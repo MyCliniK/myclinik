@@ -30,3 +30,17 @@ El equipo seguirá una metodología ágil de desarrollo basada en Scrum para des
 El desarrollo se realizará mediante git, concretamente en este repositorio, con el fin de mantener un sistema de versiones y poder dividir por equipos el desarrollo de diversas funcionalidades de manera paralela (mediante diferentes ramas).
 La aplicación que se plantea es un sistema con típicos requisitos de seguridad como autenticación, autorización, confidencialidad, integridad de datos etc.
 La plataforma tecnológica y el modelo de negocio del sistema deben permitir el cumplimiento de la Directiva Europea sobre protección de datos de carácter personal.
+
+## Development
+### Dependencias
+- JDK (yo uso OpenJDK no sé si da igual)
+- Maven
+- Spring Tool Suite
+
+### Set up
+- Crear un usuario de PostgreSQL `myclinik` con contraseña `password`
+- Crear una base de datos llamada `clients`
+
+### Arrancar entorno
+- Arrancar PostgreSQL
+- Ejecutar: `mvn spring-boot:run`
