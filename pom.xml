@@ -16,6 +16,12 @@
 <properties>
 	<java.version>11</java.version>
 </properties>
+<repositories>
+    <repository>
+        <id>scijava.public</id>
+        <url>https://maven.scijava.org/content/groups/public</url>
+    </repository>
+</repositories>
 <dependencies>
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
@@ -42,6 +48,17 @@
 		<scope>test</scope>
 	</dependency>
 
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-mail</artifactId>
+	</dependency>
+
+	<dependency>
+		<groupId>net.imagej</groupId>
+		<artifactId>ij</artifactId>
+		<version>1.53j</version>
+	</dependency>
+
 </dependencies>
 
 <build>
@@ -49,7 +66,7 @@
 		<plugin>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-maven-plugin</artifactId>
-		</plugin>
+		</plugin> 
 	</plugins>
 </build>
 
