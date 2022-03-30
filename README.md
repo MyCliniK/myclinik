@@ -39,7 +39,7 @@ La plataforma tecnológica y el modelo de negocio del sistema deben permitir el 
 
 ### Set up
 - Crear un usuario de PostgreSQL `myclinik` con contraseña `password`
-- Crear una base de datos llamada `clients`
+- Crear una base de datos llamada `myclinik`
 
 ### Arrancar entorno
 - Arrancar PostgreSQL
