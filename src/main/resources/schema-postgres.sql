@@ -4,7 +4,7 @@ CREATE TABLE clients (
 	first_name VARCHAR(30) NOT NULL,
 	last_name VARCHAR(50),
 	email VARCHAR(50),
-	phone_number VARCHAR(12) ,
+	phone VARCHAR(12) ,
 	medical_observations VARCHAR(500),
 	observations VARCHAR(500)
 );
