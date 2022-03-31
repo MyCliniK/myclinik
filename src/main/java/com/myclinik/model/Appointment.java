@@ -12,20 +12,17 @@ import java.util.Objects;
 @Table(name = "appointments")
 public class Appointment {
 
-	private @Id @GeneratedValue Long id;
-	private Date date;
-	private Date hour;
-    // comprobar Time
+	private @Id @GeneratedValue Long appointmentId;
+	private Date appointmentDate;
 	private Boolean done;
 	private Boolean paid;
 
 	private Appointment() {}
 
-	public Appointment(Date date, Date hour, Boolean done, Boolean paid) {
-		this.date= date;
-		this.hour = hour;
-		this.done = false;
-		this.paid = false;
+	public Appointment(Date appointmentDate, Boolean done, Boolean paid) {
+		this.appointmentDate= appointmentDate;
+		this.done = done;
+		this.paid = paid;
 	}
 
 	@Override
@@ -33,9 +30,8 @@ public class Appointment {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Appointment appointment = (Appointment) o;
-		return Objects.equals(id, appointment.id) &&
-			Objects.equals(date, appointment.date) &&
-			Objects.equals(hour, appointment.hour) &&
+		return Objects.equals(appointmentId, appointment.appointmentId) &&
+			Objects.equals(appointmentDate, appointment.appointmentDate) &&
 			Objects.equals(done, appointment.done) &&
 			Objects.equals(paid, appointment.paid);
 	}
@@ -43,31 +39,23 @@ public class Appointment {
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, date, hour, done, paid);
+		return Objects.hash(appointmentId, appointmentDate, done, paid);
 	}
 
 	public Long getAppointmentId() {
-		return id;
+		return appointmentId;
 	}
 
-	public void setAppointmentId(Long id) {
-		this.id = id;
+	public void setAppointmentId(Long appointmentId) {
+		this.appointmentId = appointmentId;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getAppointmentDate() {
+		return appointmentDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public Date getHour() {
-		return hour;
-	}
-
-	public void setHour(Date hour) {
-		this.hour = hour;
+	public void setAppointmentDate(Date appointmentDate) {
+		this.appointmentDate = appointmentDate;
 	}
 
 	public Boolean getDone() {
@@ -75,8 +63,7 @@ public class Appointment {
 	}
 
 	public void setDone(Boolean done) {
-		this.done = true;
-        // puede ser a false?Preguntar
+		this.done = done;
 	}
 
 	public Boolean getPaid() {
@@ -84,17 +71,16 @@ public class Appointment {
 	}
 
 	public void setPaid(Boolean paid) {
-		this.paid = true;
+		this.paid = done;
 	}
 
 
 	@Override
 	public String toString() {
 		return "Appointment{" +
-		"id=" + id +
-		", date='" + date + '\'' +
-		", hour='" + hour + '\'' +
-		", date='" + date + '\'' +
+		"appointmentId=" + appointmentId +
+		", appointmentDate='" + appointmentDate + '\'' +
+		", done='" + done + '\'' +
 		", paid='" + paid + '\'' +
 		'}';
 	}

@@ -3,3 +3,6 @@ INSERT INTO clients(first_name, last_name, phone) VALUES ('Samu', 'García', '+5
 INSERT INTO clients(first_name, last_name, observations) VALUES ('Claudia', 'Fernández', 'la mejor');
 INSERT INTO clients(first_name, last_name, medical_observations) VALUES ('Gonzalo', 'Azcarate', 'no sabe poner comas xd');
 INSERT INTO clients(first_name, last_name) VALUES ('Ana', 'Méndez');
+
+
+INSERT INTO appointments(paid, done) VALUES ('True', 'True');
