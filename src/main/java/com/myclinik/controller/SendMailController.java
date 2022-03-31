@@ -1,6 +1,6 @@
 package com.myclinik.controller;
 
-import com.myclinik.myclinik.service.SendMailService;
+import com.myclinik.service.SendMailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
