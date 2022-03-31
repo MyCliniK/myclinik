@@ -25,7 +25,7 @@ public class SendMailController {
     public String sendMail(@RequestParam("name") String name, @RequestParam("mail") String mail, @RequestParam("subject") String subject, @RequestParam("body") String body){ // Como parámetro llegan los inputs del formulario
         
         String from = "myclinik.org@gmail.com";
-        String message = body +"\n\n\n Te hemos enviado este correo informativo a " + mail + "porque has contratado nuestros servicios recientemente. Si no quieres recibir correos con ofertas y promociones, puedes darte de baja en el siguiente enlace. \n © 2022 MyClinik Org, Av. Complutense, 30, 28040 Madrid, España."; // Formato del email
+        String message = body +"\n\n\n Te hemos enviado este correo informativo a " + mail + "porque has contratado nuestros servicios recientemente. Si no quieres recibir correos con ofertas y promociones, háznoslo saber y te daremos de baja. \n © 2022 MyClinik Org, Av. Complutense, 30, 28040 Madrid, España."; // Formato del email
         mailService.sendMail(from,mail,subject,message); 
 
         return "send_mail_view";
