@@ -1,4 +1,4 @@
-package com.myclinik.myclinik.controller;
+package com.myclinik.controller;
 
 import com.myclinik.myclinik.service.SendMailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +23,10 @@ public class SendMailController {
     // Envío del email desde el formulario
     @PostMapping("/sendMail")
     public String sendMail(@RequestParam("name") String name, @RequestParam("mail") String mail, @RequestParam("subject") String subject, @RequestParam("body") String body){ // Como parámetro llegan los inputs del formulario
-        
+
         String from = "myclinik.org@gmail.com";
         String message = body +"\n\n\n Te hemos enviado este correo informativo a " + mail + "porque has contratado nuestros servicios recientemente. Si no quieres recibir correos con ofertas y promociones, háznoslo saber y te daremos de baja. \n © 2022 MyClinik Org, Av. Complutense, 30, 28040 Madrid, España."; // Formato del email
-        mailService.sendMail(from,mail,subject,message); 
+        mailService.sendMail(from,mail,subject,message);
 
         return "send_mail_view";
     }
