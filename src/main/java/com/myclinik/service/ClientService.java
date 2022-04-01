@@ -4,6 +4,7 @@ import com.myclinik.model.Client;
 import com.myclinik.repository.ClientRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,10 @@ public class ClientService implements IClientService {
 	public List<Client> findAll() {
 		var clients = (List<Client>) repository.findAll();
 		return clients;
+	}
+	@Override
+	public Client findOne(Long id) {
+		var client = (Client) repository.findById(id).get();
+		return client;
 	}
 }
