@@ -17,7 +17,7 @@ public class Appointment {
 	private Boolean done;
 	private Boolean paid;
 
-	private Appointment() {}
+	public Appointment() {} 
 
 	public Appointment(Date appointmentDate, Boolean done, Boolean paid) {
 		this.appointmentDate= appointmentDate;

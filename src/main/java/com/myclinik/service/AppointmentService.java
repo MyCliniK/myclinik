@@ -18,4 +18,16 @@ public class AppointmentService implements IAppointmentService {
 		var appointments = (List<Appointment>) repository.findAll();
 		return appointments;
 	}
+
+    public void save(Appointment appointment) {
+        repository.save(appointment);
+    }
+     
+    public Appointment get(long appointmentId) {
+        return repository.findById(appointmentId).get();
+    }
+     
+    public void delete(long appointmentId) {
+        repository.deleteById(appointmentId);
+    } 
 }
