@@ -12,7 +12,7 @@ import java.util.Objects;
 @Table(name = "treatments")
 public class Treatment {
 
-    @GeneratedValue(strategy=GenerationType.AUTO, generator="id_seq")
+    @GeneratedValue(strategy=GenerationType.AUTO, generator="treatments_id_seq")
 	private @Id  Long id;
 	private String name;
 	private String subservice;
