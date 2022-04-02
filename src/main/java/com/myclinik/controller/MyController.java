@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +16,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 public class MyController {
+	@GetMapping("/home")
+	public String goToHomePage(Model model) {
+        return ("home");
+    }
+
 	@Autowired
 	private IClientService clientService;
 
@@ -30,6 +37,7 @@ public class MyController {
 		model.addAttribute("clients", clients);
 		return "showClients";
 	}
+
 	@GetMapping("/clients/client")
 	public String getClient(Model model, @RequestParam("id") String itemid){
 		var client  = clientService.findOne(Long.parseLong(itemid));
