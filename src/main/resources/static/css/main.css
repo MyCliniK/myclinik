@@ -1,0 +1,11 @@
+body {
+  background-color: #EAF4F7;
+}
+
+.title {
+  font-size: 30px;
+  font-family: 'Roboto', sans-serif;
+  color: #338a9a;
+  text-align: center;
+  margin-top: 20px;
+}
