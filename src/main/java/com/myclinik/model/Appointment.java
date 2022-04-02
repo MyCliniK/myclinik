@@ -6,7 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Objects;
 
 @Entity
@@ -15,13 +16,14 @@ public class Appointment {
 
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="id_seq")
 	private @Id Long appointmentId;
-	private Date appointmentDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	private LocalDateTime appointmentDate;
 	private Boolean done;
 	private Boolean paid;
 
 	public Appointment() {}
 
-	public Appointment(Date appointmentDate, Boolean done, Boolean paid) {
+	public Appointment(LocalDateTime appointmentDate, Boolean done, Boolean paid) {
 		this.appointmentDate= appointmentDate;
 		this.done = done;
 		this.paid = paid;
@@ -52,11 +54,11 @@ public class Appointment {
 		this.appointmentId = appointmentId;
 	}
 
-	public Date getAppointmentDate() {
+	public LocalDateTime getAppointmentDate() {
 		return appointmentDate;
 	}
 
-	public void setAppointmentDate(Date appointmentDate) {
+	public void setAppointmentDate(LocalDateTime appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
 
@@ -73,7 +75,7 @@ public class Appointment {
 	}
 
 	public void setPaid(Boolean paid) {
-		this.paid = done;
+		this.paid = paid;
 	}
 
 

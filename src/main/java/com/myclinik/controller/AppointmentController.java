@@ -36,9 +36,10 @@ public class AppointmentController {
         return "new_appointment";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/appointments/new/save")
     public String saveAppointment(@ModelAttribute("appointment") Appointment appointment) {
-        appointmentService.save(appointment); 
+		System.out.println(appointment);
+        appointmentService.save(appointment);
         return "redirect:/appointments";
     }
     /*
@@ -47,14 +48,14 @@ public class AppointmentController {
 		ModelAndView mav = new ModelAndView("edit_product");
         Appointment appointment = appointmentService.get(appointmentId);
 		mav.addObject("appointment", appointment);
-		
+
 		return mav;
 	}
 	*/
 	@RequestMapping("/appointments/delete/{appointmentId}")
 	public String deleteAppointment(@PathVariable(name = "appointmentId") long appointmentId) {
 		appointmentService.delete(appointmentId);
-		return "redirect:/appointments";		
+		return "redirect:/appointments";
 	}
-    
+
 }
