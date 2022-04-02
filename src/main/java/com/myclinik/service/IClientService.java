@@ -11,4 +11,5 @@ public interface IClientService {
 	Client createClient();
 	void saveClient(Client c);
 	void deleteClient(Long id);
+	void updateClient(Long id, Client newClient);
 }

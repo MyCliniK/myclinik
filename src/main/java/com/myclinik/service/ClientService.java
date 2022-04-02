@@ -33,6 +33,9 @@ public class ClientService implements IClientService {
 	public void deleteClient(Long id){
 		repository.deleteById(id);
 	}
-
+	public void updateClient(Long id, Client newClient){ 
+		newClient.setId(id);
+		repository.save(newClient);
+	}
 
 }

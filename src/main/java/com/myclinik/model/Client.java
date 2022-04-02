@@ -9,6 +9,8 @@ import javax.persistence.Table;
 
 import java.util.Objects;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "clients")
 public class Client {
@@ -18,6 +20,7 @@ public class Client {
 	private String firstName;
 	private String lastName;
 	private String dni;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthdate;
 	private String sex;
 	private String phone;
