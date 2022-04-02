@@ -4,33 +4,41 @@
         <title>Clients</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    	<script src="https://use.fontawesome.com/5b5fa05dbf.js"></script>
     </head>
 
-    <body>
-        <h2>List of clients</h2>
-        <a href="/clients/new/">Crear cliente</a>
-        <table>
-            <tr>
-                <th>Id</th> 
-                <th>Name</th>
-                <th>Last Name</th>
-				<th>Email</th>
-				<th>Phone</th>
-				<th>Medical Observations</th>
-				<th>Observations</th>
-            </tr>
-
-            <tr th:each="client : ${clients}">
-                <td th:text="${client.id}">Id</td>
-                <td th:text="${client.firstName}">Name</td>
-                <td th:text="${client.lastName}">Last Name</td>
-				<td th:text="${client.email}">Email</td>
-				<td th:text="${client.phone}">Phone</td>
-				<td th:text="${client.medicalObservations}">Medical Observations</td>
-				<td th:text="${client.observations}">Observations</td>
-                <td><a th:href="@{'/clients/client?id=' + ${client.id}}">Ir a ficha</a></td>
-                <td><a th:href="@{'/clients/delete?id=' + ${client.id}}">Borrar ficha</a></td>
-            </tr>
-        </table>
+    <body style="background-color:#EAF4F7;">
+	<div style="text-align: center;">
+	    <img src="assets/logo_rect.png" class="center">
+	</div>
+	<div class="jumbotron">
+            <h1 class="display-4" style="text-align: center;">Clientes</h1>
+        </div>
+	<br>
+	<div class="container">
+		<table class="table table-info table-striped">
+		  <thead class="thead">
+		    <tr>
+			<th style="text-align: center;">Nombre</th>
+			<th style="text-align: center;">Apellidos</th>
+			<th style="text-align: center;"> Actions</th>
+		    </tr>
+		  </thead>
+		    <tr th:each="client : ${clients}">
+			<td th:text="${client.firstName}" style="text-align: center;">Name</td>
+			<td th:text="${client.lastName}" style="text-align: center;">Last Name</td>
+			<td style="text-align: center;"> 
+				<a th:href="@{'/clients/client?id=' + ${client.id}}" id="client" class="btn btn-secondary stretched-link" role="button"><i class="fa fa-fw fa-edit" aria-hidden="true"></i></a>
+				<a th:href="@{'/clients/delete?id=' + ${client.id}}" id="delete" class="btn btn-danger stretched-link" role="button"><i class="fa fa-fw fa-trash" aria-hidden="true"></i></a>
+			</td>
+		    </tr>
+		</table>
+		<br>
+		<a th:href="@{/clients/new}" id="new" class="btn btn-success stretched-link" role="button"><i class="fa fa-fw fa-user-plus" aria-hidden="true"></i></a>
+    	</div>
     </body>
 </html>
