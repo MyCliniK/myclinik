@@ -38,20 +38,19 @@ public class AppointmentController {
 
     @PostMapping("/appointments/new/save")
     public String saveAppointment(@ModelAttribute("appointment") Appointment appointment) {
-		System.out.println(appointment);
         appointmentService.save(appointment);
         return "redirect:/appointments";
     }
-    
+
     @RequestMapping("/appointments/edit/{appointmentId}")
 	public String showEditAppointment(Model model, @PathVariable(name = "appointmentId") long appointmentId) {
-		
+
         Appointment appointment = appointmentService.get(appointmentId);
 		model.addAttribute("appointment", appointment);
 
 		return "edit_appointment";
 	}
-	
+
 	@RequestMapping("/appointments/delete/{appointmentId}")
 	public String deleteAppointment(@PathVariable(name = "appointmentId") long appointmentId) {
 		appointmentService.delete(appointmentId);
