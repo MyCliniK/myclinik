@@ -22,12 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class MyController {
-	@GetMapping("/home")
-	public String goToHomePage(Model model) {
-        return ("home");
-    }
-
+public class ClientController {
 	@Autowired
 	private IClientService clientService;
 
