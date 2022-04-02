@@ -15,7 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "clients")
 public class Client {
 
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="id_seq")
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="clients_id_seq")
 	private @Id Long id;
 	private String firstName;
 	private String lastName;
@@ -112,7 +112,7 @@ public class Client {
 		return sex;
 	}
 
-	public void setSex() {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 

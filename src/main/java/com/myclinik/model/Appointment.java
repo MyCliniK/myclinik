@@ -14,7 +14,7 @@ import java.util.Objects;
 @Table(name = "appointments")
 public class Appointment {
 
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="id_seq")
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="appointments_id_seq")
 	private @Id Long id;
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime appointmentDate;
