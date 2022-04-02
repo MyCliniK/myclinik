@@ -35,12 +35,12 @@ public class MyController {
 		var client  = clientService.findOne(Long.parseLong(itemid));
 		model.addAttribute("client", client);
 		return "client";
-	}  
+	}
 	@RequestMapping("/clients/new")
 	public String createClient(Model model){
 		var newclient = clientService.createClient();
 		model.addAttribute("client", newclient);
-		return "newclient";	
+		return "newclient";
 	}
 	@PostMapping("/clients/new/save")
     public String saveClient(@ModelAttribute("client") Client client) {
@@ -50,7 +50,7 @@ public class MyController {
 	@RequestMapping ("/clients/delete")
 	public String deleteClient(@RequestParam("id") Long itemid) {
 		clientService.deleteClient(itemid);
-		return "redirect:/clients";		
+		return "redirect:/clients";
 	}
 
 	@RequestMapping ("/clients/update")
@@ -58,29 +58,4 @@ public class MyController {
 		clientService.updateClient(itemid, client);
 		return "redirect:/clients";
 	}
-	/*
-	@PutMapping("/clients/client")
-    ResponseEntity<TFG> updateClient(@RequestBody TFG newTFG, @PathVariable String id) {
-
-      return tfgRepository.findById(id).map(tfg -> {
-
-        tfg.setNombre(newTFG.getNombre());
-
-        tfg.setTitulo(newTFG.getTitulo());
-
-        tfg.setTutor(newTFG.getTutor());
-
-        tfg.setStatus(newTFG.getStatus());
-
-        tfg.setNota(newTFG.getNota());
-
-        tfg.setMemoria(newTFG.getMemoria());
-
-        tfgRepository.save(tfg);
-
-        return ResponseEntity.ok().body(tfg);
-
-      }).orElse(new ResponseEntity<TFG>(HttpStatus.NOT_FOUND));
-
-    }*/
 }
