@@ -36,18 +36,18 @@
 				</thead>
 					<tr th:each="appointment : ${appointments}">
 						<td th:text="${appointment.appointmentId}" style="text-align: center;">Id</td>
-						<td th:text="${appointment.appointmentDate}" style="text-align: center;">Fecha</td>
+						<td th:text="${#temporals.format(appointment.appointmentDate)}" style="text-align: center;">Fecha</td>
 						<td th:text="${appointment.done}" style="text-align: center;">Realizada</td>
 						<td th:text="${appointment.paid}" style="text-align: center;">Pagada</td>
-						<td style="text-align: center;"> 
+						<td style="text-align: center;">
 							<a th:href="@{'/appointments/edit/' + ${appointment.appointmentId}}" id="edit" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-edit" aria-hidden="true"></i></a>
 							<a th:href="@{'/appointments/delete/' + ${appointment.appointmentId}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-trash" aria-hidden="true"></i></a>
 						</td>
 					</tr>
 			</table>
 		<br/>
-	    <a href="appointments/new" id="new" class="btn btn-success" role="button"><i class="fa fa-fw fa-plus" aria-hidden="true"></i></a> 
+	    <a href="appointments/new" id="new" class="btn btn-success" role="button"><i class="fa fa-fw fa-plus" aria-hidden="true"></i></a>
 	</div>
-	
+
 </body>
 </html>
