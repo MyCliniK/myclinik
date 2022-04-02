@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Edit Appointment</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Edit Appointment</h1>
+		<br />
+		<form action="#" th:action="@{/appointments/new/save}" th:object="${appointment}"
+			method="post">
+
+			<table border="0" cellpadding="10">
+				<tr>				
+					<td>Appointment ID:</td>
+					<td>
+						<input type="text" th:field="*{appointmentId}" readonly="readonly" />
+					</td>
+				</tr>			
+                <tr>
+                    <td>Fecha:</td>
+                    <td><input type="datetime-local" th:field="*{appointmentDate}" /></td>
+                </tr>
+                <tr>
+                    <td>Realizado:</td>
+                    <td><input type="checkbox" th:field="*{done}" /></td>
+                </tr>
+                <tr>
+                    <td>Pagado:</td>
+                    <td><input type="checkbox" th:field="*{paid}" /></td>
+                </tr>    								
+				<tr>
+					<td colspan="2"><button type="submit">Save</button> </td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

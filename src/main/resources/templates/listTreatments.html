@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title> Tratamientos </title>
+</head>
+<body>
+<div align="center">
+    <h1>Lista de tratamientos</h1>
+    <a href="treatments/new">Crear nuevo tratamiento</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>TreatmentId</th>
+                <th>Nombre</th>
+                <th>Subservicios</th>
+		        <th>Precio</th>
+                <th>Duracion (minutos)</th>
+                <th>Consentimientos</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="treatment: ${treatments}">
+                <td th:text="${treatment.treatmentId}">ServiceId</td>
+                <td th:text="${treatment.name}">Subservicios</td>
+                <td th:text="${treatment.subservice}">Subservicios</td>
+                <td th:text="${treatment.price}">Precio</td>
+				<td th:text="${treatment.duration}">Duracion</td>
+                <td th:text="${treatment.consents}">Consentimientos</td>
+                <td>
+                	<a th:href="@{'/treatments/edit/' + ${treatment.treatmentId}}">Edit</a>
+                	&nbsp;&nbsp;&nbsp;
+                	<a th:href="@{'/treatments/delete/' + ${treatment.treatmentId}}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>   
+</body>
+</html>
