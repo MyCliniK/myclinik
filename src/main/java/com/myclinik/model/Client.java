@@ -49,7 +49,7 @@ public class Client {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Client client = (Client) o;
-		return Objects.equals(id, client.id) &&
+		return Objects.equals(clientId, client.clientId) &&
 			Objects.equals(firstName, client.firstName) &&
 			Objects.equals(lastName, client.lastName) &&
 			Objects.equals(dni, client.dni) &&
@@ -65,15 +65,15 @@ public class Client {
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, firstName, lastName, email, phone, medicalObservations, observations);
+		return Objects.hash(clientId, firstName, lastName, email, phone, medicalObservations, observations);
 	}
 
-	public Long getId() {
-		return id;
+	public Long getClientId() {
+		return clientId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setClientId(Long clientId) {
+		this.clientId = clientId;
 	}
 
 	public String getFirstName() {
@@ -115,7 +115,7 @@ public class Client {
 	public void setSex() {
 		this.sex = sex;
 	}
-	
+
 	public String getPhone() {
 		return phone;
 	}
@@ -131,7 +131,7 @@ public class Client {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public Boolean getPromos() {
 		return promos;
 	}
@@ -159,7 +159,7 @@ public class Client {
 	@Override
 	public String toString() {
 		return "Client{" +
-		"id=" + id +
+		"clientId=" + clientId +
 		", firstName='" + firstName + '\'' +
 		", lastName='" + lastName + '\'' +
 		", dni='" + dni + '\'' +
