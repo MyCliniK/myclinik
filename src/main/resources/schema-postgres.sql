@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS appointments;
+DROP TABLE IF EXISTS treatments;
 DROP TABLE IF EXISTS clients;
 DROP SEQUENCE IF EXISTS id_seq;
 
@@ -14,12 +15,25 @@ CREATE TABLE clients (
 	observations VARCHAR(500)
 );
 
+CREATE TABLE treatments (
+	treatment_id SERIAL PRIMARY KEY,
+	name VARCHAR(255),
+	subservice VARCHAR(255),
+	price FLOAT,
+	duration INT,
+	consents VARCHAR(255)
+
+);
+
 CREATE TABLE appointments (
 	appointment_id SERIAL PRIMARY KEY,
 	appointment_date TIMESTAMP,
 	done BOOLEAN,
 	paid BOOLEAN,
-	client_id int,
-	FOREIGN KEY (client_id) REFERENCES clients(client_id)
-
+	client_id INT,
+	treatment_id INT,
+	FOREIGN KEY (client_id) REFERENCES clients(client_id),
+	FOREIGN KEY (treatment_id) REFERENCES treatments(treatment_id)
 );
+
+
