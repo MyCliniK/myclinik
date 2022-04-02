@@ -21,7 +21,7 @@
             </tr>
 
             <tr th:each="client : ${clients}">
-                <td th:text="${client.id}">Id</td>
+                <td th:text="${client.clientId}">Id</td>
                 <td th:text="${client.firstName}">Name</td>
                 <td th:text="${client.lastName}">Last Name</td>
 				<td th:text="${client.email}">Email</td>

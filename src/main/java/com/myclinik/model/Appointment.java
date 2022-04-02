@@ -2,30 +2,31 @@ package com.myclinik.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Objects;
 
 @Entity
 @Table(name = "appointments")
 public class Appointment {
 
-	private @Id @GeneratedValue Long id;
-	private Date date;
-	private Date hour;
-    // comprobar Time
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="id_seq")
+	private @Id Long appointmentId;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	private LocalDateTime appointmentDate;
 	private Boolean done;
 	private Boolean paid;
 
-	private Appointment() {}
+	public Appointment() {}
 
-	public Appointment(Date date, Date hour, Boolean done, Boolean paid) {
-		this.date= date;
-		this.hour = hour;
-		this.done = false;
-		this.paid = false;
+	public Appointment(LocalDateTime appointmentDate, Boolean done, Boolean paid) {
+		this.appointmentDate= appointmentDate;
+		this.done = done;
+		this.paid = paid;
 	}
 
 	@Override
@@ -33,9 +34,8 @@ public class Appointment {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Appointment appointment = (Appointment) o;
-		return Objects.equals(id, appointment.id) &&
-			Objects.equals(date, appointment.date) &&
-			Objects.equals(hour, appointment.hour) &&
+		return Objects.equals(appointmentId, appointment.appointmentId) &&
+			Objects.equals(appointmentDate, appointment.appointmentDate) &&
 			Objects.equals(done, appointment.done) &&
 			Objects.equals(paid, appointment.paid);
 	}
@@ -43,31 +43,23 @@ public class Appointment {
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, date, hour, done, paid);
+		return Objects.hash(appointmentId, appointmentDate, done, paid);
 	}
 
 	public Long getAppointmentId() {
-		return id;
+		return appointmentId;
 	}
 
-	public void setAppointmentId(Long id) {
-		this.id = id;
+	public void setAppointmentId(Long appointmentId) {
+		this.appointmentId = appointmentId;
 	}
 
-	public Date getDate() {
-		return date;
+	public LocalDateTime getAppointmentDate() {
+		return appointmentDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public Date getHour() {
-		return hour;
-	}
-
-	public void setHour(Date hour) {
-		this.hour = hour;
+	public void setAppointmentDate(LocalDateTime appointmentDate) {
+		this.appointmentDate = appointmentDate;
 	}
 
 	public Boolean getDone() {
@@ -75,8 +67,7 @@ public class Appointment {
 	}
 
 	public void setDone(Boolean done) {
-		this.done = true;
-        // puede ser a false?Preguntar
+		this.done = done;
 	}
 
 	public Boolean getPaid() {
@@ -84,17 +75,16 @@ public class Appointment {
 	}
 
 	public void setPaid(Boolean paid) {
-		this.paid = true;
+		this.paid = paid;
 	}
 
 
 	@Override
 	public String toString() {
 		return "Appointment{" +
-		"id=" + id +
-		", date='" + date + '\'' +
-		", hour='" + hour + '\'' +
-		", date='" + date + '\'' +
+		"appointmentId=" + appointmentId +
+		", appointmentDate='" + appointmentDate + '\'' +
+		", done='" + done + '\'' +
 		", paid='" + paid + '\'' +
 		'}';
 	}
