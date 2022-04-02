@@ -22,12 +22,17 @@ public class AppointmentService implements IAppointmentService {
     public void save(Appointment appointment) {
         repository.save(appointment);
     }
-     
-    public Appointment get(long appointmentId) {
+
+    public Appointment get(Long appointmentId) {
         return repository.findById(appointmentId).get();
     }
-     
-    public void delete(long appointmentId) {
+
+    public void delete(Long appointmentId) {
         repository.deleteById(appointmentId);
-    } 
+    }
+
+	public void update(Long id, Appointment newAppointment) {
+		newAppointment.setId(id);
+		repository.save(newAppointment);
+	}
 }

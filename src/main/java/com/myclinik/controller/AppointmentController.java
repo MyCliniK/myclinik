@@ -43,7 +43,7 @@ public class AppointmentController {
     }
 
     @RequestMapping("/appointments/edit/{appointmentId}")
-	public String showEditAppointment(Model model, @PathVariable(name = "appointmentId") long appointmentId) {
+	public String showEditAppointment(Model model, @PathVariable(name = "appointmentId") Long appointmentId) {
 
         Appointment appointment = appointmentService.get(appointmentId);
 		model.addAttribute("appointment", appointment);
@@ -52,8 +52,14 @@ public class AppointmentController {
 	}
 
 	@RequestMapping("/appointments/delete/{appointmentId}")
-	public String deleteAppointment(@PathVariable(name = "appointmentId") long appointmentId) {
+	public String deleteAppointment(@PathVariable(name = "appointmentId") Long appointmentId) {
 		appointmentService.delete(appointmentId);
+		return "redirect:/appointments";
+	}
+
+	@RequestMapping("/appointments/update")
+	public String updateAppointment(@RequestParam("id") Long id, @ModelAttribute("appointment") Appointment appointment) {
+		appointmentService.update(id, appointment);
 		return "redirect:/appointments";
 	}
 
