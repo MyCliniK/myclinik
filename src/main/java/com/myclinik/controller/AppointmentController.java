@@ -42,16 +42,16 @@ public class AppointmentController {
         appointmentService.save(appointment);
         return "redirect:/appointments";
     }
-    /*
-    @RequestMapping("/appointments/edit/{appointmentId")
-	public ModelAndView showEditAppointment(@PathVariable(name = "appointmentId") long appointmentId) {
-		ModelAndView mav = new ModelAndView("edit_product");
+    
+    @RequestMapping("/appointments/edit/{appointmentId}")
+	public String showEditAppointment(Model model, @PathVariable(name = "appointmentId") long appointmentId) {
+		
         Appointment appointment = appointmentService.get(appointmentId);
-		mav.addObject("appointment", appointment);
+		model.addAttribute("appointment", appointment);
 
-		return mav;
+		return "edit_appointment";
 	}
-	*/
+	
 	@RequestMapping("/appointments/delete/{appointmentId}")
 	public String deleteAppointment(@PathVariable(name = "appointmentId") long appointmentId) {
 		appointmentService.delete(appointmentId);
