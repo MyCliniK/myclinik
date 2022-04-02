@@ -8,4 +8,7 @@ import java.util.Optional;
 public interface IClientService {
 	List<Client> findAll();
 	Client findOne(Long id);
+	Client createClient();
+	void saveClient(Client c);
+	void deleteClient(Long id);
 }

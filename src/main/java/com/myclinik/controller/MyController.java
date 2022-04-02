@@ -1,6 +1,7 @@
 package com.myclinik.controller;
 
 import com.myclinik.model.Client;
+import com.myclinik.repository.ClientRepository;
 import com.myclinik.service.IClientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,17 +35,26 @@ public class MyController {
 		var client  = clientService.findOne(Long.parseLong(itemid));
 		model.addAttribute("client", client);
 		return "client";
-	}   
-	/*@PostMapping("/clients/newclient")
+	}  
+	@RequestMapping("/clients/new")
 	public String createClient(Model model){
-		Client client
-		model.addAttribute("newclient", newclient);
-		return "newclient";	
+		var newclient = clientService.createClient();
+		model.addAttribute("client", newclient);
+		return "new_client";	
 	}
-
-
-	@PutMapping("/tfgs/{id}")
-    ResponseEntity<TFG> update(@RequestBody TFG newTFG, @PathVariable String id) {
+	@PostMapping("/save")
+    public String saveClient(@ModelAttribute("client") Client client) {
+        clientService.saveClient(client);
+        return "redirect:/clients";
+    }
+	@RequestMapping ("/clients/delete")
+	public String deleteClient(@RequestParam("id") Long itemid) {
+		clientService.deleteClient(itemid);
+		return "redirect:/clients";		
+	}
+	/*
+	@PutMapping("/clients/client")
+    ResponseEntity<TFG> updateClient(@RequestBody TFG newTFG, @PathVariable String id) {
 
       return tfgRepository.findById(id).map(tfg -> {
 

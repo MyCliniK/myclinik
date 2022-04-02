@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Crear nuevo cliente</title>
+</head>
+<body>
+    <div align="center">
+        <h1>Crear nueva cita</h1>
+        <br />
+        <form action="#" th:action="@{/clients/new/}" th:object="${client}" method="POST">
+            <table border="0" cellpadding="10">
+                <tr>
+                    <td>Nombre:</td>
+                    <td><input type="text" th:field="*{client.firstName}" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html> 

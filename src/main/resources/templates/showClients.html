@@ -8,6 +8,7 @@
 
     <body>
         <h2>List of clients</h2>
+        <a href="/clients/new/">Crear cliente</a>
         <table>
             <tr>
                 <th>Id</th> 
@@ -17,7 +18,6 @@
 				<th>Phone</th>
 				<th>Medical Observations</th>
 				<th>Observations</th>
-                <th></th>
             </tr>
 
             <tr th:each="client : ${clients}">
@@ -29,8 +29,8 @@
 				<td th:text="${client.medicalObservations}">Medical Observations</td>
 				<td th:text="${client.observations}">Observations</td>
                 <td><a th:href="@{'/clients/client?id=' + ${client.id}}">Ir a ficha</a></td>
+                <td><a th:href="@{'/clients/delete?id=' + ${client.id}}">Borrar ficha</a></td>
             </tr>
         </table>
-
     </body>
 </html>

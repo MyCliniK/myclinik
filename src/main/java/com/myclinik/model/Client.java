@@ -19,7 +19,7 @@ public class Client {
 	private String medicalObservations;
 	private String observations;
 
-	private Client() {}
+	public Client() {}
 
 	public Client(String firstName, String lastName, String email, String phone, String medicalObservations, String observations) {
 		this.firstName = firstName;
