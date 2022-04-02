@@ -2,6 +2,7 @@ package com.myclinik.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,12 +13,13 @@ import java.util.Objects;
 @Table(name = "appointments")
 public class Appointment {
 
-	private @Id @GeneratedValue Long appointmentId;
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="id_seq")
+	private @Id Long appointmentId;
 	private Date appointmentDate;
 	private Boolean done;
 	private Boolean paid;
 
-	public Appointment() {} 
+	public Appointment() {}
 
 	public Appointment(Date appointmentDate, Boolean done, Boolean paid) {
 		this.appointmentDate= appointmentDate;

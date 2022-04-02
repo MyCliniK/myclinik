@@ -1,5 +1,8 @@
 DROP TABLE IF EXISTS appointments;
 DROP TABLE IF EXISTS clients;
+DROP SEQUENCE IF EXISTS id_seq;
+
+CREATE SEQUENCE id_seq START 1 INCREMENT 1;
 
 CREATE TABLE clients (
 	client_id SERIAL PRIMARY KEY,
@@ -18,5 +21,5 @@ CREATE TABLE appointments (
 	paid BOOLEAN,
 	client_id int,
 	FOREIGN KEY (client_id) REFERENCES clients(client_id)
-	
+
 );
