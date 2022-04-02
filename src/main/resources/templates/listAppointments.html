@@ -27,7 +27,6 @@
 				<table class="table table-success table-striped">
 					<thead class="thead">
 						<tr>
-							<th style="text-align: center;">Id</th>
 							<th style="text-align: center;">Fecha</th>
 							<th style="text-align: center;">Realizada</th>
 							<th style="text-align: center;">Pagada</th>
@@ -35,7 +34,6 @@
 						</tr>
 					</thead>
 					<tr th:each="appointment : ${appointments}">
-						<td th:text="${appointment.id}" style="text-align: center;">Id</td>
 						<td th:text="${#temporals.format(appointment.appointmentDate)}" style="text-align: center;">Fecha</td>
 						<td th:text="${appointment.done}" style="text-align: center;">Realizada</td>
 						<td th:text="${appointment.paid}" style="text-align: center;">Pagada</td>
