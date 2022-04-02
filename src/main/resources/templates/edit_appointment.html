@@ -13,12 +13,12 @@
 			method="post">
 
 			<table border="0" cellpadding="10">
-				<tr>				
+				<tr>
 					<td>Appointment ID:</td>
 					<td>
-						<input type="text" th:field="*{appointmentId}" readonly="readonly" />
+						<input type="text" th:field="*{id}" readonly="readonly" />
 					</td>
-				</tr>			
+				</tr>
                 <tr>
                     <td>Fecha:</td>
                     <td><input type="datetime-local" th:field="*{appointmentDate}" /></td>
@@ -30,7 +30,7 @@
                 <tr>
                     <td>Pagado:</td>
                     <td><input type="checkbox" th:field="*{paid}" /></td>
-                </tr>    								
+                </tr>
 				<tr>
 					<td colspan="2"><button type="submit">Save</button> </td>
 				</tr>

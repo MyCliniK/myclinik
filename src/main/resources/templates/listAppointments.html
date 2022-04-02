@@ -13,7 +13,7 @@
     <table border="1" cellpadding="10">
         <thead>
             <tr>
-                <th>AppointmentId</th>
+                <th>ID</th>
                 <th>Date</th>
                 <th>Done</th>
 		        <th>Paid</th>
@@ -22,18 +22,18 @@
         </thead>
         <tbody>
             <tr th:each="appointment : ${appointments}">
-                <td th:text="${appointment.appointmentId}">AppointmentId</td>
+                <td th:text="${appointment.id}">ID</td>
                 <td th:text="${appointment.appointmentDate}">Date</td>
                 <td th:text="${appointment.done}">Done</td>
 				<td th:text="${appointment.paid}">Paid</td>
                 <td>
-                	<a th:href="@{'/appointments/edit/' + ${appointment.appointmentId}}">Edit</a>
+                	<a th:href="@{'/appointments/edit/' + ${appointment.id}}">Edit</a>
                 	&nbsp;&nbsp;&nbsp;
-                	<a th:href="@{'/appointments/delete/' + ${appointment.appointmentId}}">Delete</a>
+                	<a th:href="@{'/appointments/delete/' + ${appointment.id}}">Delete</a>
                 </td>
             </tr>
         </tbody>
     </table>
-</div>   
+</div>
 </body>
 </html>

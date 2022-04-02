@@ -15,7 +15,7 @@ import java.util.Objects;
 public class Appointment {
 
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="id_seq")
-	private @Id Long appointmentId;
+	private @Id Long id;
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime appointmentDate;
 	private Boolean done;
@@ -34,7 +34,7 @@ public class Appointment {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Appointment appointment = (Appointment) o;
-		return Objects.equals(appointmentId, appointment.appointmentId) &&
+		return Objects.equals(id, appointment.id) &&
 			Objects.equals(appointmentDate, appointment.appointmentDate) &&
 			Objects.equals(done, appointment.done) &&
 			Objects.equals(paid, appointment.paid);
@@ -43,15 +43,15 @@ public class Appointment {
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(appointmentId, appointmentDate, done, paid);
+		return Objects.hash(id, appointmentDate, done, paid);
 	}
 
-	public Long getAppointmentId() {
-		return appointmentId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setAppointmentId(Long appointmentId) {
-		this.appointmentId = appointmentId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public LocalDateTime getAppointmentDate() {
@@ -82,7 +82,7 @@ public class Appointment {
 	@Override
 	public String toString() {
 		return "Appointment{" +
-		"appointmentId=" + appointmentId +
+		"appointmentId=" + id +
 		", appointmentDate='" + appointmentDate + '\'' +
 		", done='" + done + '\'' +
 		", paid='" + paid + '\'' +
