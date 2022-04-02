@@ -19,9 +19,12 @@ public class ClientService implements IClientService {
 		var clients = (List<Client>) repository.findAll();
 		return clients;
 	}
-	@Override
 	public Client findOne(Long id) {
 		var client = (Client) repository.findById(id).get();
 		return client;
 	}
+	/*oid Client createClient(){
+		Client client = null;
+		repository.save(client);
+	}*/
 }

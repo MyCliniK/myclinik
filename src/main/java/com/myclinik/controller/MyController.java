@@ -4,10 +4,14 @@ import com.myclinik.model.Client;
 import com.myclinik.service.IClientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -24,10 +28,42 @@ public class MyController {
 		model.addAttribute("clients", clients);
 		return "showClients";
 	}
-	@GetMapping("/clients/{itemid}")
-	public String getClient(Model model, @PathVariable String id){
-		var client  = clientService.findOne(Long.parseLong(id));
+	@GetMapping("/clients/client")
+	public String getClient(Model model, @RequestParam("id") String itemid){
+		var client  = clientService.findOne(Long.parseLong(itemid));
 		model.addAttribute("client", client);
 		return "client";
+	}   
+	/*@PostMapping("/clients/newclient")
+	public String createClient(Model model){
+		Client client
+		model.addAttribute("newclient", newclient);
+		return "newclient";	
 	}
+
+
+	@PutMapping("/tfgs/{id}")
+    ResponseEntity<TFG> update(@RequestBody TFG newTFG, @PathVariable String id) {
+
+      return tfgRepository.findById(id).map(tfg -> {
+
+        tfg.setNombre(newTFG.getNombre());
+
+        tfg.setTitulo(newTFG.getTitulo());
+
+        tfg.setTutor(newTFG.getTutor());
+
+        tfg.setStatus(newTFG.getStatus());
+
+        tfg.setNota(newTFG.getNota());
+
+        tfg.setMemoria(newTFG.getMemoria());
+
+        tfgRepository.save(tfg);
+
+        return ResponseEntity.ok().body(tfg);
+
+      }).orElse(new ResponseEntity<TFG>(HttpStatus.NOT_FOUND));
+
+    }*/
 }
