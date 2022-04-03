@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Navigation Bar</title>
+	</head>
+	<body>
+		<!-- Default Navigator -->
+		<nav th:fragment = "nav-default" class="navbar navbar-dark bg-primary" style="height: 100%">
+			<div class="d-flex flex-column justify-content-center text-center" style="height: 100%; width:100%">
+				<div>
+					<a class="nav-link" th:href="@{/}">
+						<img src="/assets/logo_circle.png" width="70%" height="auto" class="d-inline-block align-center" alt="">
+					</a>
+				</div>
+				<ul class="navbar-nav d-flex flex-column justify-content-around" style="height: 80%">
+					<!-- <li class="nav-item"> -->
+					<!-- 	<a class="nav-link" th:href="@{/}"> -->
+					<!-- 		<img src="/assets/logo_circle.png" width="70%" height="auto" class="d-inline-block align-center" alt=""> -->
+					<!-- 	</a> -->
+					<!-- </li> -->
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/clients}">
+							<i class="fa fa-solid fa-users" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/appointments}">
+							<i class="fa fa-regular fa-calendar-check"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/treatments}">
+							<i class="fa fa-solid fa-heart-circle-plus" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/mail}">
+							<i class="fa fa-solid fa-envelope" aria-hidden="true"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<!-- Admin Navigator -->
+		<!-- <ul th:fragment = "nav-admin"> -->
+		<!-- 	<li><a th:href="@{/admin/products}">Product Management</a></li> -->
+		<!-- 	<li><a th:href="@{/admin/orders}">Order Management</a></li> -->
+		<!-- </ul> -->
+		<!-- <div th:fragment="copyright"> -->
+		<!-- 	&copy; o7planning.org -->
+		<!-- </div> -->
+	</body>
+</html>

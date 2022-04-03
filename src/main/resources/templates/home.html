@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layouts/main-layout :: main-fragment(
+	~{:: title},
+	~{:: #home-header},
+	~{:: #home-nav},
+	~{:: #home-main-content},
+	~{:: #home-footer}
+	)}"
+>
 	<head>
-	<title>Home page</title>
+		<title>Home page</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body style="text-align: center; margin: auto; padding: 10%;">
-		<div style="font-size: large;">
-			<a href="clients">Show clients</a>
-			<a href="appointments">Show all appointments</a>
-			<a href="treatments">Show all treatments</a>
-			<a href="mail">Send mail</a>
+		<div id="home-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+			Home Nav
+		</div>
+		<div id="home-main-content">
+			<div style="font-size: large;">
+				<a href="clients">Show clients</a>
+				<a href="appointments">Show all appointments</a>
+				<a href="treatments">Show all treatments</a>
+				<a href="mail">Send mail</a>
+			</div>
 		</div>
 	</body>
 </html>
