@@ -29,23 +29,22 @@ public class AppointmentController {
 		return "listAppointments";
 	}
 
-    @RequestMapping("/appointments/new")
-    public String showNewAppointmentForm(Model model) {
-        Appointment appointment = new Appointment();
-        model.addAttribute("appointment", appointment);
-        return "new_appointment";
-    }
+	@RequestMapping("/appointments/new")
+	public String showNewAppointmentForm(Model model) {
+		Appointment appointment = new Appointment();
+		model.addAttribute("appointment", appointment);
+		return "new_appointment";
+	}
 
-    @PostMapping("/appointments/new/save")
-    public String saveAppointment(@ModelAttribute("appointment") Appointment appointment) {
-        appointmentService.save(appointment);
-        return "redirect:/appointments";
-    }
+	@PostMapping("/appointments/new/save")
+	public String saveAppointment(@ModelAttribute("appointment") Appointment appointment) {
+		appointmentService.save(appointment);
+		return "redirect:/appointments";
+	}
 
-    @RequestMapping("/appointments/edit/{appointmentId}")
+	@RequestMapping("/appointments/edit/{appointmentId}")
 	public String showEditAppointment(Model model, @PathVariable(name = "appointmentId") Long appointmentId) {
-
-        Appointment appointment = appointmentService.get(appointmentId);
+		Appointment appointment = appointmentService.get(appointmentId);
 		model.addAttribute("appointment", appointment);
 
 		return "edit_appointment";
@@ -62,5 +61,4 @@ public class AppointmentController {
 		appointmentService.update(id, appointment);
 		return "redirect:/appointments";
 	}
-
 }

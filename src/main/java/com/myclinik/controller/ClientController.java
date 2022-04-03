@@ -39,6 +39,7 @@ public class ClientController {
 		model.addAttribute("client", client);
 		return "client";
 	}
+
 	@RequestMapping("/clients/new")
 	public String createClient(Model model){
 		var newclient = clientService.createClient();
@@ -46,10 +47,10 @@ public class ClientController {
 		return "newclient";
 	}
 	@PostMapping("/clients/new/save")
-    public String saveClient(@ModelAttribute("client") Client client) {
-        clientService.saveClient(client);
-        return "redirect:/clients";
-    }
+	public String saveClient(@ModelAttribute("client") Client client) {
+		clientService.saveClient(client);
+		return "redirect:/clients";
+	}
 	@RequestMapping ("/clients/delete")
 	public String deleteClient(@RequestParam("id") Long itemid) {
 		clientService.deleteClient(itemid);

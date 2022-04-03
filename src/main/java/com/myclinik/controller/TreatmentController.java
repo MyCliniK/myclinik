@@ -38,7 +38,6 @@ public class TreatmentController {
 
     @PostMapping("/treatments/new/save")
     public String saveTreatment(@ModelAttribute("treatment") Treatment treatment) {
-		//System.out.println(treatment);
         treatmentService.save(treatment);
         return "redirect:/treatments";
     }
@@ -55,6 +54,12 @@ public class TreatmentController {
 	@RequestMapping("/treatments/delete/{id}")
 	public String deleteAppointment(@PathVariable(name = "id") long id) {
 		treatmentService.delete(id);
+		return "redirect:/treatments";
+	}
+
+	@RequestMapping("/treatments/update")
+	public String updateTreatment(@RequestParam("id") Long id, @ModelAttribute("treatment") Treatment treatment) {
+		treatmentService.update(id, treatment);
 		return "redirect:/treatments";
 	}
 

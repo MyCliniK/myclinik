@@ -3,8 +3,8 @@ package com.myclinik.service;
 import com.myclinik.model.Client;
 import com.myclinik.repository.ClientRepository;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,9 +33,8 @@ public class ClientService implements IClientService {
 	public void deleteClient(Long id){
 		repository.deleteById(id);
 	}
-	public void updateClient(Long id, Client newClient){ 
+	public void updateClient(Long id, Client newClient){
 		newClient.setId(id);
 		repository.save(newClient);
 	}
-
 }

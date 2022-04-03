@@ -4,15 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 import javax.persistence.Table;
 
 import java.util.Objects;
+import java.util.List;
 
 @Entity
 @Table(name = "treatments")
 public class Treatment {
 
-    @GeneratedValue(strategy=GenerationType.AUTO, generator="treatments_id_seq")
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="treatments_id_seq")
 	private @Id  Long id;
 	private String name;
 	private String subservice;
@@ -20,15 +23,18 @@ public class Treatment {
 	private Integer duration;
 	private String consents;
 
+	@OneToMany(mappedBy = "treatment", cascade=CascadeType.ALL)
+	private List<Appointment> appointments;
 
 	public Treatment() {}
 
-	public Treatment(String name, String subservice, Float price, Integer duration, String consents) {
+	public Treatment(String name, String subservice, Float price, Integer duration, String consents, List<Appointment> appointments) {
 		this.name =name;
 		this.subservice =subservice;
 		this.price = price;
 		this.duration = duration;
 		this.consents = consents;
+		this.appointments = appointments;
 	}
 
 	@Override
@@ -37,17 +43,18 @@ public class Treatment {
 		if (o == null || getClass() != o.getClass()) return false;
 		Treatment treatment = (Treatment) o;
 		return Objects.equals(id,treatment.id) &&
-			Objects.equals(name, treatment.name) &&
-			Objects.equals(subservice, treatment.subservice) &&
-			Objects.equals(price, treatment.price) &&
-			Objects.equals(duration, treatment.duration) &&
-			Objects.equals(consents, treatment.consents);
+		Objects.equals(name, treatment.name) &&
+		Objects.equals(subservice, treatment.subservice) &&
+		Objects.equals(price, treatment.price) &&
+		Objects.equals(duration, treatment.duration) &&
+		Objects.equals(consents, treatment.consents) &&
+		Objects.equals(appointments, treatment.appointments);
 	}
 
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, name, subservice, price, duration, consents);
+		return Objects.hash(id, name, subservice, price, duration, consents, appointments);
 	}
 
 	public Long getId() {
@@ -100,6 +107,13 @@ public class Treatment {
 		this.consents = consents;
 	}
 
+	public List<Appointment> getAppointments (List<Appointment> appointments){
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments){
+		this.appointments = appointments;
+	}
 
 	@Override
 	public String toString() {

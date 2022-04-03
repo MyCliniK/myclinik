@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Navigation Bar</title>
+	</head>
+	<body>
+		<!-- Default Navigator -->
+		<nav th:fragment = "nav-default" class="navbar navbar-dark" style="height: 100%; background-color: #117182; ">
+			<div class="d-flex flex-column justify-content-center text-center" style="height: 100%; width:100%">
+				<div>
+					<a class="nav-link" th:href="@{/}">
+						<img src="/assets/logo_circle.png" width="70%" height="auto" class="d-inline-block align-center" alt="">
+					</a>
+				</div>
+				<ul class="navbar-nav d-flex flex-column justify-content-around" style="height: 80%">
+					<li class="nav-item">
+						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/clients') ? 'active':''}" th:href="@{/clients}">
+							<i class="fa fa-solid fa-users" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/appointments') ? 'active':''}" th:href="@{/appointments}">
+							<i class="fa fa-regular fa-calendar-check"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/treatments') ? 'active':''}" th:href="@{/treatments}">
+							<i class="fa fa-solid fa-heart-circle-plus" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/mail') ? 'active':''}" th:href="@{/mail}">
+							<i class="fa fa-solid fa-envelope" aria-hidden="true"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</body>
+</html>

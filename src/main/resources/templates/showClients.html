@@ -1,27 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layouts/main-layout :: main-fragment(
+	~{:: title},
+	~{:: #clients-header},
+	~{:: #clients-nav},
+	~{:: #clients-main-content},
+	~{:: #clients-footer}
+	)}"
+>
 	<head>
-	<title>Clients</title>
+		<title>Clients</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-		<script src="https://use.fontawesome.com/5b5fa05dbf.js"></script>
 		<link rel="stylesheet" href="/css/main.css">
 	</head>
 
 	<body>
-		<div style="text-align: center;">
-			<img src="/assets/logo_rect.png" class="center">
+		<div id="clients-header">
+			<h1 class="title">Clientes</h1>
 		</div>
-		<div>
-			<h1 class="title">CLIENTES</h1>
+		<div id="clients-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+			Clients Nav
 		</div>
-	<br>
-		<div class="container">
-			<table class="table table-info table-striped">
+		<div id="clients-main-content">
+			<table class="table table-info table-striped table-responsive">
 				<thead class="thead">
 					<tr>
 						<th style="text-align: center;">Nombre</th>

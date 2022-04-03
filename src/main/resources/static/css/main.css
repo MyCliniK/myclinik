@@ -1,11 +1,23 @@
-body {
-  background-color: #EAF4F7;
+.app {
+	height: 100vh;
+	width: 100vw;
+	max-width: 100vw;
+	max-height: 100vh;
 }
 
-.title {
-  font-size: 30px;
-  font-family: 'Roboto', sans-serif;
-  color: #338a9a;
-  text-align: center;
-  margin-top: 20px;
+header {
+	font-size: 30px;
+	font-family: 'Roboto', sans-serif;
+	color: #338a9a;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+body {
+	background-color: #EAF4F7;
+}
+
+.nav-link .fa {
+	font-size: 30px;
 }
