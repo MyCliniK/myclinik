@@ -80,6 +80,6 @@ public class AppointmentController {
 	@RequestMapping("/appointments/update")
 	public String updateAppointment(@RequestParam("id") Long id, @ModelAttribute("appointment") Appointment appointment) {
 		appointmentService.update(id, appointment);
-		return "redirect:/appointments/edit/" + id;
+		return "redirect:/appointments";
 	}
 }
