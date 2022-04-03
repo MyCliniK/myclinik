@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-th:replace="~{layouts/main-layout :: main-fragment(
+	th:replace="~{layouts/main-layout :: main-fragment(
 	~{:: title},
 	~{:: #mail-header},
 	~{:: #mail-nav},
@@ -16,44 +16,37 @@ th:replace="~{layouts/main-layout :: main-fragment(
 			E-mail
 		</div>
 	<br>
-	<div id="mail-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-		Mail Nav
-	</div>
-	<div id= "mail-main-content" class="container">	
-		<div class="card">
-			<form method="POST" th:action="@{/sendMail}" id="emailForm" class="container">
-				<br>
-				<div class="form-group">
-					<div class="input-group justify-content-center">
-						<div class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-user" aria-hidden="true"></i></div>
-						<input type="text" class="form-control" name="name" placeholder="Nombre"/>
-					</div>
-				</div>
-				<br>
-				<div class="form-group">
-					<div class="input-group justify-content-center">
-						<div class="input-group-text" id="addon-wrapping">@</div>
-						<input type="text" class="form-control" name="mail" placeholder="Correo electrónico" required/>
-					</div>
-				</div>
-				<br>
-				<div class="form-group">
-					<div class="input-group justify-content-center">
-						<div class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-envelope-open" aria-hidden="true"></i></div>
-						<input type="text" class="form-control" name="subject" placeholder="Asunto"/>
-					</div>
-				</div>
-				<br>
-				<div class="form-group">
-					<label>Mensaje</label>
-					<textarea class="form-control" rows="5" name="body"></textarea>
-				</div>
-				<br>
-				<div style="margin-bottom: 10px">
-					<button type="submit" class="btn btn-primary">Enviar</button>
-				</div>
-				<br>
-			</form>
+		<div id="mail-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+			Mail Nav
 		</div>
-	</div>
+		<div id= "mail-main-content" class="container">
+			<div class="card">
+				<form method="POST" th:action="@{/sendMail}" id="emailForm" class="container">
+					<br>
+					<div class="form-group">
+						<div class="input-group justify-content-center">
+							<div class="input-group-text" id="addon-wrapping">@</div>
+							<input type="text" class="form-control" name="mail" placeholder="Correo electrónico" required/>
+						</div>
+					</div>
+					<br>
+					<div class="form-group">
+						<div class="input-group justify-content-center">
+							<div class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-envelope-open" aria-hidden="true"></i></div>
+							<input type="text" class="form-control" name="subject" placeholder="Asunto"/>
+						</div>
+					</div>
+					<br>
+					<div class="form-group">
+					<label>Mensaje</label>
+						<textarea class="form-control" rows="5" name="body"></textarea>
+					</div>
+					<br>
+					<div style="margin-bottom: 10px">
+						<button type="submit" class="btn btn-primary">Enviar</button>
+					</div>
+					<br>
+				</form>
+			</div>
+		</div>
 	</body>
