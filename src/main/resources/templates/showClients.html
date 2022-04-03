@@ -9,15 +9,13 @@
 	)}"
 >
 	<head>
-		<title>Clients</title>
-		<meta charset="UTF-8">
+		<title>Clientes</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="/css/main.css">
 	</head>
 
 	<body>
 		<div id="clients-header">
-			<h1 class="title">Clientes</h1>
+			Clientes
 		</div>
 		<div id="clients-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
 			Clients Nav
@@ -35,8 +33,8 @@
 					<td th:text="${client.firstName}" style="text-align: center;">Name</td>
 					<td th:text="${client.lastName}" style="text-align: center;">Last Name</td>
 					<td style="text-align: center;">
-						<a th:href="@{'/clients/client?id=' + ${client.id}}" id="client" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-edit" aria-hidden="true"></i></a>
-						<a th:href="@{'/clients/delete?id=' + ${client.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-trash" aria-hidden="true"></i></a>
+						<a th:href="@{'/clients/client?id=' + ${client.id}}" id="client" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-user-edit" aria-hidden="true"></i></a>
+						<a th:href="@{'/clients/delete?id=' + ${client.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i></a>
 					</td>
 				</tr>
 			</table>
