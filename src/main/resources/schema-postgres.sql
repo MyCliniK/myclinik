@@ -10,7 +10,7 @@ CREATE TABLE clients (
 	birthdate DATE,
 	sex VARCHAR(1),
 	phone VARCHAR(12),
-	email VARCHAR(50),
+	email VARCHAR(50) NOT NULL,
 	promos BOOLEAN,
 	medical_observations VARCHAR(500),
 	observations VARCHAR(500)
@@ -31,8 +31,8 @@ CREATE TABLE appointments (
 	appointment_date TIMESTAMP NOT NULL,
 	done BOOLEAN,
 	paid BOOLEAN,
-	client_id INT,
-	treatment_id INT,
+	client_id INT NOT NULL,
+	treatment_id INT NOT NULL,
 	FOREIGN KEY (client_id) REFERENCES clients(id),
 	FOREIGN KEY (treatment_id) REFERENCES treatments(id)
 );
