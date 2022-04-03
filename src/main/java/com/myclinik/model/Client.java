@@ -1,13 +1,19 @@
 package com.myclinik.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -28,10 +34,13 @@ public class Client {
 	private Boolean promos;
 	private String medicalObservations;
 	private String observations;
+	
+	@OneToMany(mappedBy = "clients")
+    private List<Appointment> appointments = new ArrayList<>();
 
 	public Client() {}
 
-	public Client(String firstName, String lastName, String dni, Date birthdate, String sex, String phone, String email, Boolean promos, String medicalObservations, String observations) {
+	public Client(String firstName, String lastName, String dni, Date birthdate, String sex, String phone, String email, Boolean promos, String medicalObservations, String observations,  List<Appointment> appointments ) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dni = dni;
@@ -42,6 +51,7 @@ public class Client {
 		this.promos = promos;
 		this.medicalObservations = medicalObservations;
 		this.observations = observations;
+		this.appointments = appointments;		
 	}
 
 	@Override
@@ -59,13 +69,14 @@ public class Client {
 			Objects.equals(phone, client.email) &&
 			Objects.equals(promos, client.promos) &&
 			Objects.equals(medicalObservations, client.medicalObservations) &&
-			Objects.equals(observations, client.observations);
+			Objects.equals(observations, client.observations) &&
+			Objects.equals(appointments, client.appointments);
 	}
 
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, firstName, lastName, email, phone, medicalObservations, observations);
+		return Objects.hash(id, firstName, lastName, email, phone, medicalObservations, observations, appointments);
 	}
 
 	public Long getId() {
@@ -156,6 +167,14 @@ public class Client {
 		this.observations = observations;
 	}
 
+	public List<Appointment> getAppointments (List<Appointment> appointments){
+		return appointments;
+	}
+	
+	public void setAppointments(List<Appointment> appointments){
+		this.appointments = appointments;
+	}
+
 	@Override
 	public String toString() {
 		return "Client{" +
@@ -170,6 +189,7 @@ public class Client {
 		", sex='" + sex + '\'' +
 		", medicalObservations='" + medicalObservations + '\'' +
 		", observations='" + observations + '\'' +
+		", appointments='" + appointments + '\'' +
 		'}';
 	}
 }

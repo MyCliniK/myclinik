@@ -1,5 +1,6 @@
 package com.myclinik.controller;
 
+import com.myclinik.model.Appointment;
 import com.myclinik.model.Client;
 import com.myclinik.repository.ClientRepository;
 import com.myclinik.service.IClientService;
@@ -36,7 +37,9 @@ public class ClientController {
 	@GetMapping("/clients/client")
 	public String getClient(Model model, @RequestParam("id") String itemid){
 		var client  = clientService.findOne(Long.parseLong(itemid));
+		List<Appointment> app = clientService.findAppointments(Long.parseLong(itemid));
 		model.addAttribute("client", client);
+		model.addAttribute("appointments", app);
 		return "client";
 	}
 	@RequestMapping("/clients/new")

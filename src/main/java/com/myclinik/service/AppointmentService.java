@@ -35,4 +35,8 @@ public class AppointmentService implements IAppointmentService {
 		newAppointment.setId(id);
 		repository.save(newAppointment);
 	}
+
+	/*public Client findClient(Long client){
+		
+	}*/
 }
