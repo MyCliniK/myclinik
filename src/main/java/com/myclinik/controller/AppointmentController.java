@@ -58,6 +58,18 @@ public class AppointmentController {
 		return "new_appointment";
 	}
 
+	@RequestMapping(value = "/appointments/new", params = "clientId")
+	public String showNewAppointmentForm(Model model, @RequestParam("clientId") Long clientId) {
+		Appointment appointment = new Appointment();
+		appointment.setClient(clientService.findOne(clientId));
+		var treatments = (List<Treatment>) treatmentService.findAll();
+		var clients = (List<Client>) clientService.findAll();
+		model.addAttribute("appointment", appointment);
+		model.addAttribute("treatments", treatments);
+		model.addAttribute("clients", clients);
+		return "new_appointment";
+	}
+
 	@PostMapping("/appointments/new/save")
 	public String saveAppointment(@ModelAttribute("appointment") Appointment appointment) {
 		appointmentService.save(appointment);
