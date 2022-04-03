@@ -33,7 +33,7 @@
 							</div>
 							<br>
 							<div class="form-floating">
-								<select id="clientSelector" class="form-select" aria-labeled="clients" th:field="*{client}">
+								<select id="clientSelector" class="form-select" aria-labeled="clients" th:field="*{client}" required>
 									<option value="" selected>Seleccione un Cliente</option>
 									<option th:each="client: ${clients}" th:value="${client.id}" th:text="${client.firstName} + ' ' + ${client.lastName}" class="dropdown-item" href="#"></option>
 								</select>
@@ -41,7 +41,7 @@
 							</div>
 							<br>
 							<div class="form-floating">
-								<select id="treatmentSelector" class="form-select" aria-labeled="treatments" th:field="*{treatment}">
+								<select id="treatmentSelector" class="form-select" aria-labeled="treatments" th:field="*{treatment}" required>
 									<option value="" selected>Seleccione un Tratamiento</option>
 									<option th:each="treatment: ${treatments}" th:value="${treatment.id}" th:text="${treatment.name}" class="dropdown-item" href="#"></option>
 								</select>
