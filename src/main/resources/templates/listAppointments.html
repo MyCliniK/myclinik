@@ -36,7 +36,7 @@
 						</tr>
 					</thead>
 					<tr th:each="appointment : ${appointments}">
-						<td th:text="${appointment.client.firstName}" style="text-align: center;">Cliente</td>
+						<td th:text="${appointment.client.firstName} + ' ' + ${appointment.client.lastName}" style="text-align: center;">Cliente</td>
 						<td th:text="${#temporals.format(appointment.appointmentDate)}" style="text-align: center;">Fecha</td>
 						<td th:text="${appointment.treatment.name}" style="text-align: center;">Tratamiento</td>
 						<td class="text-center" style="font-size: 20px">
