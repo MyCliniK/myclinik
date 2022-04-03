@@ -31,13 +31,19 @@ public class Appointment {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Client client;
 
+	@ManyToOne
+	@JoinColumn(name = "treatment_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private Treatment treatment;
+
 	public Appointment() {}
 
-	public Appointment(LocalDateTime appointmentDate, Boolean done, Boolean paid, Client client) {
+	public Appointment(LocalDateTime appointmentDate, Boolean done, Boolean paid, Client client, Treatment treatment) {
 		this.appointmentDate= appointmentDate;
 		this.done = done;
 		this.paid = paid;
 		this.client = client;
+		this.treatment = treatment;
 	}
 
 	@Override
@@ -49,12 +55,13 @@ public class Appointment {
 		Objects.equals(appointmentDate, appointment.appointmentDate) &&
 		Objects.equals(done, appointment.done) &&
 		Objects.equals(paid, appointment.paid) &&
-		Objects.equals(client, appointment.client);
+		Objects.equals(client, appointment.client) &&
+		Objects.equals(treatment, appointment.treatment);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, appointmentDate, done, paid, client);
+		return Objects.hash(id, appointmentDate, done, paid, client, treatment);
 	}
 
 	public Long getId() {
@@ -97,6 +104,14 @@ public class Appointment {
 		this.client = client;
 	}
 
+	public Treatment getTreatment(){
+		return treatment;
+	}
+
+	public void setTreatment(Treatment treatment){
+		this.treatment = treatment;
+	}
+
 	@Override
 	public String toString() {
 		return "Appointment{" +
@@ -105,6 +120,7 @@ public class Appointment {
 		", done='" + done + '\'' +
 		", paid='" + paid + '\'' +
 		", client='" + client + '\'' +
+		", treatment='" + treatment + '\'' +
 		'}';
 	}
 }

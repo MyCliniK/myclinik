@@ -1,8 +1,6 @@
 package com.myclinik.service;
 
 import com.myclinik.model.Client;
-import com.myclinik.model.Appointment;
-import com.myclinik.repository.AppointmentRepository;
 import com.myclinik.repository.ClientRepository;
 
 import java.util.ArrayList;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Service;
 public class ClientService implements IClientService {
 	@Autowired
 	private ClientRepository repository;
-	private AppointmentRepository aRepository;
 
 	@Override
 	public List<Client> findAll() {
@@ -40,15 +37,4 @@ public class ClientService implements IClientService {
 		newClient.setId(id);
 		repository.save(newClient);
 	}
-	// public List<Appointment> findAppointments(Long id){
-	// 	List<Appointment> appointments = new ArrayList();
-	// 	var app = (List<Appointment>) aRepository.findAll();
-	// 	for (Appointment a: app) {
-	// 		if (a.getClient() == (Client) repository.findById(id).get()){
-	// 			appointments.add(a);
-	// 		}
-	// 	}
-	// 	return appointments;
-	// }
-
 }

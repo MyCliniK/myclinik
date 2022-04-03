@@ -1,6 +1,5 @@
 package com.myclinik.controller;
 
-import com.myclinik.model.Appointment;
 import com.myclinik.model.Client;
 import com.myclinik.repository.ClientRepository;
 import com.myclinik.service.IClientService;
