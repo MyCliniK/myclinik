@@ -36,19 +36,19 @@ public class ClientService implements IClientService {
 	public void deleteClient(Long id){
 		repository.deleteById(id);
 	}
-	public void updateClient(Long id, Client newClient){ 
+	public void updateClient(Long id, Client newClient){
 		newClient.setId(id);
 		repository.save(newClient);
 	}
-	public List<Appointment> findAppointments(Long id){
-		List<Appointment> appointments = new ArrayList();
-		var app = (List<Appointment>) aRepository.findAll();
-		for (Appointment a: app) {
-			if (a.getClient() == (Client) repository.findById(id).get()){
-				appointments.add(a);
-			}
-		}
-		return appointments;
-	}
+	// public List<Appointment> findAppointments(Long id){
+	// 	List<Appointment> appointments = new ArrayList();
+	// 	var app = (List<Appointment>) aRepository.findAll();
+	// 	for (Appointment a: app) {
+	// 		if (a.getClient() == (Client) repository.findById(id).get()){
+	// 			appointments.add(a);
+	// 		}
+	// 	}
+	// 	return appointments;
+	// }
 
 }

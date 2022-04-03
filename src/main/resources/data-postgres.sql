@@ -8,7 +8,6 @@ INSERT INTO treatments(name, price, duration) VALUES ('Tratamiento 1', '100', '3
 INSERT INTO treatments(name, price, duration) VALUES ('Tratamiento 2', '200', '60');
 INSERT INTO treatments(name, price, duration) VALUES ('Tratamiento 3', '300', '90');
 
-INSERT INTO appointments(appointment_date, client, treatment_id, done, paid) VALUES ('2020-01-01', 1, 1, false, false);
-INSERT INTO appointments(appointment_date, client, treatment_id, done, paid) VALUES ('2020-01-02', 1, 2, true, false);
-INSERT INTO appointments(appointment_date, client, treatment_id, done, paid) VALUES ('2020-01-03', 2, 1, true, true);
-
+INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-01', 1, 1, false, false);
+INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-02', 1, 2, true, false);
+INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-03', 2, 1, true, true);

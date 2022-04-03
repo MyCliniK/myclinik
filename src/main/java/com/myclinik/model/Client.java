@@ -34,9 +34,9 @@ public class Client {
 	private Boolean promos;
 	private String medicalObservations;
 	private String observations;
-	
-	@OneToMany(mappedBy = "clients")
-    private List<Appointment> appointments = new ArrayList<>();
+
+	@OneToMany(mappedBy = "client")
+	private List<Appointment> appointments;
 
 	public Client() {}
 
@@ -51,7 +51,7 @@ public class Client {
 		this.promos = promos;
 		this.medicalObservations = medicalObservations;
 		this.observations = observations;
-		this.appointments = appointments;		
+		this.appointments = appointments;
 	}
 
 	@Override
@@ -60,17 +60,17 @@ public class Client {
 		if (o == null || getClass() != o.getClass()) return false;
 		Client client = (Client) o;
 		return Objects.equals(id, client.id) &&
-			Objects.equals(firstName, client.firstName) &&
-			Objects.equals(lastName, client.lastName) &&
-			Objects.equals(dni, client.dni) &&
-			Objects.equals(birthdate, client.birthdate) &&
-			Objects.equals(sex, client.sex) &&
-			Objects.equals(email, client.phone) &&
-			Objects.equals(phone, client.email) &&
-			Objects.equals(promos, client.promos) &&
-			Objects.equals(medicalObservations, client.medicalObservations) &&
-			Objects.equals(observations, client.observations) &&
-			Objects.equals(appointments, client.appointments);
+		Objects.equals(firstName, client.firstName) &&
+		Objects.equals(lastName, client.lastName) &&
+		Objects.equals(dni, client.dni) &&
+		Objects.equals(birthdate, client.birthdate) &&
+		Objects.equals(sex, client.sex) &&
+		Objects.equals(email, client.phone) &&
+		Objects.equals(phone, client.email) &&
+		Objects.equals(promos, client.promos) &&
+		Objects.equals(medicalObservations, client.medicalObservations) &&
+		Objects.equals(observations, client.observations) &&
+		Objects.equals(appointments, client.appointments);
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public class Client {
 	public List<Appointment> getAppointments (List<Appointment> appointments){
 		return appointments;
 	}
-	
+
 	public void setAppointments(List<Appointment> appointments){
 		this.appointments = appointments;
 	}
@@ -178,7 +178,7 @@ public class Client {
 	@Override
 	public String toString() {
 		return "Client{" +
-		"clientId=" + id +
+		"id=" + id +
 		", firstName='" + firstName + '\'' +
 		", lastName='" + lastName + '\'' +
 		", dni='" + dni + '\'' +
@@ -189,7 +189,6 @@ public class Client {
 		", sex='" + sex + '\'' +
 		", medicalObservations='" + medicalObservations + '\'' +
 		", observations='" + observations + '\'' +
-		", appointments='" + appointments + '\'' +
 		'}';
 	}
 }

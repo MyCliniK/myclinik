@@ -31,8 +31,8 @@ CREATE TABLE appointments (
 	appointment_date TIMESTAMP,
 	done BOOLEAN,
 	paid BOOLEAN,
-	client INT,
+	client_id INT,
 	treatment_id INT,
-	FOREIGN KEY (client) REFERENCES clients(id),
+	FOREIGN KEY (client_id) REFERENCES clients(id),
 	FOREIGN KEY (treatment_id) REFERENCES treatments(id)
 );

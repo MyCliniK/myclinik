@@ -25,11 +25,11 @@ public class Appointment {
 	private LocalDateTime appointmentDate;
 	private Boolean done;
 	private Boolean paid;
-	
-    @ManyToOne
-    @JoinColumn(name = "client")
+
+	@ManyToOne
+	@JoinColumn(name = "client_id")
 	@OnDelete(action = OnDeleteAction.CASCADE)
-    private Client client;
+	private Client client;
 
 	public Appointment() {}
 
@@ -46,11 +46,10 @@ public class Appointment {
 		if (o == null || getClass() != o.getClass()) return false;
 		Appointment appointment = (Appointment) o;
 		return Objects.equals(id, appointment.id) &&
-			Objects.equals(appointmentDate, appointment.appointmentDate) &&
-			Objects.equals(done, appointment.done) &&
-			Objects.equals(paid, appointment.paid) &&
-			Objects.equals(client, appointment.client);
-			
+		Objects.equals(appointmentDate, appointment.appointmentDate) &&
+		Objects.equals(done, appointment.done) &&
+		Objects.equals(paid, appointment.paid) &&
+		Objects.equals(client, appointment.client);
 	}
 
 	@Override
@@ -101,7 +100,7 @@ public class Appointment {
 	@Override
 	public String toString() {
 		return "Appointment{" +
-		"appointmentId=" + id +
+		"id=" + id +
 		", appointmentDate='" + appointmentDate + '\'' +
 		", done='" + done + '\'' +
 		", paid='" + paid + '\'' +

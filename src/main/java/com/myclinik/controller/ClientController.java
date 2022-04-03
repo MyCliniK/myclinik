@@ -37,11 +37,10 @@ public class ClientController {
 	@GetMapping("/clients/client")
 	public String getClient(Model model, @RequestParam("id") String itemid){
 		var client  = clientService.findOne(Long.parseLong(itemid));
-		List<Appointment> app = clientService.findAppointments(Long.parseLong(itemid));
 		model.addAttribute("client", client);
-		model.addAttribute("appointments", app);
 		return "client";
 	}
+
 	@RequestMapping("/clients/new")
 	public String createClient(Model model){
 		var newclient = clientService.createClient();
@@ -49,10 +48,10 @@ public class ClientController {
 		return "newclient";
 	}
 	@PostMapping("/clients/new/save")
-    public String saveClient(@ModelAttribute("client") Client client) {
-        clientService.saveClient(client);
-        return "redirect:/clients";
-    }
+	public String saveClient(@ModelAttribute("client") Client client) {
+		clientService.saveClient(client);
+		return "redirect:/clients";
+	}
 	@RequestMapping ("/clients/delete")
 	public String deleteClient(@RequestParam("id") Long itemid) {
 		clientService.deleteClient(itemid);
