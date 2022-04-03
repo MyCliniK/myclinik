@@ -50,7 +50,11 @@ public class AppointmentController {
 	@RequestMapping("/appointments/new")
 	public String showNewAppointmentForm(Model model) {
 		Appointment appointment = new Appointment();
+		var treatments = (List<Treatment>) treatmentService.findAll();
+		var clients = (List<Client>) clientService.findAll();
 		model.addAttribute("appointment", appointment);
+		model.addAttribute("treatments", treatments);
+		model.addAttribute("clients", clients);
 		return "new_appointment";
 	}
 
