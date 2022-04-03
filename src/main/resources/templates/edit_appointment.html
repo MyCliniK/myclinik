@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-th:replace="~{layouts/main-layout :: main-fragment(
+	th:replace="~{layouts/main-layout :: main-fragment(
 	~{:: title},
 	~{:: #editapp-header},
 	~{:: #editapp-nav},
@@ -27,49 +27,55 @@ th:replace="~{layouts/main-layout :: main-fragment(
 		</div>
 	<br>
 		<div id="editapp-main-content">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-10 offset-sm-1 text-center">
-					<form method="post" action="#" th:action="@{'/appointments/update?id=' + ${appointment.id}}" th:object="${appointment}">
-						<div class="form-group">
-							<div class="input-group justify-content-center">
-								<span class="input-group-text" id="addon-wrapping">Fecha</span>
-								<input type="datetime-local" th:field="*{appointmentDate}"/>
-							</div>
-						</div>
-						<br>
-						<div>
-							<select class="form-select" aria-labeled="select clients">
-								<div th:each=" client: ${clients}">
-										<option th:value= "${client}" th:text="${client.firstName}" th:field= "*{client.firstName}" class="dropdown-item" href="#"></option>
-								</div>
-							</select>
-							<select class="form-select" aria-labeled="select treatments">
-								<div th:each=" treatment: ${treatments}">
-										<option th:value= "${treatment}" th:text="${treatment.name}" th:field= "*{treatment.name}" class="dropdown-item" href="#"></option>
-								</div>
-							</select>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-10 offset-sm-1 text-center">
+						<form method="post" action="#" th:action="@{'/appointments/update?id=' + ${appointment.id}}" th:object="${appointment}">
 							<div class="form-group">
-								<div class="form-check form-check-inline justify-content-center">
-									<input class="form-check-input" type="checkbox" value="" th:field="*{done}"/>
-									<label class="form-check-label" for="flexCheckDefault">
-										Realizado
-									</label>
-								</div>
-								<div class="form-check form-check-inline justify-content-center">
-									<input class="form-check-input" type="checkbox" th:field="*{paid}"/>
-									<label class="form-check-label" for="flexCheckDefault">
-										Pagado
-									</label>
+								<div class="input-group justify-content-center">
+									<span class="input-group-text" id="addon-wrapping">Fecha</span>
+									<input type="datetime-local" th:field="*{appointmentDate}"/>
 								</div>
 							</div>
 							<br>
-							<div style="margin-bottom: 10px; text-align: center;">
-								<button type="submit" class="btn btn-warning">Guardar</button>
-							</div>
-					</form>
+							<div>
+								<div class="form-floating">
+									<select id="clientSelector" class="form-select" aria-labeled="clients" th:field="*{client}">
+										<option value="" selected>Seleccione un Cliente</option>
+										<option th:each="client: ${clients}" th:value="${client.id}" th:text="${client.firstName} + ' ' + ${client.lastName}" class="dropdown-item" href="#"></option>
+									</select>
+									<label class="form-check-label" for="clientSelector">Client</label>
+								</div>
+								<br>
+								<div class="form-floating">
+									<select id="treatmentSelector" class="form-select" aria-labeled="treatments" th:field="*{treatment}">
+										<option value="" selected>Seleccione un Tratamiento</option>
+										<option th:each="treatment: ${treatments}" th:value="${treatment.id}" th:text="${treatment.name}" class="dropdown-item" href="#"></option>
+									</select>
+									<label class="form-check-label" for="clientSelector">Tratamiento</label>
+								</div>
+								<br>
+								<div class="form-group">
+									<div class="form-check form-check-inline justify-content-center">
+										<input class="form-check-input" type="checkbox" value="" th:field="*{done}"/>
+										<label class="form-check-label" for="flexCheckDefault">
+											Realizado
+										</label>
+									</div>
+									<div class="form-check form-check-inline justify-content-center">
+										<input class="form-check-input" type="checkbox" th:field="*{paid}"/>
+										<label class="form-check-label" for="flexCheckDefault">
+											Pagado
+										</label>
+									</div>
+								</div>
+								<br>
+								<div style="margin-bottom: 10px; text-align: center;">
+									<button type="submit" class="btn btn-warning">Guardar</button>
+								</div>
+						</form>
+					</div>
 				</div>
 			</div>
-		</div>
 	</body>
 </html>

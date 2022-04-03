@@ -24,7 +24,7 @@ import java.util.List;
 
 @Controller
 public class AppointmentController {
-	
+
 	@Autowired
 	private IAppointmentService appointmentService;
 	@Autowired
@@ -76,11 +76,10 @@ public class AppointmentController {
 		appointmentService.delete(appointmentId);
 		return "redirect:/appointments";
 	}
-	
+
 	@RequestMapping("/appointments/update")
 	public String updateAppointment(@RequestParam("id") Long id, @ModelAttribute("appointment") Appointment appointment) {
-		System.out.println(appointment);
-		//appointmentService.update(id, appointment);
-		return "redirect:/home";
+		appointmentService.update(id, appointment);
+		return "redirect:/appointments/edit/" + id;
 	}
 }
