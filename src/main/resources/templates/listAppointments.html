@@ -47,8 +47,14 @@
 						<td th:text="${appointment.client.firstName}" style="text-align: center;">Cliente</td>
 						<td th:text="${#temporals.format(appointment.appointmentDate)}" style="text-align: center;">Fecha</td>
 						<td th:text="${appointment.treatment.name}" style="text-align: center;">Tratamiento</td>
-						<td th:text="${appointment.done ? 'y' : 'n'}" style="text-align: center;">Realizada</td>
-						<td th:text="${appointment.paid}" style="text-align: center;">Pagada</td>
+						<td class="text-center" style="font-size: 20px">
+							<span th:if="${appointment.done == true}"> <i class="fa-solid fa-circle-check text-success"></i></span>
+							<span th:if="${appointment.done == false}"> <i class="fa-solid fa-circle-xmark text-danger"></i></span>
+						</td>
+						<td class="text-center" style="font-size: 20px">
+							<span th:if="${appointment.paid == true}"> <i class="fa-solid fa-circle-check text-success"></i></span>
+							<span th:if="${appointment.paid == false}"> <i class="fa-solid fa-circle-xmark text-danger"></i></span>
+						</td>
 						<td style="text-align: center;">
 							<a th:href="@{'/appointments/edit/' + ${appointment.id}}" id="edit" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-edit" aria-hidden="true"></i></a>
 							<a th:href="@{'/appointments/delete/' + ${appointment.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-trash" aria-hidden="true"></i></a>
