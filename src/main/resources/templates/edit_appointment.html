@@ -39,6 +39,16 @@ th:replace="~{layouts/main-layout :: main-fragment(
 						</div>
 						<br>
 						<div>
+							<select class="form-select" aria-labeled="select clients">
+								<div th:each=" client: ${clients}">
+										<option th:value= "${client}" th:text="${client.firstName}" th:field= "*{client.firstName}" class="dropdown-item" href="#"></option>
+								</div>
+							</select>
+							<select class="form-select" aria-labeled="select treatments">
+								<div th:each=" treatment: ${treatments}">
+										<option th:value= "${treatment}" th:text="${treatment.name}" th:field= "*{treatment.name}" class="dropdown-item" href="#"></option>
+								</div>
+							</select>
 							<div class="form-group">
 								<div class="form-check form-check-inline justify-content-center">
 									<input class="form-check-input" type="checkbox" value="" th:field="*{done}"/>
