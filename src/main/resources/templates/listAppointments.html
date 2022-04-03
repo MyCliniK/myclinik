@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layouts/main-layout :: main-fragment(
+		~{:: title},
+		~{:: #appointments-header},
+		~{:: #appointments-nav},
+		~{:: #appointments-main-content},
+		~{:: #appointments-footer}
+		)}"
+	>
 	<head>
 		<meta charset="utf-8"/>
 		<title>Citas</title>
@@ -13,16 +21,16 @@
 		<link rel="stylesheet" href="/css/main.css">
 	</head>
 	<body>
-		<div style="text-align: center;">
-			<img src="/assets/logo_rect.png" class="center">
-		</div>
-
-		<div>
-			<h1 class="title">CITAS</h1>
+		
+		<div id="appointments-header">
+			<h1 class="title">Citas</h1>
 		</div>
 	<br>
+		<div id="appointments-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+			Citas Nav
+		</div>
 
-		<div class="container">
+		<div id="appointments-main-content" class="container">
 			<div>
 				<table class="table table-success table-striped">
 					<thead class="thead">
