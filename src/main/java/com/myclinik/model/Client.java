@@ -1,13 +1,20 @@
 package com.myclinik.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 import javax.persistence.Table;
 
 import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,9 +36,12 @@ public class Client {
 	private String medicalObservations;
 	private String observations;
 
+	@OneToMany(mappedBy = "client", cascade=CascadeType.ALL)
+	private List<Appointment> appointments;
+
 	public Client() {}
 
-	public Client(String firstName, String lastName, String dni, Date birthdate, String sex, String phone, String email, Boolean promos, String medicalObservations, String observations) {
+	public Client(String firstName, String lastName, String dni, Date birthdate, String sex, String phone, String email, Boolean promos, String medicalObservations, String observations,  List<Appointment> appointments ) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dni = dni;
@@ -42,6 +52,7 @@ public class Client {
 		this.promos = promos;
 		this.medicalObservations = medicalObservations;
 		this.observations = observations;
+		this.appointments = appointments;
 	}
 
 	@Override
@@ -50,22 +61,23 @@ public class Client {
 		if (o == null || getClass() != o.getClass()) return false;
 		Client client = (Client) o;
 		return Objects.equals(id, client.id) &&
-			Objects.equals(firstName, client.firstName) &&
-			Objects.equals(lastName, client.lastName) &&
-			Objects.equals(dni, client.dni) &&
-			Objects.equals(birthdate, client.birthdate) &&
-			Objects.equals(sex, client.sex) &&
-			Objects.equals(email, client.phone) &&
-			Objects.equals(phone, client.email) &&
-			Objects.equals(promos, client.promos) &&
-			Objects.equals(medicalObservations, client.medicalObservations) &&
-			Objects.equals(observations, client.observations);
+		Objects.equals(firstName, client.firstName) &&
+		Objects.equals(lastName, client.lastName) &&
+		Objects.equals(dni, client.dni) &&
+		Objects.equals(birthdate, client.birthdate) &&
+		Objects.equals(sex, client.sex) &&
+		Objects.equals(email, client.phone) &&
+		Objects.equals(phone, client.email) &&
+		Objects.equals(promos, client.promos) &&
+		Objects.equals(medicalObservations, client.medicalObservations) &&
+		Objects.equals(observations, client.observations) &&
+		Objects.equals(appointments, client.appointments);
 	}
 
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, firstName, lastName, email, phone, medicalObservations, observations);
+		return Objects.hash(id, firstName, lastName, email, phone, medicalObservations, observations, appointments);
 	}
 
 	public Long getId() {
@@ -156,10 +168,18 @@ public class Client {
 		this.observations = observations;
 	}
 
+	public List<Appointment> getAppointments (List<Appointment> appointments){
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments){
+		this.appointments = appointments;
+	}
+
 	@Override
 	public String toString() {
 		return "Client{" +
-		"clientId=" + id +
+		"id=" + id +
 		", firstName='" + firstName + '\'' +
 		", lastName='" + lastName + '\'' +
 		", dni='" + dni + '\'' +

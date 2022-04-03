@@ -38,7 +38,6 @@ public class TreatmentController {
 
     @PostMapping("/treatments/new/save")
     public String saveTreatment(@ModelAttribute("treatment") Treatment treatment) {
-		//System.out.println(treatment);
         treatmentService.save(treatment);
         return "redirect:/treatments";
     }
