@@ -21,16 +21,7 @@
 	<br>
 		<div class="container">
 			<div class="card">
-				<form method="POST" action="#" th:action="@{/treatments/new/save}" th:object="${treatment}" class="container">
-					<br>
-					<div class="row">
-						<div class="form-group">
-							<div class="input-group justify-content-center">
-								<span class="input-group-text" id="addon-wrapping">Identificador</span>
-								<input class="form-control" type="text" th:field="*{treatmentId}" readonly="readonly" />
-							</div>
-						</div>
-					</div>
+				<form method="POST" action="#" th:action="@{'/treatments/update?id=' + ${treatment.id}}" th:object="${treatment}" class="container">
 					<br>
 					<div class="row">
 						<div class="col-md-6">

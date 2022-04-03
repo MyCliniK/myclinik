@@ -58,4 +58,10 @@ public class TreatmentController {
 		return "redirect:/treatments";
 	}
 
+	@RequestMapping("/treatments/update")
+	public String updateTreatment(@RequestParam("id") Long id, @ModelAttribute("treatment") Treatment treatment) {
+		treatmentService.update(id, treatment);
+		return "redirect:/treatments";
+	}
+
 }

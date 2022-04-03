@@ -23,11 +23,16 @@ public class TreatmentService implements ITreatmentService {
 		repository.save(treatment);
 	}
 
-	public Treatment get(long id) {
+	public Treatment get(Long id) {
 		return repository.findById(id).get();
 	}
 
-	public void delete(long id) {
+	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+
+	public void update(Long id, Treatment newTreatment) {
+		newTreatment.setId(id);
+		repository.save(newTreatment);
 	}
 }
