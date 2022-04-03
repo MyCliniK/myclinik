@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,14 @@ public class AppointmentController {
 	@GetMapping("/appointments")
 	public String findAppointments(Model model) {
 		var appointments = (List<Appointment>) appointmentService.findAll();
+		model.addAttribute("appointments", appointments);
+		return "listAppointments";
+	}
+
+	@RequestMapping(value = "/appointments", params = "clientId")
+	public String findAppointmentsByClient(Model model, @RequestParam("clientId") Long clientId) {
+		var allAppointments = (List<Appointment>) appointmentService.findAll();
+		var appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == clientId).collect(java.util.stream.Collectors.toList());
 		model.addAttribute("appointments", appointments);
 		return "listAppointments";
 	}
