@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layouts/main-layout :: main-fragment(
+		~{:: title},
+		~{:: #treatment-header},
+		~{:: #treatment-nav},
+		~{:: #treatment-main-content},
+		~{:: #treatment-footer}
+		)}"
+	>	
 	<head>
 		<meta charset="utf-8"/>
 	<title> Tratamientos </title>
@@ -14,18 +22,16 @@
 	</head>
 
 	<body>
-		<div>
-			<div style="text-align: center;">
-				<img src="/assets/logo_rect.png" class="center">
-			</div>
-
-			<div>
-				<h1 class="title">TRATAMIENTOS</h1>
-			</div>
+		<div id="treatment-header">
+			<h1 class="title">Tratamientos</h1>
+		</div>
+		<div id="treatment-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+			Treatment Nav
+		</div>
 			<br>
 
-			<div class="container">
-				<div>
+			<div id="treatment-main-content">
+				<!--<div>-->
 					<table class="table table-warning table-striped">
 						<thead class="thead">
 							<tr>

@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layouts/main-layout :: main-fragment(
+		~{:: title},
+		~{:: #treatment-header},
+		~{:: #treatment-nav},
+		~{:: #treatment-main-content},
+		~{:: #treatment-footer}
+		)}"
+	>
 	<head>
 		<meta charset="utf-8" />
 		<title>Nuevo tratamiento</title>
@@ -12,14 +20,17 @@
 		<link rel="stylesheet" href="/css/main.css">
 	</head>
 	<body>
-		<div style="text-align: center;">
-			<img src="/assets/logo_rect.png" class="center">
+		<div id="treatment-header">
+			<h1 class="title"> Nuevo tratamiento</h1>
+		</div>
+		<div id="treatment-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+			New Treatment Nav
 		</div>
 		<div>
 			<h1 class="title">NUEVO TRATAMIENTO</h1>
 		</div>
 	<br>
-		<div class="container">
+		<div id="treatment-main-content">
 			<div class="card">
 				<form method="POST" action="#" th:action="@{/treatments/new/save}" th:object="${treatment}" class="container">
 					<br>
