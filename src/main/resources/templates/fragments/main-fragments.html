@@ -14,41 +14,28 @@
 					</a>
 				</div>
 				<ul class="navbar-nav d-flex flex-column justify-content-around" style="height: 80%">
-					<!-- <li class="nav-item"> -->
-					<!-- 	<a class="nav-link" th:href="@{/}"> -->
-					<!-- 		<img src="/assets/logo_circle.png" width="70%" height="auto" class="d-inline-block align-center" alt=""> -->
-					<!-- 	</a> -->
-					<!-- </li> -->
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/clients}">
+						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/clients') ? 'active':''}" th:href="@{/clients}">
 							<i class="fa fa-solid fa-users" aria-hidden="true"></i>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/appointments}">
+						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/appointments') ? 'active':''}" th:href="@{/appointments}">
 							<i class="fa fa-regular fa-calendar-check"></i>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/treatments}">
+						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/treatments') ? 'active':''}" th:href="@{/treatments}">
 							<i class="fa fa-solid fa-heart-circle-plus" aria-hidden="true"></i>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/mail}">
+						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/mail') ? 'active':''}" th:href="@{/mail}">
 							<i class="fa fa-solid fa-envelope" aria-hidden="true"></i>
 						</a>
 					</li>
 				</ul>
 			</div>
 		</nav>
-		<!-- Admin Navigator -->
-		<!-- <ul th:fragment = "nav-admin"> -->
-		<!-- 	<li><a th:href="@{/admin/products}">Product Management</a></li> -->
-		<!-- 	<li><a th:href="@{/admin/orders}">Order Management</a></li> -->
-		<!-- </ul> -->
-		<!-- <div th:fragment="copyright"> -->
-		<!-- 	&copy; o7planning.org -->
-		<!-- </div> -->
 	</body>
 </html>
