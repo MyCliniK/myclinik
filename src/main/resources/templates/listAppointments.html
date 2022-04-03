@@ -47,11 +47,11 @@
 						<td th:text="${appointment.client.firstName}" style="text-align: center;">Cliente</td>
 						<td th:text="${#temporals.format(appointment.appointmentDate)}" style="text-align: center;">Fecha</td>
 						<td th:text="${appointment.treatment.name}" style="text-align: center;">Tratamiento</td>
-						<td style="text-align: center; font-size: 20px">
+						<td class="text-center" style="font-size: 20px">
 							<span th:if="${appointment.done == true}"> <i class="fa-solid fa-circle-check text-success"></i></span>
 							<span th:if="${appointment.done == false}"> <i class="fa-solid fa-circle-xmark text-danger"></i></span>
 						</td>
-						<td style="text-align: center; font-size: 20px">
+						<td class="text-center" style="font-size: 20px">
 							<span th:if="${appointment.paid == true}"> <i class="fa-solid fa-circle-check text-success"></i></span>
 							<span th:if="${appointment.paid == false}"> <i class="fa-solid fa-circle-xmark text-danger"></i></span>
 						</td>
