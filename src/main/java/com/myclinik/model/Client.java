@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 import javax.persistence.Table;
 
 import java.util.Objects;
@@ -35,7 +36,7 @@ public class Client {
 	private String medicalObservations;
 	private String observations;
 
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "client", cascade=CascadeType.ALL)
 	private List<Appointment> appointments;
 
 	public Client() {}
