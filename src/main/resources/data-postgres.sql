@@ -4,9 +4,9 @@ INSERT INTO clients(first_name, last_name, observations, dni, email) VALUES ('Cl
 INSERT INTO clients(first_name, last_name, medical_observations, dni, email) VALUES ('Gonzalo', 'Azcarate', 'No le gusta la asignatura de ISST', '12345678A', 'gonzalo@mail.com');
 INSERT INTO clients(first_name, last_name, dni, email) VALUES ('Ana', 'Méndez', '12345678A', 'ana@mail.com');
 
-INSERT INTO treatments(name, price, duration) VALUES ('Tratamiento 1', '100', '30');
-INSERT INTO treatments(name, price, duration) VALUES ('Tratamiento 2', '200', '60');
-INSERT INTO treatments(name, price, duration) VALUES ('Tratamiento 3', '300', '90');
+INSERT INTO treatments(name, price, duration) VALUES ('Depilación Espalda', '80', '30');
+INSERT INTO treatments(name, price, duration) VALUES ('Depilación Axilas', '50', '60');
+INSERT INTO treatments(name, price, duration) VALUES ('Depilación Piernas', '100', '90');
 
 INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-01 19:10', 1, 1, false, false);
 INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-02 13:30', 1, 2, true, false);
