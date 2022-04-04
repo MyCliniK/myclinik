@@ -25,19 +25,15 @@
 				<thead class="thead">
 					<tr>
 						<th style="text-align: center;">Nombre</th>
-						<th style="text-align: center;">Subservicios</th>
 						<th style="text-align: center;">Precio (€)</th>
 						<th style="text-align: center;">Duración (minutos)</th>
-						<th style="text-align: center;">Consentimientos</th>
 						<th style="text-align: center;">Acciones</th>
 					</tr>
 				</thead>
 				<tr th:each="treatment: ${treatments}">
 					<td th:text="${treatment.name}" style="text-align: center;">Nombre</td>
-					<td th:text="${treatment.subservice}" style="text-align: center;">Subservicios</td>
 					<td th:text="${treatment.price}" style="text-align: center;">Precio</td>
 					<td th:text="${treatment.duration}" style="text-align: center;">Duración</td>
-					<td th:text="${treatment.consents}" style="text-align: center;">Consentimientos</td>
 					<td style="text-align: center;">
 						<a th:href="@{'/treatments/edit/' + ${treatment.id}}" id="edit" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-edit" aria-hidden="true"></i></a>
 						<a th:href="@{'/treatments/delete/' + ${treatment.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-trash" aria-hidden="true"></i></a>
