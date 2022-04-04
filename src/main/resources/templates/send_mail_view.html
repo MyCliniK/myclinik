@@ -16,37 +16,36 @@
 			E-mail
 		</div>
 	<br>
-		<div id="mail-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-			Mail Nav
-		</div>
-		<div id= "mail-main-content" class="container">
-			<div class="card">
-				<form method="POST" th:action="@{/sendMail}" id="emailForm" class="container">
-					<br>
-					<div class="form-group">
-						<div class="input-group justify-content-center">
-							<div class="input-group-text" id="addon-wrapping">@</div>
-							<input type="text" class="form-control" name="mail" placeholder="Correo electrónico" required/>
-						</div>
+	<div id="mail-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+		Mail Nav
+	</div>
+	<div id= "mail-main-content" class="container">
+		<div class="card">
+			<form method="POST" th:action="@{/sendMail}" id="emailForm" class="container">
+				<br>
+				<div class="form-group">
+					<div class="input-group justify-content-center">
+						<div class="input-group-text" id="addon-wrapping">@</div>
+						<input type="text" class="form-control" name="mail" placeholder="Correo electrónico" required/>
 					</div>
-					<br>
-					<div class="form-group">
-						<div class="input-group justify-content-center">
-							<div class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-envelope-open" aria-hidden="true"></i></div>
-							<input type="text" class="form-control" name="subject" placeholder="Asunto"/>
-						</div>
+				</div>
+				<br>
+				<div class="form-group">
+					<div class="input-group justify-content-center">
+						<div class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-envelope-open" aria-hidden="true"></i></div>
+						<input type="text" class="form-control" name="subject" placeholder="Asunto"/>
 					</div>
-					<br>
-					<div class="form-group">
+				</div>
+				<br>
+				<div class="form-group">
 					<label>Mensaje</label>
-						<textarea class="form-control" rows="5" name="body"></textarea>
-					</div>
-					<br>
-					<div style="margin-bottom: 10px">
-						<button type="submit" class="btn btn-primary">Enviar</button>
-					</div>
-					<br>
-				</form>
-			</div>
+					<textarea class="form-control" rows="5" name="body"></textarea>
+				</div>
+				<br>
+				<div style="margin-bottom: 10px; text-align: center;">
+					<button type="submit" class="btn btn-primary">Enviar</button>
+				</div>
+				<br>
+			</form>
 		</div>
 	</body>
