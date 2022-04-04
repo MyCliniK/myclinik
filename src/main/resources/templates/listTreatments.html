@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layouts/main-layout :: main-fragment(
-		~{:: title},
-		~{:: #treatment-header},
-		~{:: #treatment-nav},
-		~{:: #treatment-main-content},
-		~{:: #treatment-footer}
-		)}"
-	>	
+	~{:: title},
+	~{:: #treatment-header},
+	~{:: #treatment-nav},
+	~{:: #treatment-main-content},
+	~{:: #treatment-footer}
+	)}"
+	>
 	<head>
 		<title>Tratamientos</title>
 	</head>
@@ -20,38 +20,29 @@
 		<div id="treatment-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
 			Treatment Nav
 		</div>
-		<br>
-
-			<div id="treatment-main-content">
-				<!--<div>-->
-					<table class="table table-warning table-striped">
-						<thead class="thead">
-							<tr>
-								<th style="text-align: center;">Nombre</th>
-								<th style="text-align: center;">Subservicios</th>
-								<th style="text-align: center;">Precio (€)</th>
-								<th style="text-align: center;">Duración (minutos)</th>
-								<th style="text-align: center;">Consentimientos</th>
-								<th style="text-align: center;">Acciones</th>
-							</tr>
-						</thead>
-						<tr th:each="treatment: ${treatments}">
-							<td th:text="${treatment.name}" style="text-align: center;">Nombre</td>
-							<td th:text="${treatment.subservice}" style="text-align: center;">Subservicios</td>
-							<td th:text="${treatment.price}" style="text-align: center;">Precio</td>
-							<td th:text="${treatment.duration}" style="text-align: center;">Duración</td>
-							<td th:text="${treatment.consents}" style="text-align: center;">Consentimientos</td>
-							<td style="text-align: center;">
-								<a th:href="@{'/treatments/edit/' + ${treatment.id}}" id="edit" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-edit" aria-hidden="true"></i></a>
-								<a th:href="@{'/treatments/delete/' + ${treatment.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-trash" aria-hidden="true"></i></a>
-							</td>
-						</tr>
-					</table>
-					<br>
-					<div style="float: right;">
-						<a th:href="@{'/treatments/new'}" id="add" class="btn btn-success" role="button"><i class="fa fa-fw fa-plus" aria-hidden="true"></i></a>
-					</div>
-				</div>
+		<div id="treatment-main-content">
+			<table class="table table-warning table-striped">
+				<thead class="thead">
+					<tr>
+						<th style="text-align: center;">Nombre</th>
+						<th style="text-align: center;">Precio (€)</th>
+						<th style="text-align: center;">Duración (minutos)</th>
+						<th style="text-align: center;">Acciones</th>
+					</tr>
+				</thead>
+				<tr th:each="treatment: ${treatments}">
+					<td th:text="${treatment.name}" style="text-align: center;">Nombre</td>
+					<td th:text="${treatment.price}" style="text-align: center;">Precio</td>
+					<td th:text="${treatment.duration}" style="text-align: center;">Duración</td>
+					<td style="text-align: center;">
+						<a th:href="@{'/treatments/edit/' + ${treatment.id}}" id="edit" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-edit" aria-hidden="true"></i></a>
+						<a th:href="@{'/treatments/delete/' + ${treatment.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-trash" aria-hidden="true"></i></a>
+					</td>
+				</tr>
+			</table>
+			<div>
+				<a th:href="@{'/treatments/new'}" id="add" class="btn btn-success" role="button" style="width: 100%"><i class="fa fa-fw fa-plus" aria-hidden="true"></i></a>
 			</div>
+		</div>
 	</body>
 </html>
