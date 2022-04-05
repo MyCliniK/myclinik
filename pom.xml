@@ -17,10 +17,10 @@
 	<java.version>11</java.version>
 </properties>
 <repositories>
-    <repository>
-        <id>scijava.public</id>
-        <url>https://maven.scijava.org/content/groups/public</url>
-    </repository>
+	<repository>
+		<id>scijava.public</id>
+		<url>https://maven.scijava.org/content/groups/public</url>
+	</repository>
 </repositories>
 <dependencies>
 	<dependency>
@@ -77,7 +77,7 @@
 		<plugin>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-maven-plugin</artifactId>
-		</plugin> 
+		</plugin>
 	</plugins>
 </build>
 
