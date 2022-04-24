@@ -23,6 +23,9 @@
 				<a href="appointments">Show all appointments</a>
 				<a href="treatments">Show all treatments</a>
 				<a href="mail">Send mail</a>
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" value="Sign Out"/>
+				</form>
 			</div>
 		</div>
 	</body>
