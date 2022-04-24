@@ -10,17 +10,21 @@
 		<script src="https://use.fontawesome.com/5b5fa05dbf.js"></script>
 		<link rel="stylesheet" href="/css/main.css">
     </head>
-    <body>
-        <div th:if="${param.error}">
-            Invalid username or password.
+    <body class="app" text-align="center" style="background-color:#eff9ff; border: 10px solid; color: #117182;">
+        <div class="container" text-align="center">
+            <br>
+            <form th:action="@{/login}" method="post">
+                <div><label><i class="fa fa-fw fa-user" aria-hidden="true"></i> User Name : <input type="text" name="username"/> </label></div>
+                <div><label><i class="fa fa-fw fa-key" aria-hidden="true"></i> Password: <input type="password" name="password"/> </label></div>
+                <div><input type="submit" value="Sign In"/></div>
+            </form>
+            <br>
+            <div th:if="${param.error}">
+                Invalid username or password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
         </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
     </body>
 </html>
