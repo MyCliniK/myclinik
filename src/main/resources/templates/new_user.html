@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<title> Admin </title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+		<script src="https://use.fontawesome.com/5b5fa05dbf.js"></script>
+		<link rel="stylesheet" href="/css/main.css">
+	</head>
+	<body>
+		<div id="mail-header">
+			<h1 class="title">Nuevo usuario</h1>
+		</div>
+	<br>
+	<div id= "admin-main-content">	
+		<div class="container">
+			<div class="card">
+				<form method="POST" class="container">
+					<br>
+					<div class="form-group">
+						<label>Nombre de usuario</label>
+						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+							<div class="input-group-addon"><i class="fa fa-fw fa-user" aria-hidden="true"></i></div>
+							<input type="text" th:field="*{username}" class="form-control" name="username" placeholder="Nombre de usuario"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Contraseña</label>
+						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+							<div class="input-group-addon"><i class="fa fa-fw fa-key" aria-hidden="true"></i></div>
+							<input type="password" th:field="*{password}" class="form-control" name="password" placeholder="Contraseña"/>
+						</div>
+					</div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-cog" aria-hidden="true"></i></span>
+                            <select th:field="*{role}" placeholder="Rol" class="form-select">
+                                <option value="O">OPS</option>
+                                <option value="C">CONT</option>
+                                <option value="A">ADMIN</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+					<div style="margin-bottom: 10px">
+						<button type="submit" class="btn btn-warning">Crear</button>
+						<button type="button" class="btn btn-danger">Cancelar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>

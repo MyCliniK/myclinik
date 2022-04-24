@@ -24,6 +24,8 @@ public class User implements UserDetails {
  
     private String password;
 
+    private String role;
+
     public Integer getId() {
         return id;
     }
@@ -46,6 +48,14 @@ public class User implements UserDetails {
  
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+ 
+    public void setRole(String role) {
+        this.role = role;
     }
  
     @Override
@@ -79,7 +89,7 @@ public class User implements UserDetails {
  
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
+        return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + "]";
     }
  
 }
