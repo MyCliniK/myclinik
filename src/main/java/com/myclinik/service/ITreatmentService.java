@@ -10,4 +10,5 @@ public interface ITreatmentService {
     Treatment get(Long id);
     void delete(Long id);
 	void update(Long id, Treatment treatment);
+    
 }

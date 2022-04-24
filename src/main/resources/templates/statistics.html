@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layouts/main-layout :: main-fragment(
+	~{:: title},
+	~{:: #statistics-header},
+	~{:: #statistics-nav},
+	~{:: #statistics-main-content},
+	~{:: #statistics-footer}
+	)}"
+	>
+	<head>
+		<title>Statistics</title>
+	</head>
+	<body>
+
+		<div id="statistics-header">
+			Statistics
+		</div>
+		<br>
+		<div id="statistics-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+			Statistics Nav
+		</div>
+
+		<div id="statistics-main-content">
+            
+            <form method="POST" th:action="@{/statistics}" id="statisticsForm" class="container">
+                 <div class="form-floating">
+                    <select  id="clientSelector" class="form-select" aria-labeled="clients" name="client" required>
+                        <option value="" selected>Seleccione un Cliente</option>
+                        <option th:each="itClient: ${clients}" th:value="${itClient.id}"
+                            th:selected="(${itClient.id} ==  ${clientId})"                               
+                            th:text="${itClient.firstName} + ' ' + ${itClient.lastName}"
+                            class="dropdown-item" href="#"
+                                >
+                        </option>
+                    </select>
+                     <label class="form-check-label" for="clientSelector">Client</label>
+                </div>	
+            
+
+                <div style="margin-bottom: 10px; text-align: center;">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+            </form>
+            <table class="table table-success table-striped">
+				<thead class="thead">
+					<tr>
+						<th style="text-align: center;">Cliente</th>
+						<th style="text-align: center;">Fecha</th>
+						<th style="text-align: center;">Tratamiento</th>
+                        <th style="text-align: center;">Precio</th>
+						<th style="text-align: center;">Realizada</th>
+						<th style="text-align: center;">Pagada</th>
+                        
+					</tr>
+				</thead>
+				<tr th:each="appointment : ${appointments}">
+					<td th:text="${appointment.client.firstName} + ' ' + ${appointment.client.lastName}" style="text-align: center;">Cliente</td>
+					<td th:text="${#temporals.format(appointment.appointmentDate)}" style="text-align: center;">Fecha</td>
+					<td th:text="${appointment.treatment.name}" style="text-align: center;">Tratamiento</td>
+					<td th:text="${appointment.treatment.price}" style="text-align: center;">Precio</td>
+                    <td class="text-center" style="font-size: 20px">
+						<span th:if="${appointment.done == true}"> <i class="fa-solid fa-circle-check text-success"></i></span>
+						<span th:if="${appointment.done == false}"> <i class="fa-solid fa-circle-xmark text-danger"></i></span>
+					</td>
+					<td class="text-center" style="font-size: 20px">
+						<span th:if="${appointment.paid == true}"> <i class="fa-solid fa-circle-check text-success"></i></span>
+						<span th:if="${appointment.paid == false}"> <i class="fa-solid fa-circle-xmark text-danger"></i></span>
+					</td>
+				</tr>
+			</table>
+		</div>
+        <div>
+			<a href="appointments/new" id="new" class="btn btn-success" role="button" style="width: 100%"><i class="fa fa-fw fa-calendar-plus" aria-hidden="true"></i></a>
+		</div>
+	</body>
+</html>

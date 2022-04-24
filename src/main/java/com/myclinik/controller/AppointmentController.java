@@ -98,4 +98,5 @@ public class AppointmentController {
 		appointmentService.update(id, appointment);
 		return "redirect:/appointments";
 	}
+
 }

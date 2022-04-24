@@ -13,5 +13,5 @@ public interface IClientService {
 	void saveClient(Client c);
 	void deleteClient(Long id);
 	void updateClient(Long id, Client newClient);
-	// List<Appointment> findAppointments (Long id);
+	
 }

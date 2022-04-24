@@ -1,6 +1,7 @@
 package com.myclinik.service;
 
 import com.myclinik.model.Appointment;
+import com.myclinik.model.Client;
 import com.myclinik.repository.AppointmentRepository;
 
 import java.util.List;
@@ -35,7 +36,6 @@ public class AppointmentService implements IAppointmentService {
 		newAppointment.setId(id);
 		repository.save(newAppointment);
 	}
-
 	/*public Client findClient(Long client){
 		
 	}*/
