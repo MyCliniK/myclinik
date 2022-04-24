@@ -2,61 +2,73 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layouts/main-layout :: main-fragment(
-		~{:: title},
-		~{:: #newapp-header},
-		~{:: #newapp-nav},
-		~{:: #newapp-main-content},
-		~{:: #newapp-footer}
-		)}"
+	~{:: title},
+	~{:: #newapp-header},
+	~{:: #newapp-nav},
+	~{:: #newapp-main-content},
+	~{:: #newapp-footer}
+	)}"
 	>
 	<head>
-		<meta charset="utf-8" />
-		<title>Crear nueva cita</title>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-		<script src="https://use.fontawesome.com/5b5fa05dbf.js"></script>
-		<link rel="stylesheet" href="/css/main.css">
+		<title>Nueva cita</title>
 	</head>
 	<body>
 		<div id="newapp-header">
-			<h1 class="title">Nueva cita</h1>
+			Nueva cita
 		</div>
-	<br>
+		<br>
 		<div id="newapp-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
 			Nueva cita Nav
 		</div>
 		<div id="newapp-main-content" class="container">
-			<div class="row">
-				<div class="col-sm-10 offset-sm-1 text-center">
-					<form method="POST" action="#" th:action="@{/appointments/new/save}" th:object="${appointment}">
-						<div class="form-group">
-							<div class="input-group justify-content-center">
-								<span class="input-group-text" id="addon-wrapping">Fecha</span>
-								<input type="datetime-local" th:field="*{appointmentDate}"/>
+			<div class="card">
+				<div class="row">
+					<div class="col-sm-10 offset-sm-1 text-center">
+						<form method="POST" action="#" th:action="@{/appointments/new/save}" th:object="${appointment}">
+							<br>
+							<div class="form-group">
+								<div class="input-group justify-content-center">
+									<span class="input-group-text" id="addon-wrapping">Fecha</span>
+									<input type="datetime-local" th:field="*{appointmentDate}" required/>
+								</div>
 							</div>
-						</div>
-						<br>
-						<div class="form-group">
-							<div class="form-check form-check-inline justify-content-center">
-								<input class="form-check-input" type="checkbox" value="" th:field="*{done}"/>
-								<label class="form-check-label" for="flexCheckDefault">
-									Realizado
-								</label>
+							<br>
+							<div class="form-floating">
+								<select id="clientSelector" class="form-select" aria-labeled="clients" th:field="*{client}" required>
+									<option value="" selected>Seleccione un Cliente</option>
+									<option th:each="client: ${clients}" th:value="${client.id}" th:text="${client.firstName} + ' ' + ${client.lastName}" class="dropdown-item" href="#"></option>
+								</select>
+								<label class="form-check-label" for="clientSelector">Client</label>
 							</div>
-							<div class="form-check form-check-inline justify-content-center">
-								<input class="form-check-input" type="checkbox" th:field="*{paid}"/>
-								<label class="form-check-label" for="flexCheckDefault">
-									Pagado
-								</label>
+							<br>
+							<div class="form-floating">
+								<select id="treatmentSelector" class="form-select" aria-labeled="treatments" th:field="*{treatment}" required>
+									<option value="" selected>Seleccione un Tratamiento</option>
+									<option th:each="treatment: ${treatments}" th:value="${treatment.id}" th:text="${treatment.name}" class="dropdown-item" href="#"></option>
+								</select>
+								<label class="form-check-label" for="clientSelector">Tratamiento</label>
 							</div>
-						</div>
-						<br>
-						<div style="margin-bottom: 10px; text-align: center;">
-							<button type="submit" class="btn btn-primary">Crear</button>
-						</div>
-					</form>
+							<br>
+							<div class="form-group">
+								<div class="form-check form-check-inline justify-content-center">
+									<input class="form-check-input" type="checkbox" value="" th:field="*{done}"/>
+									<label class="form-check-label" for="flexCheckDefault">
+										Realizado
+									</label>
+								</div>
+								<div class="form-check form-check-inline justify-content-center">
+									<input class="form-check-input" type="checkbox" th:field="*{paid}"/>
+									<label class="form-check-label" for="flexCheckDefault">
+										Pagado
+									</label>
+								</div>
+							</div>
+							<br>
+							<div style="margin-bottom: 10px; text-align: center;">
+								<button type="submit" class="btn btn-primary">Crear</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>

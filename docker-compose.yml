@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  myclinik:
+    container_name: myclinik
+    image: myclinik
+    build:
+      context: .
+    networks:
+      - myclinik_net
+    links:
+      - "myclinik_db:db"
+    ports:
+      - 8080:8081
+    environment:
+      SPRING_MYCLINIK_DB_URI: postgresql://db:5432
+      SPRING_MYCLINIK_DB_USERNAME: myclinik
+      SPRING_MYCLINIK_DB_PASSWORD: password
+      SPRING_MYCLINIK_DB_INIT_MODE: never
+      SPRING_MAIL_USERNAME: "${SPRING_MAIL_USERNAME}"
+      SPRING_MAIL_PASSWORD: "${SPRING_MAIL_PASSWORD}"
+
+  myclinik_db:
+    container_name: myclinik_db
+    image: postgres
+    restart: always
+    networks:
+      - myclinik_net
+    environment:
+      POSTGRES_DB: myclinik
+      POSTGRES_USER: myclinik
+      POSTGRES_PASSWORD: password
+
+networks:
+  myclinik_net:
+    driver: bridge

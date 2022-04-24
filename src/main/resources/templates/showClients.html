@@ -9,15 +9,13 @@
 	)}"
 >
 	<head>
-		<title>Clients</title>
-		<meta charset="UTF-8">
+		<title>Clientes</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="/css/main.css">
 	</head>
 
 	<body>
 		<div id="clients-header">
-			<h1 class="title">Clientes</h1>
+			Clientes
 		</div>
 		<div id="clients-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
 			Clients Nav
@@ -27,22 +25,42 @@
 				<thead class="thead">
 					<tr>
 						<th style="text-align: center;">Nombre</th>
-						<th style="text-align: center;">Apellidos</th>
+						<th style="text-align: center;">DNI</th>
+						<th style="text-align: center;">Teléfono</th>
+						<th style="text-align: center;">Correo</th>
 						<th style="text-align: center;">Acciones</th>
 					</tr>
 				</thead>
 				<tr th:each="client : ${clients}">
-					<td th:text="${client.firstName}" style="text-align: center;">Name</td>
-					<td th:text="${client.lastName}" style="text-align: center;">Last Name</td>
+					<td th:text="${client.firstName} + ' ' + ${client.lastName}" style="text-align: center;">Nombre</td>
+					<td th:text="${client.dni}" style="text-align: center;">DNI</td>
+					<td th:text="${client.phone}" style="text-align: center;">Teléfono</td>
+					<td th:text="${client.email}" style="text-align: center;">Correo</td>
 					<td style="text-align: center;">
-						<a th:href="@{'/clients/client?id=' + ${client.id}}" id="client" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-edit" aria-hidden="true"></i></a>
-						<a th:href="@{'/clients/delete?id=' + ${client.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-trash" aria-hidden="true"></i></a>
+						<div class="d-flex justify-content-center align-content-center">
+							<div class="d-flex me-2">
+								<a th:href="@{'/mail?clientId=' + ${client.id}}" id="mail" class="btn btn-primary" role="button">
+									<i class="fa fa-fw fa-envelope" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="d-flex ms-2 me-2">
+								<a th:href="@{'/appointments/new?clientId=' + ${client.id}}" id="newAppointment" class="btn btn-success" role="button">
+									<i class="fa fa-fw fa-calendar-plus" aria-hidden="true"></i>
+								</a>
+								<a th:href="@{'/appointments?clientId=' + ${client.id}}" id="showAppointments" class="btn btn-info text-light" role="button">
+									<i class="fa fa-fw fa-calendar" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="d-flex ms-2">
+								<a th:href="@{'/clients/client?id=' + ${client.id}}" id="client" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-user-edit" aria-hidden="true"></i></a>
+								<a th:href="@{'/clients/delete?id=' + ${client.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i></a>
+							</div>
+						</div>
 					</td>
 				</tr>
 			</table>
-			<br>
-			<div style="float: right;">
-				<a th:href="@{/clients/new}" id="new" class="btn btn-success" role="button"><i class="fa fa-fw fa-user-plus" aria-hidden="true"></i></a>
+			<div>
+				<a th:href="@{/clients/new}" id="new" class="btn btn-success" role="button" style="width: 100%"><i class="fa fa-fw fa-user-plus" aria-hidden="true"></i></a>
 			</div>
 		</div>
 	</body>

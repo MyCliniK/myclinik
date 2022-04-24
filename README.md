@@ -33,14 +33,19 @@ La plataforma tecnológica y el modelo de negocio del sistema deben permitir el 
 
 ## Development
 ### Dependencias
-- JDK (yo uso OpenJDK no sé si da igual)
+- JDK
 - Maven
 - Spring Tool Suite
+- PostgreSQL
 
 ### Set up
-- Crear un usuario de PostgreSQL `myclinik` con contraseña `password`
-- Crear una base de datos llamada `myclinik`
+- Cree una base de datos llamada `myclinik`
+- Si se tiene el fichero `.env` cargue las variables de entorno de éste, si no, cree las siguientes variables:
+	- `SPRING_MYCLINIK_DB_USERNAME` con el usuario de la base de datos `myclinik`.
+	- `SPRING_MYCLINIK_DB_PASSWORD` con la contraseña de ese usuario.
+	- `SPRING_MAIL_USERNAME` (opcional) con la dirección de correo electrónico.
+	- `SPRING_MAIL_PASSWORD` (opcional) con la contraseña del correo.
 
 ### Arrancar entorno
 - Arrancar PostgreSQL
-- Ejecutar: `mvn spring-boot:run`
+- Ejecutar: `./mvnw spring-boot:run`

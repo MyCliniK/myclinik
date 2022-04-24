@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-th:replace="~{layouts/main-layout :: main-fragment(
+	th:replace="~{layouts/main-layout :: main-fragment(
 	~{:: title},
 	~{:: #mail-header},
 	~{:: #mail-nav},
@@ -9,57 +9,49 @@ th:replace="~{layouts/main-layout :: main-fragment(
 	)}"
 >
 	<head>
-		<title> Email </title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-		<script src="https://use.fontawesome.com/5b5fa05dbf.js"></script>
-		<link rel="stylesheet" href="/css/main.css">
+		<title>E-mail</title>
 	</head>
 	<body>
 		<div id="mail-header">
-			<h1 class="title">E-mail</h1>
+			E-mail
 		</div>
 	<br>
-	<div id="mail-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-		Mail Nav
-	</div>
-	<div id= "mail-main-content">	
-		<div class="container">
+		<div id="mail-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+			Mail Nav
+		</div>
+		<div id= "mail-main-content" class="container">
 			<div class="card">
 				<form method="POST" th:action="@{/sendMail}" id="emailForm" class="container">
 					<br>
-					<div class="form-group">
-						<label>Nombre</label>
-						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-							<div class="input-group-addon"><i class="fa fa-fw fa-user" aria-hidden="true"></i></div>
-							<input type="text" class="form-control" name="name" placeholder="Nombre"/>
-						</div>
+					<div class="form-floating">
+						<select id="clientSelector" class="form-select" aria-labeled="clients" name="client" required>
+							<option value="" selected>Seleccione un Cliente</option>
+							<option th:each="client: ${clients}" th:value="${client.id}"
+								th:selected="(${client.id} == ${clientId})"
+								th:text="${client.firstName} + ' ' + ${client.lastName} + ' <' + ${client.email} + '>'"
+								class="dropdown-item" href="#"
+								>
+							</option>
+						</select>
+						<label class="form-check-label" for="clientSelector">Client</label>
 					</div>
+					<br>
 					<div class="form-group">
-						<label>Correo</label>
-						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-							<div class="input-group-addon">@</div>
-							<input type="text" class="form-control" name="mail" placeholder="Correo electrónico"/>
-						</div>
-					</div>
-					<div class="form-group">
-						<label>Asunto</label>
-						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-							<div class="input-group-addon"><i class="fa fa-fw fa-envelope-open" aria-hidden="true"></i></div>
+						<div class="input-group justify-content-center">
+							<div class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-envelope-open" aria-hidden="true"></i></div>
 							<input type="text" class="form-control" name="subject" placeholder="Asunto"/>
 						</div>
 					</div>
+					<br>
 					<div class="form-group">
-						<label>Mensaje</label>
+					<label>Mensaje</label>
 						<textarea class="form-control" rows="5" name="body"></textarea>
 					</div>
-					<div style="margin-bottom: 10px">
-						<button type="submit" class="btn btn-success">Enviar</button>
+					<br>
+					<div style="margin-bottom: 10px; text-align: center;">
+						<button type="submit" class="btn btn-primary">Enviar</button>
 					</div>
+					<br>
 				</form>
 			</div>
-		</div>
-	</div>
 	</body>

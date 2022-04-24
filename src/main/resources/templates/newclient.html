@@ -9,31 +9,25 @@ th:replace="~{layouts/main-layout :: main-fragment(
 	)}"
 >
 	<head>
-		<title>New client</title>
-		<meta charset="utf-8"/>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-		<script src="https://use.fontawesome.com/5b5fa05dbf.js"></script>
-		<link rel="stylesheet" href="/css/main.css">
+		<title>Nuevo cliente</title>
 	</head>
 	<body>
 		<div class="container">
-			<div class="card">
 				<div id="newclient-header">
-					<h1 class="title">Nuevo cliente</h1>
+					Nuevo cliente
 				</div>
 				<div id="newclient-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
 					New Client Nav
 				</div>
-			<div id="newclient-main-content">	
+				<div id="newclient-main-content" class="container">
+				<div class="card">
 				<form method="POST" th:action="@{/clients/new/save}" th:object="${client}" id="clientForm" class="container">
+					<br>
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-user" aria-hidden="true"></i></span>
-							<input type="text" th:field="*{firstName}" placeholder="Nombre" aria-label="Nombre" class="form-control">
-							<input type="text" th:field="*{lastName}"placeholder="Apellidos" aria-label="Apellidos" class="form-control">
+							<input type="text" th:field="*{firstName}" placeholder="Nombre" aria-label="Nombre" class="form-control" required>
+							<input type="text" th:field="*{lastName}"placeholder="Apellidos" aria-label="Apellidos" class="form-control" required>
 						</div>
 					</div>
 					<br>
@@ -42,7 +36,7 @@ th:replace="~{layouts/main-layout :: main-fragment(
 							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-id-card" aria-hidden="true"></i></span>
-									<input type="text" th:field="*{dni}"placeholder="DNI" aria-label="DNI" class="form-control">
+									<input type="text" th:field="*{dni}"placeholder="DNI" aria-label="DNI" class="form-control" required>
 								</div>
 							</div>
 						</div>
@@ -82,7 +76,7 @@ th:replace="~{layouts/main-layout :: main-fragment(
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i></span>
-							<input type="text" th:field="*{email}" placeholder="Correo" aria-label="Correo" class="form-control">
+							<input type="text" th:field="*{email}" placeholder="Correo" aria-label="Correo" class="form-control" required>
 						</div>
 					</div>
 				<br>
@@ -102,7 +96,7 @@ th:replace="~{layouts/main-layout :: main-fragment(
 					<div class="form-group">
 						<label>Comentarios adicionales</label>
 						<div class="input-group">
-							<div class="input-group-text"><i class="fa fa-fw fa-comment" aria-hidden="true"></i></div>
+							<div class="input-group-text"><i class="fa fa-fw fa-comment-medical" aria-hidden="true"></i></div>
 							<textarea class="form-control" th:field="*{observations}" rows="5" name="body"></textarea>
 						</div>
 					</div>
@@ -110,17 +104,16 @@ th:replace="~{layouts/main-layout :: main-fragment(
 					<div class="form-group">
 						<label>Consentimientos</label>
 						<div class="input-group mb-3">
-							<label class="input-group-text" for="inputGroupFile01">Upload</label>
+							<label class="input-group-text" for="inputGroupFile01"><i class="fa fa-fw fa-file-contract" aria-hidden="true"></i></label>
 							<input type="file" class="form-control" id="inputGroupFile01">
 						</div>
 					</div>
 				<br>
-					<div style="margin-bottom: 10px">
+					<div style="margin-bottom: 10px; text-align: center;">
 						<button type="submit" class="btn btn-primary">Crear</button>
 						<button type="button" class="btn btn-danger">Eliminar ficha</button>
 					</div>
 				</form>
-			</div>
 			</div>
 		</div>
 	</body>
