@@ -124,6 +124,7 @@
 						events: appointments.map(appointment => {
 							var startDate = new Date(appointment.appointmentDate);
 							return {
+								id: appointment.id,
 								title: appointment.treatment.name,
 								start: startDate,
 								end: new Date(startDate.getTime() + appointment.treatment.duration * 60000),

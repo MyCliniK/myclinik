@@ -4794,9 +4794,9 @@ function View(element, calendar, viewName) {
 				e.end = addMinutes(addDays(e.end, dayDelta, true), minuteDelta);
 			}
 			normalizeEvent(e, options);
+			updateEvent(e);
 		}
 	}
-
 
 	function elongateEvents(events, dayDelta, minuteDelta) {
 		minuteDelta = minuteDelta || 0;
@@ -4807,6 +4807,19 @@ function View(element, calendar, viewName) {
 		}
 	}
 
+	function updateEvent(event){
+		// Get the date to the local date time
+		var z = event.start.getTimezoneOffset()*60*1000;
+		var date = new Date(event.start.getTime() - z);
+		$.ajax({
+			type:"POST",
+			url:"/appointments/update",
+			data:{
+				id : event.id,
+				date: date.toISOString().slice(0,16), // YYYY-MM-ddTHH:mm
+			}
+		})
+	}
 
 
 	// ====================================================================================================

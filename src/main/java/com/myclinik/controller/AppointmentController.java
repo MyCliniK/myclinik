@@ -7,7 +7,6 @@ import com.myclinik.service.IAppointmentService;
 import com.myclinik.service.ITreatmentService;
 import com.myclinik.service.IClientService;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.time.LocalDateTime;
 
 @Controller
 public class AppointmentController {
@@ -98,4 +98,14 @@ public class AppointmentController {
 		appointmentService.update(id, appointment);
 		return "redirect:/appointments";
 	}
+
+	@PostMapping("/appointments/update")
+	public String updateAppointmentDate(@RequestParam("id") Long id, @RequestParam("date") String strDate) {
+		LocalDateTime newDate = LocalDateTime.parse(strDate);
+		Appointment appointment = appointmentService.get(id);
+		appointment.setAppointmentDate(newDate);
+		appointmentService.update(id, appointment);
+		return "calendar";
+	}
+
 }
