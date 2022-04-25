@@ -37,11 +37,23 @@
                     </select>
                      <label class="form-check-label" for="clientSelector">Client</label>
                 </div>	
-            
+				<div class="form-floating">
+                    <select  id="treatmentSelector" class="form-select" aria-labeled="treatments" name="treatment" required>
+                        <option value="" selected>Seleccione un Tratamiento</option>
+                        <option th:each="itTreatment: ${treatments}" th:value="${itTreatment.id}"
+                            th:selected="(${itTreatment.id} ==  ${treatmentId})"                               
+                            th:text="${itTreatment.name}"
+                            class="dropdown-item" href="#"
+                                >
+                        </option>
+                    </select>
+                     <label class="form-check-label" for="treatmentSelector">Tratamiento</label>
+                </div>	
 
                 <div style="margin-bottom: 10px; text-align: center;">
                     <button type="submit" class="btn btn-primary">Buscar</button>
                 </div>
+
             </form>
             <table class="table table-success table-striped">
 				<thead class="thead">

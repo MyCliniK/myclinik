@@ -36,7 +36,9 @@ public class StatisticsController {
 	public String findAppointments(Model model) {
 		var clients = (List<Client>) clientService.findAll();
 		var appointments = (List<Appointment>) appointmentService.findAll();
+		var treatments = (List<Treatment>) treatmentService.findAll();
 		model.addAttribute("appointments", appointments);
+		model.addAttribute("treatments", treatments);
 		model.addAttribute("clients", clients);
 		return "statistics";
 	}
@@ -44,23 +46,44 @@ public class StatisticsController {
 	public String filterByClient(Model model, @RequestParam("clientId")  Long clientId){
         var clients = (List<Client>) clientService.findAll();
 		var allAppointments = (List<Appointment>) appointmentService.findAll();
+		var treatments = (List<Treatment>) treatmentService.findAll();
 		var appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == clientId).collect(java.util.stream.Collectors.toList());
 		model.addAttribute("clients", clients);
+		model.addAttribute("treatments", treatments);
 		model.addAttribute("appointments", appointments);
         model.addAttribute("clientId", clientId);
         return "statistics";
 	}
 
+	@RequestMapping(value = "/statistics", params= "treatmentId")
+	public String filterByTreatment(Model model, @RequestParam("treatmentId")  Long treatmentId){
+		var clients = (List<Client>) clientService.findAll();
+		var treatments = (List<Treatment>) treatmentService.findAll();
+		var allAppointments = (List<Appointment>) appointmentService.findAll();
+		var appointments = allAppointments.stream().filter(appointment -> appointment.getTreatment().getId() == treatmentId).collect(java.util.stream.Collectors.toList());
+		model.addAttribute("clients", clients);
+		model.addAttribute("treatments", treatments);
+		model.addAttribute("treatmentId", treatmentId);
+		model.addAttribute("appointments", appointments);
+        return "statistics";
+	}
+	
     @PostMapping("/statistics")
-    public String selectByClient(@RequestParam("client") Client client, Model model){ 
+    public String selectByClient(Model model, @RequestParam("client") Client client, @RequestParam("treatment") Treatment treatment){ 
+		var treatments = treatmentService.findAll();
 		var clients = (List<Client>) clientService.findAll();
 		var allAppointments = (List<Appointment>) appointmentService.findAll();
 		var appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == client.getId()).collect(java.util.stream.Collectors.toList());
+		appointments = appointments.stream().filter(appointment -> appointment.getTreatment().getId() == treatment.getId()).collect(java.util.stream.Collectors.toList());
+		model.addAttribute("treatments",treatments);
 		model.addAttribute("clients", clients);
 		model.addAttribute("appointments", appointments);
         model.addAttribute("clientId", client.getId());
+		model.addAttribute("treatmentId", treatment.getId());
         return "statistics";
     }
 
+	
 
 }
+//).stream().filter(appointment -> appointment.getTreatment().getId() == treatmentId).collect(java.util.stream.Collectors.toList());
