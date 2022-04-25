@@ -45,27 +45,17 @@ public class StatisticsController {
 	@RequestMapping(value = "/statistics", params= "clientId")
 	public String filterByClient(Model model, @RequestParam("clientId")  Long clientId){
         var clients = (List<Client>) clientService.findAll();
-		var allAppointments = (List<Appointment>) appointmentService.findAll();
-		var treatments = (List<Treatment>) treatmentService.findAll();
-		var appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == clientId).collect(java.util.stream.Collectors.toList());
 		model.addAttribute("clients", clients);
-		model.addAttribute("treatments", treatments);
-		model.addAttribute("appointments", appointments);
         model.addAttribute("clientId", clientId);
         return "statistics";
 	}
 
 	@RequestMapping(value = "/statistics", params= "treatmentId")
 	public String filterByTreatment(Model model, @RequestParam("treatmentId")  Long treatmentId){
-		var clients = (List<Client>) clientService.findAll();
 		var treatments = (List<Treatment>) treatmentService.findAll();
-		var allAppointments = (List<Appointment>) appointmentService.findAll();
-		var appointments = allAppointments.stream().filter(appointment -> appointment.getTreatment().getId() == treatmentId).collect(java.util.stream.Collectors.toList());
-		model.addAttribute("clients", clients);
 		model.addAttribute("treatments", treatments);
 		model.addAttribute("treatmentId", treatmentId);
-		model.addAttribute("appointments", appointments);
-        return "statistics";
+		return "statistics";
 	}
 	
     @PostMapping("/statistics")
