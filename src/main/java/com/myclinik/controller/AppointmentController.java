@@ -70,6 +70,19 @@ public class AppointmentController {
 		return "new_appointment";
 	}
 
+	@RequestMapping(value = "/appointments/new", params = "date")
+	public String showNewAppointmentForm(Model model, @RequestParam("date") String strDate) {
+		Appointment appointment = new Appointment();
+		LocalDateTime date = LocalDateTime.parse(strDate);
+		appointment.setAppointmentDate(date);
+		var treatments = (List<Treatment>) treatmentService.findAll();
+		var clients = (List<Client>) clientService.findAll();
+		model.addAttribute("appointment", appointment);
+		model.addAttribute("treatments", treatments);
+		model.addAttribute("clients", clients);
+		return "new_appointment";
+	}
+
 	@PostMapping("/appointments/new/save")
 	public String saveAppointment(@ModelAttribute("appointment") Appointment appointment) {
 		appointmentService.save(appointment);
