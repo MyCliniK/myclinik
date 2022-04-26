@@ -56,7 +56,16 @@
 					<option th:value="false"th:selected="${paidAppointment} == false">No pagado</option>
                     </select>
                      <label class="form-check-label" for="paidSelector">Pagos</label>
-                </div>				
+                </div>		
+				<div class="form-floating">
+                    <select  id="doneSelector" class="form-select" aria-labeled="appointments" name="doneAppointment">
+                   	<option value="" selected> Seleccione realizadas, no realizadas o todas</option>
+					<option th:value="true" th:selected="${doneAppointment} == true">Realizada</option> 
+					<option th:value="false"th:selected="${doneAppointment} == false">No realizada</option>
+                    </select>
+                     <label class="form-check-label" for="doneSelector">Pagos</label>
+                </div>	
+				
 				<br>
 
                 <div style="margin-bottom: 10px; text-align: center;">

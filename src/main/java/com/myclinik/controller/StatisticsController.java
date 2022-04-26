@@ -65,10 +65,17 @@ public class StatisticsController {
 		model.addAttribute("appointmentPaid", appointmentPaid);
 		return "statistics";
 	}
+	@RequestMapping(value = "/statistics", params= "appointmentDone")
+	public String filterByDone(Model model, @RequestParam("appointmentDone")  Boolean appointmentDone){
+		var appointments = (List<Appointment>) appointmentService.findAll();
+		model.addAttribute("appointments", appointments);
+		model.addAttribute("appointmentPaid", appointmentDone);
+		return "statistics";
+	}
 
 	
     @PostMapping("/statistics")
-    public String filterData(Model model, @RequestParam(name = "client", required = false) Client client, @RequestParam(name= "treatment", required = false) Treatment treatment, @RequestParam(name="paidAppointment", required = false) Boolean paidAppointment){
+    public String filterData(Model model, @RequestParam(name = "client", required = false) Client client, @RequestParam(name= "treatment", required = false) Treatment treatment, @RequestParam(name="paidAppointment", required = false) Boolean paidAppointment, @RequestParam(name="doneAppointment", required = false) Boolean doneAppointment){
         var treatments = treatmentService.findAll();
         var clients = (List<Client>) clientService.findAll();
         var allAppointments = (List<Appointment>) appointmentService.findAll();
@@ -76,12 +83,14 @@ public class StatisticsController {
         if (client != null) appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == client.getId()).collect(java.util.stream.Collectors.toList());
 		if (treatment !=null) appointments = appointments.stream().filter(appointment -> appointment.getTreatment().getId() == treatment.getId()).collect(java.util.stream.Collectors.toList());
 		if (paidAppointment != null) appointments = appointments.stream().filter(appointment -> appointment.getPaid() == paidAppointment).collect(java.util.stream.Collectors.toList());
-        model.addAttribute("treatments",treatments);
+        if (doneAppointment != null) appointments = appointments.stream().filter(appointment -> appointment.getDone() == doneAppointment).collect(java.util.stream.Collectors.toList());
+		model.addAttribute("treatments",treatments);
         model.addAttribute("clients", clients);
         model.addAttribute("appointments", appointments);
         if (client != null) model.addAttribute("clientId", client.getId());
         if (treatment != null) model.addAttribute("treatmentId", treatment.getId());
 		model.addAttribute("paidAppointment", paidAppointment);
+		model.addAttribute("doneAppointment", doneAppointment);
         return "statistics";
     }
 
