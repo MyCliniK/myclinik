@@ -1,8 +1,9 @@
-package main.java.com.myclinik.service;
+package com.myclinik.service;
 
 import com.myclinik.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IUserService {
 	List<User> findAll();

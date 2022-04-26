@@ -19,7 +19,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 	<div id= "admin-main-content">	
 		<div class="container">
 			<div class="card">
-				<form method="POST" class="container">
+				<form method="POST" th:action="@{'/users/update?id=' + ${user.id}}" th:object="${user}"  class="container">
 					<br>
 					<div class="form-group">
 						<label>Nombre de usuario</label>

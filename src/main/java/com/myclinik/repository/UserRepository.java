@@ -1,4 +1,4 @@
-package main.java.com.myclinik.repository;
+package com.myclinik.repository;
  
 import com.myclinik.model.User;
 import org.springframework.stereotype.Repository;

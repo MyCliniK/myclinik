@@ -1,8 +1,9 @@
-package main.java.com.myclinik.service;
+package com.myclinik.service;
  
-import org.springframework.beans.factory.annotation.Autowired;
 import com.myclinik.model.User;
-import main.java.com.myclinik.repository.UserRepository;
+import com.myclinik.repository.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -10,12 +11,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
  
 @Service
-public class UserService implements org.springframework.security.core.userdetails.UserDetailsService {
+public class UserService implements IUserService {
  
     @Autowired
     private UserRepository repository;
  
-    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
  
         User user = repository.findByUsername(username);
@@ -34,6 +34,7 @@ public class UserService implements org.springframework.security.core.userdetail
 		var user = (User) repository.findById(id).get();
 		return user;
 	}
+	
 	public User createUser(){
 		User user = new User();
 		return user;

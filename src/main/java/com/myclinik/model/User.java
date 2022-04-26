@@ -6,7 +6,15 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
- 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+import javax.persistence.Table;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,17 +22,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "user_table")
 public class User implements UserDetails {
+
+    @GeneratedValue(strategy=GenerationType.AUTO, generator="users_id_seq")
+	private @Id Integer id;
+	private String username;
+	private String password;
+	private String role;
+
+    public User() {}
+
+    public User(String username, String password, String role) {
+		this.username = username;
+		this.password = password;
+		this.role = role;
+	}
  
     private static final long serialVersionUID = 1L;
-
-    @Id
-    private Integer id;
- 
-    private String username;
- 
-    private String password;
-
-    private String role;
 
     public Integer getId() {
         return id;

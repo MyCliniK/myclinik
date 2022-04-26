@@ -1,8 +1,8 @@
-package main.java.com.myclinik.controller;
+package com.myclinik.controller;
 
 import com.myclinik.model.User;
-import main.java.com.myclinik.repository.UserRepository;
-import main.java.com.myclinik.service.IUserService;
+import com.myclinik.repository.UserRepository;
+import com.myclinik.service.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,42 +27,42 @@ public class UserController {
     @Autowired
 	private IUserService userService;
 
-    @GetMapping("/admin/users")
+    @GetMapping("/users")
 	public String findUsers(Model model) {
 		var users = (List<User>) userService.findAll();
 		model.addAttribute("users", users);
 		return "showUsers";
 	}
 
-	@GetMapping("/admin/users/user")
+	@GetMapping("/users/user")
 	public String getUser(Model model, @RequestParam("id") Integer id){
 		var user  = userService.findOne(id);
 		model.addAttribute("user", user);
 		return "user";
 	}
 
-	@RequestMapping("/admin/users/new-user")
-	public String createClient(Model model){
+	@RequestMapping("/users/new-user")
+	public String createUser(Model model){
 		var newuser = userService.createUser();
 		model.addAttribute("username", newuser);
 		return "new_user";
 	}
 
-	@PostMapping("/admin/new-user/save")
+	@PostMapping("/users/new-user/save")
 	public String saveUser(@ModelAttribute("username") User username) {
 		userService.saveUser(username);
-		return "redirect:/admin/users";
+		return "redirect:/users";
 	}
 
-	@RequestMapping ("/admin/users/delete")
+	@RequestMapping ("/users/delete")
 	public String deleteUser(@RequestParam("id") Integer id) {
 		userService.deleteUser(id);
-		return "redirect:/admin/users";
+		return "redirect:/users";
 	}
 
-	@RequestMapping ("/admin/users/update")
+	@RequestMapping ("/users/update")
 	public String editUser(@RequestParam("id") Integer id, User username){
 		userService.updateUser(id, username);
-		return "redirect:/admin/users";
+		return "redirect:/users";
 	}
 }

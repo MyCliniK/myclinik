@@ -20,6 +20,7 @@ public class SecurityController extends WebSecurityConfigurerAdapter{
         http
             .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/users/**").hasRole("ADMIN")
                 .antMatchers("/clients/**", "/appointments/**", "/treatments/**").hasAnyRole("OPS", "ADMIN")
                 .antMatchers("/statistics/**").hasAnyRole("CONT", "ADMIN")
                 .antMatchers("/css/**", "/assets/**", "/layouts/**", "/login*", "/").permitAll()

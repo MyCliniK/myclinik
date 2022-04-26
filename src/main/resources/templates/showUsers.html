@@ -24,15 +24,15 @@
 					<td style="text-align: center;">
 						<div class="d-flex justify-content-center align-content-center">
 							<div class="d-flex ms-2">
-								<a th:href="@{'/admin/users/user?id=' + ${user.id}}" id="user" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-user-edit" aria-hidden="true"></i></a>
-								<a th:href="@{'/admin/users/delete?id=' + ${user.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i></a>
+								<a th:href="@{'/users/user?id=' + ${user.id}}" id="user" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-user-edit" aria-hidden="true"></i></a>
+								<a th:href="@{'/users/delete?id=' + ${user.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</td>
 				</tr>
 			</table>
 			<div>
-				<a th:href="@{/admin/users/new-user}" id="new" class="btn btn-success" role="button" style="width: 100%"><i class="fa fa-fw fa-user-plus" aria-hidden="true"></i></a>
+				<a th:href="@{/users/new-user}" id="new" class="btn btn-success" role="button" style="width: 100%"><i class="fa fa-fw fa-user-plus" aria-hidden="true"></i></a>
 			</div>1
 		</div>
 	</body>
