@@ -36,7 +36,7 @@
                         </option>
                     </select>
                      <label class="form-check-label" for="clientSelector">Client</label>
-                </div>	
+                </div>
 				<div class="form-floating">
                     <select  id="treatmentSelector" class="form-select" aria-labeled="treatments" name="treatment">
                         <option value="" selected>Seleccione un Tratamiento</option>
@@ -50,26 +50,13 @@
                      <label class="form-check-label" for="treatmentSelector">Tratamiento</label>
                 </div>	
 				<div class="form-floating">
-                    <select  id="paidSelector" class="form-select" aria-labeled="pappointments" name="pappointment">
-                   <option value="" selected> Seleccione pagadas, no pagadas o todas</option>
-					<option 
-							th:selected = "*{appointmentPaid}"
-							th:value = true
-							class="dropdown-item" href="#"
-						> Pagadas
-					</option>
-					<option> No pagadas</option>
-					<option> Todas </option>
-				   <!--<option th:each="app: ${pappointments}" th:value="${app.paid}"
-						th:selected="(${app.paid==  ${appointmentPaid})"
-						th:text="${app.client}"
-						class="dropdown-item" href="#"
-						> Pagadas
-					</option>-->
+                    <select  id="paidSelector" class="form-select" aria-labeled="appointments" name="paidAppointment">
+                   	<option value="" selected> Seleccione pagadas, no pagadas o todas</option>
+					<option th:value="true" th:selected="${paidAppointment} == true">Pagado</option> 
+					<option th:value="false"th:selected="${paidAppointment} == false">No pagado</option>
                     </select>
                      <label class="form-check-label" for="paidSelector">Pagos</label>
-                </div>
-				
+                </div>				
 				<br>
 
                 <div style="margin-bottom: 10px; text-align: center;">

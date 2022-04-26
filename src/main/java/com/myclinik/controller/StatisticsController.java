@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -59,27 +60,28 @@ public class StatisticsController {
 	}
 	@RequestMapping(value = "/statistics", params= "appointmentPaid")
 	public String filterByPaid(Model model, @RequestParam("appointmentPaid")  Boolean appointmentPaid){
-		var pappointments = (List<Appointment>) appointmentService.findAll();
-		model.addAttribute("pappointments", pappointments);
+		var appointments = (List<Appointment>) appointmentService.findAll();
+		model.addAttribute("appointments", appointments);
 		model.addAttribute("appointmentPaid", appointmentPaid);
 		return "statistics";
 	}
 
 	
     @PostMapping("/statistics")
-    public String filterData(Model model, @RequestParam("client") Client client, @RequestParam("treatment") Treatment treatment, @RequestParam("pappointment") Appointment pappointment){ 
-		var treatments = treatmentService.findAll();
-		var clients = (List<Client>) clientService.findAll();
-		var allAppointments = (List<Appointment>) appointmentService.findAll();
-		var appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == client.getId()).collect(java.util.stream.Collectors.toList());
-		appointments = appointments.stream().filter(appointment -> appointment.getTreatment().getId() == treatment.getId()).collect(java.util.stream.Collectors.toList());
-		appointments = appointments.stream().filter(appointment -> appointment.getPaid() == pappointment.getPaid()).collect(java.util.stream.Collectors.toList());
-		model.addAttribute("treatments",treatments);
-		model.addAttribute("clients", clients);
-		model.addAttribute("appointments", appointments);
-        model.addAttribute("clientId", client.getId());
-		model.addAttribute("treatmentId", treatment.getId());
-		model.addAttribute("appointmentPaid", pappointment.getPaid());
+    public String filterData(Model model, @RequestParam(name = "client", required = false) Client client, @RequestParam(name= "treatment", required = false) Treatment treatment, @RequestParam(name="paidAppointment", required = false) Boolean paidAppointment){
+        var treatments = treatmentService.findAll();
+        var clients = (List<Client>) clientService.findAll();
+        var allAppointments = (List<Appointment>) appointmentService.findAll();
+		var appointments = allAppointments;
+        if (client != null) appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == client.getId()).collect(java.util.stream.Collectors.toList());
+		if (treatment !=null) appointments = appointments.stream().filter(appointment -> appointment.getTreatment().getId() == treatment.getId()).collect(java.util.stream.Collectors.toList());
+		if (paidAppointment != null) appointments = appointments.stream().filter(appointment -> appointment.getPaid() == paidAppointment).collect(java.util.stream.Collectors.toList());
+        model.addAttribute("treatments",treatments);
+        model.addAttribute("clients", clients);
+        model.addAttribute("appointments", appointments);
+        if (client != null) model.addAttribute("clientId", client.getId());
+        if (treatment != null) model.addAttribute("treatmentId", treatment.getId());
+		model.addAttribute("paidAppointment", paidAppointment);
         return "statistics";
     }
 
