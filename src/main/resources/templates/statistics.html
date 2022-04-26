@@ -26,7 +26,7 @@
             
             <form method="POST" th:action="@{/statistics}" id="statisticsForm" class="container">
                  <div class="form-floating">
-                    <select  id="clientSelector" class="form-select" aria-labeled="clients" name="client" required>
+                    <select  id="clientSelector" class="form-select" aria-labeled="clients" name="client">
                         <option value="" selected>Seleccione un Cliente</option>
                         <option th:each="itClient: ${clients}" th:value="${itClient.id}"
                             th:selected="(${itClient.id} ==  ${clientId})"                               
@@ -38,7 +38,7 @@
                      <label class="form-check-label" for="clientSelector">Client</label>
                 </div>	
 				<div class="form-floating">
-                    <select  id="treatmentSelector" class="form-select" aria-labeled="treatments" name="treatment" required>
+                    <select  id="treatmentSelector" class="form-select" aria-labeled="treatments" name="treatment">
                         <option value="" selected>Seleccione un Tratamiento</option>
                         <option th:each="itTreatment: ${treatments}" th:value="${itTreatment.id}"
                             th:selected="(${itTreatment.id} ==  ${treatmentId})"                               
@@ -49,6 +49,27 @@
                     </select>
                      <label class="form-check-label" for="treatmentSelector">Tratamiento</label>
                 </div>	
+				<div class="form-floating">
+                    <select  id="paidSelector" class="form-select" aria-labeled="pappointments" name="pappointment">
+                   <option value="" selected> Seleccione pagadas, no pagadas o todas</option>
+					<option 
+							th:selected = "*{appointmentPaid}"
+							th:value = true
+							class="dropdown-item" href="#"
+						> Pagadas
+					</option>
+					<option> No pagadas</option>
+					<option> Todas </option>
+				   <!--<option th:each="app: ${pappointments}" th:value="${app.paid}"
+						th:selected="(${app.paid==  ${appointmentPaid})"
+						th:text="${app.client}"
+						class="dropdown-item" href="#"
+						> Pagadas
+					</option>-->
+                    </select>
+                     <label class="form-check-label" for="paidSelector">Pagos</label>
+                </div>
+				
 				<br>
 
                 <div style="margin-bottom: 10px; text-align: center;">
