@@ -12,11 +12,11 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 		<link rel="stylesheet" href="/css/main.css">
 	</head>
 	<body>
-		<div id="mail-header">
+		<div id="user-header">
 			<h1 class="title">Nuevo usuario</h1>
 		</div>
 	<br>
-	<div id= "admin-main-content">	
+	<div id= "user-main-content">	
 		<div class="container">
 			<div class="card">
 				<form method="POST" th:action="@{'/users/update?id=' + ${user.id}}" th:object="${user}"  class="container">

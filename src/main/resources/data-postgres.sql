@@ -11,3 +11,6 @@ INSERT INTO treatments(name, price, duration) VALUES ('Depilación Piernas', '10
 INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-01 19:10', 1, 1, false, false);
 INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-02 13:30', 1, 2, true, false);
 INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-03 14:15', 2, 1, true, true);
+
+INSERT INTO users (username, password, enabled) values ('admin1', '{noop}admin1', true);
+INSERT INTO authorities (username, authority) values('admin1', 'ADMIN');

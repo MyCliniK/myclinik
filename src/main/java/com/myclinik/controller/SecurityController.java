@@ -2,6 +2,8 @@ package com.myclinik.controller;
 
 import java.beans.BeanProperty;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,14 +43,26 @@ public class SecurityController extends WebSecurityConfigurerAdapter{
         ;
     }
 
+
+    //@Autowired
+    //private CustomAuthenticationProvider authProvider;
+
+    @Autowired
+    DataSource ds;
+
     @Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //auth.authenticationProvider(authProvider);
         auth.inMemoryAuthentication()
             .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
             .and()
             .withUser("ops").password(passwordEncoder().encode("ops")).roles("OPS")
             .and()
             .withUser("cont").password(passwordEncoder().encode("cont")).roles("CONT");
+
+        auth.jdbcAuthentication().dataSource(ds)
+            .usersByUsernameQuery("select username, password, enabled from users where username=?")
+            .authoritiesByUsernameQuery("select username, authority from authorities where username=?");
     }
 
     @Bean 

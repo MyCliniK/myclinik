@@ -36,3 +36,15 @@ CREATE TABLE appointments (
 	FOREIGN KEY (client_id) REFERENCES clients(id),
 	FOREIGN KEY (treatment_id) REFERENCES treatments(id)
 );
+
+CREATE TABLE users (
+	username VARCHAR(255) PRIMARY KEY,
+	password VARCHAR(255),
+	enabled BOOLEAN not null
+);
+
+CREATE TABLE authorities (
+	username VARCHAR(255) not null,
+	authority VARCHAR(255) not null,
+	CONSTRAINT fk_authorities_users FOREIGN KEY (username) REFERENCES users(username)
+);

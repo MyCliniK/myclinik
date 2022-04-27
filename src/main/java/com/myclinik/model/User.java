@@ -20,33 +20,23 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
  
 @Entity
-@Table(name = "user_table")
+@Table(name = "users")
 public class User implements UserDetails {
 
-    @GeneratedValue(strategy=GenerationType.AUTO, generator="users_id_seq")
-	private @Id Integer id;
 	private String username;
 	private String password;
-	private String role;
+	private String authority;
 
     public User() {}
 
-    public User(String username, String password, String role) {
+    public User(String username, String password, String authority) {
 		this.username = username;
 		this.password = password;
-		this.role = role;
+		this.authority = authority;
 	}
  
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
- 
     public String getUsername() {
         return username;
     }
@@ -63,12 +53,12 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public String getAuthority() {
+        return authority;
     }
  
-    public void setRole(String role) {
-        this.role = role;
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
  
     @Override
@@ -102,7 +92,7 @@ public class User implements UserDetails {
  
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + "]";
+        return "User [username=" + username + ", password=" + password + ", authority=" + authority + "]";
     }
  
 }

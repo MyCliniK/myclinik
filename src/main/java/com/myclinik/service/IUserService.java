@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface IUserService {
 	List<User> findAll();
-	User findOne(Integer id);
+	User findOne(String username);
 	User createUser();
 	void saveUser(User u);
-	void deleteUser(Integer id);
-	void updateUser(Integer id, User newUser);
+	void deleteUser(String username);
+	void updateUser(String username, User newUser);
 }

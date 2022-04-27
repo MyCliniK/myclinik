@@ -35,34 +35,34 @@ public class UserController {
 	}
 
 	@GetMapping("/users/user")
-	public String getUser(Model model, @RequestParam("id") Integer id){
-		var user  = userService.findOne(id);
+	public String getUser(Model model, @RequestParam("username") String username){
+		var user  = userService.findOne(username);
 		model.addAttribute("user", user);
 		return "user";
 	}
 
-	@RequestMapping("/users/new-user")
+	@RequestMapping("/users/new")
 	public String createUser(Model model){
 		var newuser = userService.createUser();
 		model.addAttribute("username", newuser);
 		return "new_user";
 	}
 
-	@PostMapping("/users/new-user/save")
+	@PostMapping("/users/new/save")
 	public String saveUser(@ModelAttribute("username") User username) {
 		userService.saveUser(username);
 		return "redirect:/users";
 	}
 
 	@RequestMapping ("/users/delete")
-	public String deleteUser(@RequestParam("id") Integer id) {
-		userService.deleteUser(id);
+	public String deleteUser(@RequestParam("username") String username) {
+		userService.deleteUser(username);
 		return "redirect:/users";
 	}
 
 	@RequestMapping ("/users/update")
-	public String editUser(@RequestParam("id") Integer id, User username){
-		userService.updateUser(id, username);
+	public String editUser(@RequestParam("username") String username, User u){
+		userService.updateUser(username, u);
 		return "redirect:/users";
 	}
 }

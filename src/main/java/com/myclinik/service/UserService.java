@@ -30,8 +30,8 @@ public class UserService implements IUserService {
 		return users;
 	}
 
-    public User findOne(Integer id) {
-		var user = (User) repository.findById(id).get();
+    public User findOne(String username) {
+		var user = (User) repository.findByUsername(username);
 		return user;
 	}
 	
@@ -44,12 +44,12 @@ public class UserService implements IUserService {
 		repository.save(u);
 	}
 
-	public void deleteUser(Integer id){
-		repository.deleteById(id);
+	public void deleteUser(String username){
+	//	repository.deleteByUsername(username);
 	}
 
-	public void updateUser(Integer id, User newUser){
-		newUser.setId(id);
+	public void updateUser(String username, User newUser){
+		newUser.setUsername(username);
 		repository.save(newUser);
 	}
 }
