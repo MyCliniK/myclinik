@@ -16,10 +16,10 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 			<h1 class="title">Nuevo usuario</h1>
 		</div>
 	<br>
-	<div id= "user-main-content">	
+	<div id= "user-main-content">
 		<div class="container">
 			<div class="card">
-				<form method="POST" th:action="@{'/users/update?id=' + ${user.id}}" th:object="${user}"  class="container">
+				<form method="POST" th:action="@{/users/new/save}" th:object="${user}"  class="container">
 					<br>
 					<div class="form-group">
 						<label>Nombre de usuario</label>
@@ -38,10 +38,10 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-cog" aria-hidden="true"></i></span>
-                            <select th:field="*{role}" placeholder="Rol" class="form-select">
-                                <option value="O">OPS</option>
-                                <option value="C">CONT</option>
-                                <option value="A">ADMIN</option>
+                            <select placeholder="Rol" class="form-select" name="authority">
+                                <option value="OPS">OPS</option>
+                                <option value="CONT">CONT</option>
+                                <option value="ADMIN">ADMIN</option>
                             </select>
                         </div>
                     </div>

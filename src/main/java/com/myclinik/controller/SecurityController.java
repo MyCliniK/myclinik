@@ -16,66 +16,65 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityController extends WebSecurityConfigurerAdapter{
-  
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/users/**").hasRole("ADMIN")
-                .antMatchers("/clients/**", "/appointments/**", "/treatments/**").hasAnyRole("OPS", "ADMIN")
-                .antMatchers("/statistics/**").hasAnyRole("CONT", "ADMIN")
-                .antMatchers("/css/**", "/assets/**", "/layouts/**", "/login*", "/").permitAll()
-                .anyRequest().authenticated().and()
-            
-            .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/home", true)
-                .failureUrl("/login?error")
-                .permitAll()
-                .and()
 
-            .logout()
-                .permitAll()
-                .and()
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+		.authorizeRequests()
+		// .antMatchers("/admin/**").hasRole("ADMIN")
+		// .antMatchers("/users/**").hasRole("ADMIN")
+		.antMatchers("/clients/**", "/appointments/**", "/treatments/**").hasAnyRole("OPS", "ADMIN")
+		.antMatchers("/statistics/**").hasAnyRole("CONT", "ADMIN")
+		.antMatchers("/css/**", "/assets/**", "/layouts/**", "/login*", "/").permitAll()
+		.anyRequest().authenticated().and()
 
-            .httpBasic()
-        ;
-    }
+		.formLogin()
+		.loginPage("/login")
+		// .defaultSuccessUrl("/home", true)
+		.failureUrl("/login?error")
+		.permitAll()
+		.and()
+
+		.logout()
+		.permitAll()
+		.and()
+
+		.httpBasic()
+		;
+	}
 
 
-    //@Autowired
-    //private CustomAuthenticationProvider authProvider;
+	//@Autowired
+	//private CustomAuthenticationProvider authProvider;
 
-    @Autowired
-    DataSource ds;
+	@Autowired
+	private DataSource ds;
 
-    @Override
+	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.authenticationProvider(authProvider);
-        auth.inMemoryAuthentication()
-            .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
-            .and()
-            .withUser("ops").password(passwordEncoder().encode("ops")).roles("OPS")
-            .and()
-            .withUser("cont").password(passwordEncoder().encode("cont")).roles("CONT");
+		//auth.authenticationProvider(authProvider);
+		// auth.inMemoryAuthentication()
+		//     .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
+		//     .and()
+		//     .withUser("ops").password(passwordEncoder().encode("ops")).roles("OPS")
+		//     .and()
+		//     .withUser("cont").password(passwordEncoder().encode("cont")).roles("CONT");
 
-        auth.jdbcAuthentication().dataSource(ds)
-            .usersByUsernameQuery("select username, password, enabled from users where username=?")
-            .authoritiesByUsernameQuery("select username, authority from authorities where username=?");
-    }
+		auth.jdbcAuthentication()
+		.dataSource(ds);
+	}
 
-    @Bean 
-    public PasswordEncoder passwordEncoder() { 
-        return new BCryptPasswordEncoder(); 
-    }
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    //@Bean(name = "pwdEncoder")
-    //public PasswordEncoder getPasswordEncoder() {
-    //    DelegatingPasswordEncoder delPasswordEncoder = (DelegatingPasswordEncoder) PasswordEncoderFactories
-    //            .createDelegatingPasswordEncoder();
-    //    BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
-    //    delPasswordEncoder.setDefaultPasswordEncoderForMatches(bcryptPasswordEncoder);
-    //    return delPasswordEncoder;
-    //}
+	//@Bean(name = "pwdEncoder")
+	//public PasswordEncoder getPasswordEncoder() {
+	//    DelegatingPasswordEncoder delPasswordEncoder = (DelegatingPasswordEncoder) PasswordEncoderFactories
+	//            .createDelegatingPasswordEncoder();
+	//    BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
+	//    delPasswordEncoder.setDefaultPasswordEncoderForMatches(bcryptPasswordEncoder);
+	//    return delPasswordEncoder;
+	//}
 }

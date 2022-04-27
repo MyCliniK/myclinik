@@ -12,5 +12,5 @@ INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) 
 INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-02 13:30', 1, 2, true, false);
 INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-03 14:15', 2, 1, true, true);
 
-INSERT INTO users (username, password, enabled) values ('admin1', '{noop}admin1', true);
-INSERT INTO authorities (username, authority) values('admin1', 'ADMIN');
+INSERT INTO users (username, password, enabled) values ('admin', '$2a$10$T7ftSUbI/bOXZXmjcRYI9uZlZdH0QdC5blKqvX0qpgM.On.fyN7K2', true);
+INSERT INTO authorities (id, username, authority) values(99, 'admin', 'ADMIN');

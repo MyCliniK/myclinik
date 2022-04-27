@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS clients CASCADE;
 DROP TABLE IF EXISTS appointments CASCADE;
 DROP TABLE IF EXISTS treatments CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS authorities CASCADE;
 
 CREATE TABLE clients (
 	id SERIAL PRIMARY KEY,
@@ -38,13 +40,16 @@ CREATE TABLE appointments (
 );
 
 CREATE TABLE users (
-	username VARCHAR(255) PRIMARY KEY,
-	password VARCHAR(255),
-	enabled BOOLEAN not null
+	username VARCHAR(50) NOT NULL PRIMARY KEY,
+	password VARCHAR(500) NOT NULL,
+	enabled BOOLEAN NOT NULL
 );
 
 CREATE TABLE authorities (
-	username VARCHAR(255) not null,
-	authority VARCHAR(255) not null,
+	id SERIAL PRIMARY KEY,
+	username VARCHAR(50) NOT NULL,
+	authority VARCHAR(50) NOT NULL,
 	CONSTRAINT fk_authorities_users FOREIGN KEY (username) REFERENCES users(username)
 );
+
+CREATE UNIQUE INDEX ix_auth_username ON authorities (username,authority);

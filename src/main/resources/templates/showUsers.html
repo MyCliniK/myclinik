@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layouts/main-layout :: main-fragment(
+	~{:: title},
+	~{:: #users-header},
+	~{:: #users-nav},
+	~{:: #users-main-content},
+	~{:: #users-footer}
+	)}"
 >
 	<head>
 		<title>Usuarios</title>
@@ -7,10 +14,13 @@
 	</head>
 
 	<body>
-		<div>
+		<div id="users-header">
 			Usuarios
 		</div>
-		<div>
+		<div id="users-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+			Users Nav
+		</div>
+		<div id="users-main-content">
 			<table class="table table-info table-striped table-responsive">
 				<thead class="thead">
 					<tr>
@@ -24,16 +34,16 @@
 					<td style="text-align: center;">
 						<div class="d-flex justify-content-center align-content-center">
 							<div class="d-flex ms-2">
-								<a th:href="@{'/users/user?id=' + ${user.id}}" id="user" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-user-edit" aria-hidden="true"></i></a>
-								<a th:href="@{'/users/delete?id=' + ${user.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i></a>
+								<a th:href="@{'/users/user?username=' + ${user.username}}" id="user" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-user-edit" aria-hidden="true"></i></a>
+								<a th:href="@{'/users/delete?username=' + ${user.username}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</td>
 				</tr>
 			</table>
 			<div>
-				<a th:href="@{/users/new-user}" id="new" class="btn btn-success" role="button" style="width: 100%"><i class="fa fa-fw fa-user-plus" aria-hidden="true"></i></a>
-			</div>1
+				<a th:href="@{/users/new}" id="new" class="btn btn-success" role="button" style="width: 100%"><i class="fa fa-fw fa-user-plus" aria-hidden="true"></i></a>
+			</div>
 		</div>
 	</body>
 </html>
