@@ -37,6 +37,9 @@ public class StatisticsController {
 	@Autowired
 	private IClientService clientService;
 
+	private LocalDateTime inicioDate;
+	private LocalDateTime finalDate;
+
 	@GetMapping("/statistics")
 	public String findAppointments(Model model) {
 		var clients = (List<Client>) clientService.findAll();
@@ -79,7 +82,6 @@ public class StatisticsController {
 	}
 	@RequestMapping(value = "/statistics", params= "appointmentDate")
 	public String filterByDate(Model model, @RequestParam ("appointmentDate") LocalDateTime appointmentDate){
-		System.out.println("Has entrado al request de date");
 		var appointments = (List<Appointment>) appointmentService.findAll();
 		model.addAttribute("appointments", appointments);
 		model.addAttribute("appointmentDate", appointmentDate);
@@ -89,20 +91,17 @@ public class StatisticsController {
 	
     @PostMapping("/statistics")
     public String filterData(Model model, @RequestParam(name = "client", required = false) Client client, @RequestParam(name= "treatment", required = false) Treatment treatment, @RequestParam(name="paidAppointment", required = false) Boolean paidAppointment, @RequestParam(name="doneAppointment", required = false) Boolean doneAppointment, @RequestParam(name="initialDate", required = false) String initialDate, @RequestParam(name="endDate", required = false) String endDate  ){
-        System.out.println("has entrado al Post");
 		var treatments = treatmentService.findAll();
         var clients = (List<Client>) clientService.findAll();
         var allAppointments = (List<Appointment>) appointmentService.findAll();
 		var appointments = allAppointments;
-        if (client != null) appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == client.getId()).collect(java.util.stream.Collectors.toList());
+		if (client != null) appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == client.getId()).collect(java.util.stream.Collectors.toList());
 		if (treatment !=null) appointments = appointments.stream().filter(appointment -> appointment.getTreatment().getId() == treatment.getId()).collect(java.util.stream.Collectors.toList());
 		if (paidAppointment != null) appointments = appointments.stream().filter(appointment -> appointment.getPaid() == paidAppointment).collect(java.util.stream.Collectors.toList());
         if (doneAppointment != null) appointments = appointments.stream().filter(appointment -> appointment.getDone() == doneAppointment).collect(java.util.stream.Collectors.toList());
-		System.out.println("inicio: " + initialDate + " end: " + endDate);
-		LocalDateTime inicioDate = LocalDateTime.parse(initialDate);
-		LocalDateTime finalDate = LocalDateTime.parse(endDate);
-		if (initialDate != null) appointments = appointments.stream().filter(appointment -> !appointment.getAppointmentDate().isBefore(inicioDate)).collect(java.util.stream.Collectors.toList());
-		if (endDate != null) appointments = appointments.stream().filter(appointment -> !appointment.getAppointmentDate().isAfter(finalDate)).collect(java.util.stream.Collectors.toList());
+		if (initialDate != "") inicioDate = LocalDateTime.parse(initialDate);
+		if (endDate != "") finalDate = LocalDateTime.parse(endDate);
+		if ((initialDate != "") && (endDate != "" )) appointments = appointments.stream().filter(appointment -> ((!appointment.getAppointmentDate().isBefore(inicioDate)) && (!appointment.getAppointmentDate().isAfter(finalDate)))).collect(java.util.stream.Collectors.toList());
 		model.addAttribute("treatments",treatments);
         model.addAttribute("clients", clients);
         model.addAttribute("appointments", appointments);
