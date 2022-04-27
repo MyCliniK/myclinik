@@ -95,6 +95,7 @@ public class StatisticsController {
         var clients = (List<Client>) clientService.findAll();
         var allAppointments = (List<Appointment>) appointmentService.findAll();
 		var appointments = allAppointments;
+		Float ingresosTotales = (float) 0.00;
 		if (client != null) appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == client.getId()).collect(java.util.stream.Collectors.toList());
 		if (treatment !=null) appointments = appointments.stream().filter(appointment -> appointment.getTreatment().getId() == treatment.getId()).collect(java.util.stream.Collectors.toList());
 		if (paidAppointment != null) appointments = appointments.stream().filter(appointment -> appointment.getPaid() == paidAppointment).collect(java.util.stream.Collectors.toList());
@@ -102,15 +103,19 @@ public class StatisticsController {
 		if (initialDate != "") inicioDate = LocalDateTime.parse(initialDate);
 		if (endDate != "") finalDate = LocalDateTime.parse(endDate);
 		if ((initialDate != "") && (endDate != "" )) appointments = appointments.stream().filter(appointment -> ((!appointment.getAppointmentDate().isBefore(inicioDate)) && (!appointment.getAppointmentDate().isAfter(finalDate)))).collect(java.util.stream.Collectors.toList());
+		for (Appointment app: appointments) {
+			ingresosTotales += app.getTreatment().getPrice();
+		}
+		if (client != null) model.addAttribute("clientId", client.getId());
+        if (treatment != null) model.addAttribute("treatmentId", treatment.getId());
 		model.addAttribute("treatments",treatments);
         model.addAttribute("clients", clients);
         model.addAttribute("appointments", appointments);
-        if (client != null) model.addAttribute("clientId", client.getId());
-        if (treatment != null) model.addAttribute("treatmentId", treatment.getId());
 		model.addAttribute("paidAppointment", paidAppointment);
 		model.addAttribute("doneAppointment", doneAppointment);
 		if (initialDate != null) model.addAttribute("initialDate", initialDate);
 		if (endDate != null) model.addAttribute("endDate", endDate);
+		model.addAttribute("ingresosTotales" , ingresosTotales);
         return "statistics";
     }
 
