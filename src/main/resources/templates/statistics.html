@@ -65,7 +65,20 @@
                     </select>
                      <label class="form-check-label" for="doneSelector">Pagos</label>
                 </div>	
+
+				<div class="form-group">
+					<div class="input-group justify-content-center">
+						<span class="input-group-text" id="addon-wrapping">Fecha inicial</span>
+						<input type="datetime-local" name = "initialDate" th:value = "${initialDate}"/>
+					</div>
+				</div>
 				
+				<div class="form-group">
+					<div class="input-group justify-content-center">
+						<span class="input-group-text" id="addon-wrapping">Fecha final</span>
+						<input type="datetime-local" name="endDate" th:value = "${endDate}" />
+					</div>
+				</div>
 				<br>
 
                 <div style="margin-bottom: 10px; text-align: center;">
