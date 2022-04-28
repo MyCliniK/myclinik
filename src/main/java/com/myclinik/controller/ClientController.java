@@ -18,6 +18,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.Path;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import java.util.stream.Collectors;
+import org.springframework.core.io.Resource;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.myclinik.service.IStorageService;
+import com.myclinik.exception.StorageFileNotFoundException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +38,9 @@ import java.util.Optional;
 public class ClientController {
 	@Autowired
 	private IClientService clientService;
+
+	@Autowired
+	private IStorageService storageService;
 
 	@GetMapping("/clients")
 	public String findClients(Model model) {
@@ -36,6 +52,14 @@ public class ClientController {
 	@GetMapping("/clients/client")
 	public String getClient(Model model, @RequestParam("id") String itemid){
 		var client  = clientService.findOne(Long.parseLong(itemid));
+
+		model.addAttribute("files", storageService.loadFolder(itemid)
+			.map(path -> {
+				return MvcUriComponentsBuilder.fromMethodName(ClientController.class,
+						"serveFile", path.getFileName().toString(), itemid).build().toUri().toString();
+			})
+			.collect(Collectors.toList()));
+
 		model.addAttribute("client", client);
 		return "client";
 	}
@@ -51,6 +75,7 @@ public class ClientController {
 		clientService.saveClient(client);
 		return "redirect:/clients";
 	}
+
 	@RequestMapping ("/clients/delete")
 	public String deleteClient(@RequestParam("id") Long itemid) {
 		clientService.deleteClient(itemid);
@@ -58,8 +83,22 @@ public class ClientController {
 	}
 
 	@RequestMapping ("/clients/update")
-	public String editClient(@RequestParam("id") Long itemid, Client client){
-		clientService.updateClient(itemid, client);
-		return "redirect:/clients";
+	public String editClient(@RequestParam("id") Long itemId, Client client, @RequestParam("file") MultipartFile file){
+		storageService.store(file, Long.toString(itemId));
+		clientService.updateClient(itemId, client);
+		return "redirect:/clients/client?id=" + itemId;
+	}
+
+	@GetMapping("/files/{clientid:.+}/{filename:.+}")
+	@ResponseBody
+	public ResponseEntity<Resource> serveFile(@PathVariable String filename, @PathVariable String clientid) {
+		Resource file = storageService.loadAsResource(clientid + "/" + filename);
+		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+				"attachment; filename=\"" + file.getFilename() + "\"").body(file);
+	}
+
+	@ExceptionHandler(StorageFileNotFoundException.class)
+	public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
+		return ResponseEntity.notFound().build();
 	}
 }

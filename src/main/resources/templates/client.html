@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{layouts/main-layout :: main-fragment(
-		~{:: title},
-		~{:: #client-header},
-		~{:: #client-nav},
-		~{:: #client-main-content},
-		~{:: #client-footer}
-		)}"
+	~{:: title},
+	~{:: #client-header},
+	~{:: #client-nav},
+	~{:: #client-main-content},
+	~{:: #client-footer}
+	)}"
 >
 	<head>
 		<title>Modificar ficha de cliente</title>
@@ -25,7 +25,7 @@
 		<br>
 		<div id="client-main-content" class="container">
 			<div class="card">
-				<form method="POST" th:action="@{'/clients/update?id=' + ${client.id}}" th:object="${client}" id="clientForm" class="container">
+				<form method="POST" enctype="multipart/form-data" th:action="@{'/clients/update?id=' + ${client.id}}" th:object="${client}" id="clientForm" class="container">
 					<br>
 					<div class="form-group">
 						<div class="input-group">
@@ -50,18 +50,17 @@
 									<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-birthday-cake" aria-hidden="true"></i></span>
 									<input type="date" th:field="*{birthdate}" class="form-control">
 								</div>
-							</div>
-						</div>
+							</div> </div>
 					</div>
-				<br>
+					<br>
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-venus-mars" aria-hidden="true"></i></span>
 									<select th:field="*{sex}" placeholder="Sexo" class="form-select">
-										<option value="M">Masculino</option>
-										<option value="F">Femenino</option>
+									<option value="M">Masculino</option>
+									<option value="F">Femenino</option>
 										<option value="-">Prefiere no decirlo</option>
 									</select>
 								</div>
@@ -76,19 +75,19 @@
 							</div>
 						</div>
 					</div>
-				<br>
+					<br>
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i></span>
 							<input type="text" th:field="*{email}" placeholder="Correo" aria-label="Correo" class="form-control" required>
 						</div>
 					</div>
-				<br>
+					<br>
 					<div class="form-check form-switch">
 						<input class="form-check-input" th:field="*{promos}" type="checkbox" role="switch" id="flexSwitchCheckDefault">
 						<label class="form-check-label" for="flexSwitchCheckDefault">Desea recibir ofertas y promociones</label>
 					</div>
-				<br>
+					<br>
 					<div class="form-group">
 						<label>Observaciones médicas</label>
 						<div class="input-group">
@@ -96,7 +95,7 @@
 							<textarea class="form-control" th:field="*{medicalObservations}" rows="5" name="body"></textarea>
 						</div>
 					</div>
-				<br>
+					<br>
 					<div class="form-group">
 						<label>Comentarios adicionales</label>
 						<div class="input-group">
@@ -104,15 +103,24 @@
 							<textarea class="form-control" th:field="*{observations}" rows="5" name="body"></textarea>
 						</div>
 					</div>
-				<br>
+					<br>
+
 					<div class="form-group">
 						<label>Consentimientos</label>
 						<div class="input-group mb-3">
 							<label class="input-group-text" for="inputGroupFile01"><i class="fa fa-fw fa-file-contract" aria-hidden="true"></i></label>
-							<input type="file" class="form-control" id="inputGroupFile01">
+							<input type="file" class="form-control" id="inputGroupFile01" name="file">
 						</div>
 					</div>
-				<br>
+
+					<div>
+						<ul>
+							<li th:each="file : ${files}">
+								<a th:href="${file}" th:text="${file}" />
+							</li>
+						</ul>
+					</div>
+					<br>
 					<div style="margin-bottom: 10px; text-align: center;">
 						<button type="submit" class="btn btn-warning">Guardar</button>
 						<button type="button" class="btn btn-danger">Eliminar ficha</button>

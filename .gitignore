@@ -1,3 +1,6 @@
+# Data folder
+files/*
+
 # Compiled class file
 *.class
 
