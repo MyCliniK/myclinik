@@ -25,7 +25,9 @@ import net.bytebuddy.asm.Advice.Local;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class StatisticsController {
@@ -42,12 +44,24 @@ public class StatisticsController {
 
 	@GetMapping("/statistics")
 	public String findAppointments(Model model) {
+		Map<String, Integer> treatapp = new HashMap<>();
 		var clients = (List<Client>) clientService.findAll();
 		var appointments = (List<Appointment>) appointmentService.findAll();
 		var treatments = (List<Treatment>) treatmentService.findAll();
 		model.addAttribute("appointments", appointments);
 		model.addAttribute("treatments", treatments);
 		model.addAttribute("clients", clients);
+		for (Treatment treat: treatments){
+			int cont = 0;
+			for (Appointment app: appointments){
+				if (app.getTreatment().getName() == treat.getName()){
+					cont++;
+				}
+			}
+			treatapp.put(treat.getName(), cont);
+		}
+		System.out.println("mapa!!" + treatapp.toString());
+		model.addAttribute("maptreatapp", treatapp);
 		return "statistics";
 	}
 	@RequestMapping(value = "/statistics", params= "clientId")
@@ -95,6 +109,7 @@ public class StatisticsController {
         var clients = (List<Client>) clientService.findAll();
         var allAppointments = (List<Appointment>) appointmentService.findAll();
 		var appointments = allAppointments;
+		int[] arrayprueba = {1, 2, 3};
 		Float ingresosTotales = (float) 0.00;
 		if (client != null) appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == client.getId()).collect(java.util.stream.Collectors.toList());
 		if (treatment !=null) appointments = appointments.stream().filter(appointment -> appointment.getTreatment().getId() == treatment.getId()).collect(java.util.stream.Collectors.toList());
@@ -116,7 +131,8 @@ public class StatisticsController {
 		if (initialDate != null) model.addAttribute("initialDate", initialDate);
 		if (endDate != null) model.addAttribute("endDate", endDate);
 		model.addAttribute("ingresosTotales" , ingresosTotales);
-        return "statistics";
+		model.addAttribute("arrayprueba", arrayprueba);
+		return "statistics";
     }
 
 	

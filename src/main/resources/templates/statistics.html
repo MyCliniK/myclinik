@@ -115,7 +115,53 @@
 			</table>
 			<p>Los ingresos totales son:</p>
 			<p th:text="${ingresosTotales}"> </p>
-		</div>
+
+			<script src="https://code.highcharts.com/highcharts.js"></script>
+			<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+			<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+			<div id="container" style="height: 400px"></div>
+			<script th:inline="javascript">
+				/*var maptreatapp = {};
+				var chartdata = [];
+				var i = 0;
+				Object.keys(maptreatapp).forEach(function(key) {
+					chartdata[i++] = {name: key, data: [maptreatapp[key]]};
+				});*/
+				Highcharts.chart('container', {
+					chart : {
+						type : 'pie',
+						options3d : {
+							enabled : true,
+							alpha : 50,
+							beta : 0
+						}
+					},
+					title : {
+						text : 'Citas por tipo de tratamiento'
+					},
+					tooltip : {
+						pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+					},
+					plotOptions : {
+						pie : {
+							allowPointSelect : true,
+							cursor : 'pointer',
+							depth : 35,
+							dataLabels : {
+								enabled : true,
+								format : '{point.name}'
+							}
+						}
+					},
+					series : [ {
+						type : 'pie',
+						name : 'Ratio',
+						data : [ [ 'Success', [[2]] ], [ 'Failure', [[4]] ] ]
+					} ]
+				});
+			</script>
+			</div>
         <div>
 			<a href="appointments/new" id="new" class="btn btn-success" role="button" style="width: 100%"><i class="fa fa-fw fa-calendar-plus" aria-hidden="true"></i></a>
 		</div>
