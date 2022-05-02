@@ -48,6 +48,7 @@
 						<span th:if="${appointment.paid == false}"> <i class="fa-solid fa-circle-xmark text-danger"></i></span>
 					</td>
 					<td style="text-align: center;">
+						<a th:href="@{'/calendar?selectedAppointmentId=' + ${appointment.id} + '&initialDate=' + ${appointment.appointmentDate}}" id="showCalendar" class="btn btn-info text-light" role="button"> <i class="fa fa-fw fa-calendar" aria-hidden="true"></i></a>
 						<a th:href="@{'/appointments/edit/' + ${appointment.id}}" id="edit" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-edit" aria-hidden="true"></i></a>
 						<a th:href="@{'/appointments/delete/' + ${appointment.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-calendar-times" aria-hidden="true"></i></a>
 					</td>

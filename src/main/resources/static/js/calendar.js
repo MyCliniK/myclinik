@@ -231,7 +231,7 @@
 		var suggestedViewHeight;
 		var resizeUID = 0;
 		var ignoreWindowResize = 0;
-		var date = new Date();
+		var date = options.initialDate ? new Date(options.initialDate) : new Date();
 		var events = [];
 		var _dragElement;
 
@@ -4813,7 +4813,7 @@ function View(element, calendar, viewName) {
 		var date = new Date(event.start.getTime() - z);
 		$.ajax({
 			type:"POST",
-			url:"/appointments/update",
+			url:"/appointments/date/update",
 			data:{
 				id : event.id,
 				date: date.toISOString().slice(0,16), // YYYY-MM-ddTHH:mm

@@ -22,13 +22,13 @@
 					var y = date.getFullYear();
 
 					var appointments = [[${appointments}]];
-
-					/*  className colors
-
-					className: default(transparent), important(red), chill(pink), success(green), info(blue)
-
-					*/
-
+					var newAppointmentId = [[${newAppointmentId}]];
+					var selectedAppointmentId = [[${selectedAppointmentId}]];
+					var editedAppointmentId = [[${editedAppointmentId}]];
+					var initialDate = [[${initialDate}]] ? new Date([[${initialDate}]]) : new Date();
+					if(initialDate.toString() == "Invalid Date") {
+						initialDate = new Date();
+					}
 
 					/* initialize the external events
 		-----------------------------------------------------------------*/
@@ -112,17 +112,28 @@
 
 						},
 
+						// Set date for the initial view
+						initialDate: initialDate,
+
 						// Load events from attribute
 						events: appointments.map(appointment => {
 							var startDate = new Date(appointment.appointmentDate);
-							return {
+							var event = {
 								id: appointment.id,
-								title: appointment.treatment.name,
+								title: appointment.treatment.name + " - " + appointment.client.firstName + " " + appointment.client.lastName,
 								start: startDate,
 								end: new Date(startDate.getTime() + appointment.treatment.duration * 60000),
 								allDay: false,
 								url: '/appointments/edit/' + appointment.id,
 							};
+							if(appointment.id == newAppointmentId) {
+								event.className = 'success';
+							} else if(appointment.id == selectedAppointmentId) {
+								event.className = 'info';
+							} else if(appointment.id == editedAppointmentId) {
+								event.className = 'important';
+							}
+							return event;
 						}),
 					});
 

@@ -85,8 +85,11 @@ public class AppointmentController {
 
 	@PostMapping("/appointments/new/save")
 	public String saveAppointment(@ModelAttribute("appointment") Appointment appointment) {
+		if (appointment.getAppointmentDate() == null) {
+			appointment.setAppointmentDate(LocalDateTime.now());
+		}
 		appointmentService.save(appointment);
-		return "redirect:/appointments";
+		return "redirect:/calendar?initialDate=" + appointment.getAppointmentDate() + "&newAppointmentId=" + appointment.getId();
 	}
 
 	@RequestMapping("/appointments/edit/{appointmentId}")
@@ -109,10 +112,10 @@ public class AppointmentController {
 	@RequestMapping("/appointments/update")
 	public String updateAppointment(@RequestParam("id") Long id, @ModelAttribute("appointment") Appointment appointment) {
 		appointmentService.update(id, appointment);
-		return "redirect:/appointments";
+		return "redirect:/calendar?editedAppointmentId=" + appointment.getId() + "&initialDate=" + appointment.getAppointmentDate();
 	}
 
-	@PostMapping("/appointments/update")
+	@PostMapping("/appointments/date/update")
 	public String updateAppointmentDate(@RequestParam("id") Long id, @RequestParam("date") String strDate) {
 		LocalDateTime newDate = LocalDateTime.parse(strDate);
 		Appointment appointment = appointmentService.get(id);
