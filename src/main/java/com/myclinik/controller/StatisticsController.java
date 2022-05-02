@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import net.bytebuddy.asm.Advice.Local;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +59,59 @@ public class StatisticsController {
 		}
 		return maptreatapp;
 	}
+	private Map<String, Float> incomeByMonth(){
+		Map<String, Float> mapmonthapp  = new LinkedHashMap<String, Float>() {{
+				put("JANUARY", (float) 0.00);
+				put("FEBRUARY", (float) 0.00);
+				put("MARCH", (float) 0.00);
+				put("APRIL", (float) 0.00);
+				put("MAY", (float) 0.00);
+				put("JUNE", (float) 0.00);
+				put("JULY", (float) 0.00);
+				put("AUGUST", (float) 0.00);
+				put("SEPTEMBER", (float) 0.00);
+				put("OCTOBER", (float) 0.00);
+				put("NOVEMBER", (float) 0.00);
+				put("DECEMBER", (float) 0.00);
+			}};
+		var appointments = (List<Appointment>) appointmentService.findAll();
+		for (int i = 0; i<mapmonthapp.size(); i++){
+			for (Appointment app: appointments){
+				var key = mapmonthapp.keySet().toArray()[i];
+				if (app.getAppointmentDate().getMonth().toString() == key && app.getPaid() == true){
+					mapmonthapp.put(app.getAppointmentDate().getMonth().toString(), (float) mapmonthapp.get(key) + app.getTreatment().getPrice());
+				}
+			}
+		}
+		return mapmonthapp;
+	}
+	private Map<String, Float> unpaidByMonth(){
+		Map<String, Float> mapmonthappunpaid  = new LinkedHashMap<String, Float>() {{
+				put("JANUARY", (float) 0.00);
+				put("FEBRUARY", (float) 0.00);
+				put("MARCH", (float) 0.00);
+				put("APRIL", (float) 0.00);
+				put("MAY", (float) 0.00);
+				put("JUNE", (float) 0.00);
+				put("JULY", (float) 0.00);
+				put("AUGUST", (float) 0.00);
+				put("SEPTEMBER", (float) 0.00);
+				put("OCTOBER", (float) 0.00);
+				put("NOVEMBER", (float) 0.00);
+				put("DECEMBER", (float) 0.00);
+			}};
+		var appointments = (List<Appointment>) appointmentService.findAll();
+		for (int i = 0; i<mapmonthappunpaid.size(); i++){
+			for (Appointment app: appointments){
+				var key = mapmonthappunpaid.keySet().toArray()[i];
+				if (app.getAppointmentDate().getMonth().toString() == key && app.getPaid() == false){
+					mapmonthappunpaid.put(app.getAppointmentDate().getMonth().toString(), (float) mapmonthappunpaid.get(key) + app.getTreatment().getPrice());
+				}
+			}
+		}
+		return mapmonthappunpaid;
+	}
+
 
 	@GetMapping("/statistics")
 	public String findAppointments(Model model) {
@@ -67,6 +122,8 @@ public class StatisticsController {
 		model.addAttribute("treatments", treatments);
 		model.addAttribute("clients", clients);
 		model.addAttribute("maptreatapp", appointmentByTreatment());
+		model.addAttribute("mapmonthapp", incomeByMonth());
+		model.addAttribute("mapmonthappunpaid", unpaidByMonth());
 		return "statistics";
 	}
 	@RequestMapping(value = "/statistics", params= "clientId")

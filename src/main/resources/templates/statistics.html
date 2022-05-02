@@ -119,23 +119,22 @@
 			<script src="https://code.highcharts.com/highcharts.js"></script>
 			<script src="https://code.highcharts.com/highcharts-3d.js"></script>
 			<script src="https://code.highcharts.com/modules/exporting.js"></script>
+			<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+				
 
-			<div id="container" style="height: 400px"></div>
+			<div id="container" style="height: 500px"></div>
 			<script th:inline="javascript">
 				/*<![CDATA[*/
 				var jmap = /*[[${maptreatapp}]]*/ 'defaultmap';
     			/*]]>*/
+				
 				/*[+
 				var chartdata = []
 				var i = 0;
-				console.log(jmap);
 				Object.keys(jmap).forEach(function(key) {
 					var data = jmap[key]; 
-					console.log("data is: " + data);
 					chartdata[i++] = [key, data];
 				});
-				console.log(chartdata);
-				
 				+]*/
 				Highcharts.chart('container', {
 					chart : {
@@ -171,9 +170,58 @@
 					} ]
 				});
 			</script>
-			</div>
-        <div>
-			<a href="appointments/new" id="new" class="btn btn-success" role="button" style="width: 100%"><i class="fa fa-fw fa-calendar-plus" aria-hidden="true"></i></a>
+			</br>
+			<div id="container2" style="height: 500px"></div>
+				<script th:inline="javascript">
+				/*<![CDATA[*/
+				var jmap2 = /*[[${mapmonthapp}]]*/ 'defaultmap';
+				var jkeyset = /*[[${mapmonthapp.keySet()}]]*/ 'defaultkeyset';
+				var jvalues = /*[[${mapmonthapp.values()}]]*/ 'defaultvalues';
+				var jvaluesunpaid = /*[[${mapmonthappunpaid.values()}]]*/ 'defaultvaluesunpaid';
+				/*]]>*/
+				Highcharts.chart('container2', {
+					chart: {
+						type: 'column'
+					},
+					title: {
+						text: 'Ingresos por mes'
+					},
+					xAxis: {
+						categories: jkeyset,
+						crosshair: true
+					},
+					yAxis: {
+						min: 0,
+						max:100,
+						title: {
+							text: 'Ingresos'
+						}
+					},
+					tooltip: {
+						headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+						pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+						'<td style="padding:0"><b>{point.y:.1f} €</b></td></tr>',
+						footerFormat: '</table>',
+						shared: true,
+						useHTML: true
+					},
+					plotOptions: {
+						column: {
+							pointPadding: 0.2,
+							borderWidth: 0
+						}
+					},
+					series: [{
+						name: 'Pagados',
+						data:  jvalues
+					},
+					{
+						name: 'NoPagados',
+						data:  jvaluesunpaid
+					}
+					]
+				});
+				</script>
 		</div>
 	</body>
 </html>
