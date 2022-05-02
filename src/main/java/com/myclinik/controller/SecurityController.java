@@ -43,10 +43,6 @@ public class SecurityController extends WebSecurityConfigurerAdapter{
 		;
 	}
 
-
-	//@Autowired
-	//private CustomAuthenticationProvider authProvider;
-
 	@Autowired
 	private DataSource ds;
 
@@ -68,13 +64,4 @@ public class SecurityController extends WebSecurityConfigurerAdapter{
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
-	//@Bean(name = "pwdEncoder")
-	//public PasswordEncoder getPasswordEncoder() {
-	//    DelegatingPasswordEncoder delPasswordEncoder = (DelegatingPasswordEncoder) PasswordEncoderFactories
-	//            .createDelegatingPasswordEncoder();
-	//    BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
-	//    delPasswordEncoder.setDefaultPasswordEncoderForMatches(bcryptPasswordEncoder);
-	//    return delPasswordEncoder;
-	//}
 }

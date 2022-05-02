@@ -26,16 +26,13 @@ public class User implements UserDetails {
 	private @Id String username;
 	private String password;
 	private Boolean enabled;
-	// private String authority;
 
     public User() {}
 
-    // public User(String username, String password, Boolean enabled, String authority) {
     public User(String username, String password, Boolean enabled) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
-		// this.authority = authority;
 	}
 
     //private static final long serialVersionUID = 1L;
@@ -63,14 +60,6 @@ public class User implements UserDetails {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
-
-    // public String getAuthority() {
-    //     return authority;
-    // }
-    //
-    // public void setAuthority(String authority) {
-    //     this.authority = authority;
-    // }
 
     @Override
     public Set<GrantedAuthority> getAuthorities() {
@@ -107,7 +96,6 @@ public class User implements UserDetails {
 		"username=" + username +
 		", password=" + password +
 		", enabled=" + enabled +
-		// ", authority=" + authority +
 		"}";
     }
 
