@@ -1,19 +1,19 @@
 package com.myclinik.model;
 
-import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,21 +21,26 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
-
-	private @Id String username;
+public class User {
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	private String username;
 	private String password;
 	private Boolean enabled;
 
-    public User() {}
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name="user_roles", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
+    private Set<Role> roles=new HashSet<Role>();
 
-    public User(String username, String password, Boolean enabled) {
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
-	}
+    public Long getId() {
+        return id;
+    }
 
-    //private static final long serialVersionUID = 1L;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -53,7 +58,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public Boolean getEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
@@ -61,42 +66,11 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
-    @Override
-    public Set<GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ADMIN"));
-        authorities.add(new SimpleGrantedAuthority("CONT"));
-        authorities.add(new SimpleGrantedAuthority("OPS"));
-        return authorities;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    @Override
-    public String toString() {
-        return "User {" +
-		"username=" + username +
-		", password=" + password +
-		", enabled=" + enabled +
-		"}";
-    }
-
 }

@@ -2,8 +2,11 @@ package com.myclinik.controller;
 
 import com.myclinik.model.User;
 import com.myclinik.repository.UserRepository;
-import com.myclinik.service.IUserService;
+import com.myclinik.security.UserDetailsServiceImp;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,7 +30,7 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-	private IUserService userService;
+	private UserDetailsServiceImp userService; //duda
 
     @GetMapping("/users")
 	public String findUsers(Model model) {
@@ -51,16 +54,16 @@ public class UserController {
 	}
 
 	@PostMapping("/users/new/save")
-	public String saveUser(@ModelAttribute("user") User user, String authority) {
+	public String saveUser(@ModelAttribute("user") User user) {
 		user.setEnabled(true);
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-		userService.saveUser(user, authority);
+		userService.saveUser(user);
 		return "redirect:/users";
 	}
 
 	@RequestMapping ("/users/delete")
-	public String deleteUser(@RequestParam("username") String username) {
-		userService.deleteUser(username);
+	public String deleteUser(@RequestParam("id") Long id) {
+		userService.deleteUser(id);
 		return "redirect:/users";
 	}
 

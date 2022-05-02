@@ -15,4 +15,9 @@ public class IndexController {
 	public String goToHomePage() {
         return ("home");
     }
+
+    @GetMapping("/access-denied")
+    public String goToAccessDeniedPage() {
+        return ("access-denied");
+    }
 }
