@@ -42,15 +42,10 @@ public class StatisticsController {
 	private LocalDateTime inicioDate;
 	private LocalDateTime finalDate;
 
-	@GetMapping("/statistics")
-	public String findAppointments(Model model) {
-		Map<String, Integer> treatapp = new HashMap<>();
-		var clients = (List<Client>) clientService.findAll();
+	private Map<String, Integer> appointmentByTreatment(){
+		Map<String, Integer> maptreatapp = new HashMap<>();
 		var appointments = (List<Appointment>) appointmentService.findAll();
 		var treatments = (List<Treatment>) treatmentService.findAll();
-		model.addAttribute("appointments", appointments);
-		model.addAttribute("treatments", treatments);
-		model.addAttribute("clients", clients);
 		for (Treatment treat: treatments){
 			int cont = 0;
 			for (Appointment app: appointments){
@@ -58,10 +53,20 @@ public class StatisticsController {
 					cont++;
 				}
 			}
-			treatapp.put(treat.getName(), cont);
+			maptreatapp.put(treat.getName(), cont);
 		}
-		System.out.println("mapa!!" + treatapp.toString());
-		model.addAttribute("maptreatapp", treatapp);
+		return maptreatapp;
+	}
+
+	@GetMapping("/statistics")
+	public String findAppointments(Model model) {
+		var clients = (List<Client>) clientService.findAll();
+		var appointments = (List<Appointment>) appointmentService.findAll();
+		var treatments = (List<Treatment>) treatmentService.findAll();
+		model.addAttribute("appointments", appointments);
+		model.addAttribute("treatments", treatments);
+		model.addAttribute("clients", clients);
+		model.addAttribute("maptreatapp", appointmentByTreatment());
 		return "statistics";
 	}
 	@RequestMapping(value = "/statistics", params= "clientId")
@@ -109,7 +114,6 @@ public class StatisticsController {
         var clients = (List<Client>) clientService.findAll();
         var allAppointments = (List<Appointment>) appointmentService.findAll();
 		var appointments = allAppointments;
-		int[] arrayprueba = {1, 2, 3};
 		Float ingresosTotales = (float) 0.00;
 		if (client != null) appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == client.getId()).collect(java.util.stream.Collectors.toList());
 		if (treatment !=null) appointments = appointments.stream().filter(appointment -> appointment.getTreatment().getId() == treatment.getId()).collect(java.util.stream.Collectors.toList());
@@ -131,7 +135,7 @@ public class StatisticsController {
 		if (initialDate != null) model.addAttribute("initialDate", initialDate);
 		if (endDate != null) model.addAttribute("endDate", endDate);
 		model.addAttribute("ingresosTotales" , ingresosTotales);
-		model.addAttribute("arrayprueba", arrayprueba);
+		model.addAttribute("maptreatapp", appointmentByTreatment());
 		return "statistics";
     }
 

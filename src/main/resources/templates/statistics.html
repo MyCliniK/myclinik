@@ -122,12 +122,21 @@
 
 			<div id="container" style="height: 400px"></div>
 			<script th:inline="javascript">
-				/*var maptreatapp = {};
-				var chartdata = [];
+				/*<![CDATA[*/
+				var jmap = /*[[${maptreatapp}]]*/ 'defaultmap';
+    			/*]]>*/
+				/*[+
+				var chartdata = []
 				var i = 0;
-				Object.keys(maptreatapp).forEach(function(key) {
-					chartdata[i++] = {name: key, data: [maptreatapp[key]]};
-				});*/
+				console.log(jmap);
+				Object.keys(jmap).forEach(function(key) {
+					var data = jmap[key]; 
+					console.log("data is: " + data);
+					chartdata[i++] = [key, data];
+				});
+				console.log(chartdata);
+				
+				+]*/
 				Highcharts.chart('container', {
 					chart : {
 						type : 'pie',
@@ -154,10 +163,11 @@
 							}
 						}
 					},
+					
 					series : [ {
 						type : 'pie',
 						name : 'Ratio',
-						data : [ [ 'Success', [[2]] ], [ 'Failure', [[4]] ] ]
+						data : chartdata
 					} ]
 				});
 			</script>
