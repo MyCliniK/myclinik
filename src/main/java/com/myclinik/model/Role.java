@@ -30,6 +30,17 @@ public class Role {
     @JoinTable(name="users_roles", joinColumns=@JoinColumn(name="roleid"), inverseJoinColumns=@JoinColumn(name="userid"))
     private Set<User> users=new HashSet<User>();
 
+	public Role() {}
+
+	public Role(Long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public Role(String name) {
+		this.name = name;
+	}
+
     public Long getId() {
         return id;
     }

@@ -81,7 +81,8 @@ public class UserController {
 	}
 
 	@RequestMapping ("/users/update")
-	public String editUser(@RequestParam("id") Long id, User user, Role role){
+	public String editUser(@RequestParam("id") Long id, User user, Long roleId){
+		Role role = roleService.get(roleId);
 		Set<Role> roles = new HashSet<Role>();
 		roles.add(role);
 		user.setRoles(roles);
