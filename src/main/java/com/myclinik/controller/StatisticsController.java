@@ -26,6 +26,7 @@ import net.bytebuddy.asm.Advice.Local;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -45,7 +46,7 @@ public class StatisticsController {
 	private LocalDateTime finalDate;
 
 	private Map<String, Integer> appointmentByTreatment(){
-		Map<String, Integer> maptreatapp = new HashMap<>();
+		Map<String, Integer> maptreatapp = new LinkedHashMap<>();
 		var appointments = (List<Appointment>) appointmentService.findAll();
 		var treatments = (List<Treatment>) treatmentService.findAll();
 		for (Treatment treat: treatments){
@@ -59,6 +60,43 @@ public class StatisticsController {
 		}
 		return maptreatapp;
 	}
+
+	private Map<String, Map<String, Float>> incomeByMonthandTreatment(){
+		var treatments = (List<Treatment>) treatmentService.findAll();
+		Map<String, Map<String, Float>> maps = new LinkedHashMap<String, Map<String, Float>>();
+		var appointments = (List<Appointment>) appointmentService.findAll();
+		for (Treatment treat: treatments){
+			Map<String, Float> mapmonthappcopy  = new LinkedHashMap<String, Float>() {{
+				put("JANUARY", (float) 0.00);
+				put("FEBRUARY", (float) 0.00);
+				put("MARCH", (float) 0.00);
+				put("APRIL", (float) 0.00);
+				put("MAY", (float) 0.00);
+				put("JUNE", (float) 0.00);
+				put("JULY", (float) 0.00);
+				put("AUGUST", (float) 0.00);
+				put("SEPTEMBER", (float) 0.00);
+				put("OCTOBER", (float) 0.00);
+				put("NOVEMBER", (float) 0.00);
+				put("DECEMBER", (float) 0.00);
+			}};
+			for (int i = 0; i<mapmonthappcopy.size(); i++){
+				for (Appointment app: appointments){
+					var key = mapmonthappcopy.keySet().toArray()[i];
+					if (app.getTreatment() == treat) {
+						if (app.getAppointmentDate().getMonth().toString() == key && app.getPaid() == true){
+							mapmonthappcopy.put(app.getAppointmentDate().getMonth().toString(), (float) mapmonthappcopy.get(key) + app.getTreatment().getPrice());
+						}
+					}
+				}
+			}
+			maps.put(treat.getName(), mapmonthappcopy);
+		}
+		return maps;
+	}
+
+
+
 	private Map<String, Float> incomeByMonth(){
 		Map<String, Float> mapmonthapp  = new LinkedHashMap<String, Float>() {{
 				put("JANUARY", (float) 0.00);
@@ -75,14 +113,15 @@ public class StatisticsController {
 				put("DECEMBER", (float) 0.00);
 			}};
 		var appointments = (List<Appointment>) appointmentService.findAll();
-		for (int i = 0; i<mapmonthapp.size(); i++){
-			for (Appointment app: appointments){
-				var key = mapmonthapp.keySet().toArray()[i];
-				if (app.getAppointmentDate().getMonth().toString() == key && app.getPaid() == true){
-					mapmonthapp.put(app.getAppointmentDate().getMonth().toString(), (float) mapmonthapp.get(key) + app.getTreatment().getPrice());
+		
+			for (int i = 0; i<mapmonthapp.size(); i++){
+				for (Appointment app: appointments){
+					var key = mapmonthapp.keySet().toArray()[i];
+					if (app.getAppointmentDate().getMonth().toString() == key && app.getPaid() == true){
+						mapmonthapp.put(app.getAppointmentDate().getMonth().toString(), (float) mapmonthapp.get(key) + app.getTreatment().getPrice());
+					}
 				}
 			}
-		}
 		return mapmonthapp;
 	}
 	private Map<String, Float> unpaidByMonth(){
@@ -124,6 +163,7 @@ public class StatisticsController {
 		model.addAttribute("maptreatapp", appointmentByTreatment());
 		model.addAttribute("mapmonthapp", incomeByMonth());
 		model.addAttribute("mapmonthappunpaid", unpaidByMonth());
+		model.addAttribute("maps", incomeByMonthandTreatment());
 		return "statistics";
 	}
 	@RequestMapping(value = "/statistics", params= "clientId")
@@ -192,7 +232,10 @@ public class StatisticsController {
 		if (initialDate != null) model.addAttribute("initialDate", initialDate);
 		if (endDate != null) model.addAttribute("endDate", endDate);
 		model.addAttribute("ingresosTotales" , ingresosTotales);
+		model.addAttribute("mapmonthapp", incomeByMonth());
 		model.addAttribute("maptreatapp", appointmentByTreatment());
+		model.addAttribute("mapmonthappunpaid", unpaidByMonth());
+		model.addAttribute("maps", incomeByMonthandTreatment());
 		return "statistics";
     }
 
