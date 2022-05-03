@@ -88,7 +88,11 @@ public class UserController {
 		user.setRoles(roles);
 
 		user.setEnabled(true);
-		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		if(user.getPassword() != null && !user.getPassword().isEmpty()){
+			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		} else {
+			user.setPassword(userService.get(id).getPassword());
+		}
 
 		userService.update(id, user);
 		return "redirect:/users";
