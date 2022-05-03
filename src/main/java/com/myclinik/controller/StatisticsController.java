@@ -45,6 +45,8 @@ public class StatisticsController {
 	private LocalDateTime inicioDate;
 	private LocalDateTime finalDate;
 
+	private String[] monthNames = {"ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
+
 	private Map<String, Integer> appointmentByTreatment(){
 		Map<String, Integer> maptreatapp = new LinkedHashMap<>();
 		var appointments = (List<Appointment>) appointmentService.findAll();
@@ -66,28 +68,14 @@ public class StatisticsController {
 		Map<String, Map<String, Float>> maps = new LinkedHashMap<String, Map<String, Float>>();
 		var appointments = (List<Appointment>) appointmentService.findAll();
 		for (Treatment treat: treatments){
-			Map<String, Float> mapmonthappcopy  = new LinkedHashMap<String, Float>() {{
-				put("JANUARY", (float) 0.00);
-				put("FEBRUARY", (float) 0.00);
-				put("MARCH", (float) 0.00);
-				put("APRIL", (float) 0.00);
-				put("MAY", (float) 0.00);
-				put("JUNE", (float) 0.00);
-				put("JULY", (float) 0.00);
-				put("AUGUST", (float) 0.00);
-				put("SEPTEMBER", (float) 0.00);
-				put("OCTOBER", (float) 0.00);
-				put("NOVEMBER", (float) 0.00);
-				put("DECEMBER", (float) 0.00);
-			}};
-			for (int i = 0; i<mapmonthappcopy.size(); i++){
-				for (Appointment app: appointments){
-					var key = mapmonthappcopy.keySet().toArray()[i];
-					if (app.getTreatment() == treat) {
-						if (app.getAppointmentDate().getMonth().toString() == key && app.getPaid() == true){
-							mapmonthappcopy.put(app.getAppointmentDate().getMonth().toString(), (float) mapmonthappcopy.get(key) + app.getTreatment().getPrice());
-						}
-					}
+			Map<String, Float> mapmonthappcopy  = new LinkedHashMap<String, Float>();
+			for (String month : monthNames){
+				mapmonthappcopy.put(month, 0.0f);
+			}
+			for (Appointment app: appointments){
+				String month = monthNames[app.getAppointmentDate().getMonthValue()-1];
+				if (app.getTreatment() == treat && app.getPaid() == true){
+					mapmonthappcopy.put(month, (float) mapmonthappcopy.get(month) + app.getTreatment().getPrice());
 				}
 			}
 			maps.put(treat.getName(), mapmonthappcopy);
@@ -95,60 +83,34 @@ public class StatisticsController {
 		return maps;
 	}
 
-
-
 	private Map<String, Float> incomeByMonth(){
-		Map<String, Float> mapmonthapp  = new LinkedHashMap<String, Float>() {{
-				put("JANUARY", (float) 0.00);
-				put("FEBRUARY", (float) 0.00);
-				put("MARCH", (float) 0.00);
-				put("APRIL", (float) 0.00);
-				put("MAY", (float) 0.00);
-				put("JUNE", (float) 0.00);
-				put("JULY", (float) 0.00);
-				put("AUGUST", (float) 0.00);
-				put("SEPTEMBER", (float) 0.00);
-				put("OCTOBER", (float) 0.00);
-				put("NOVEMBER", (float) 0.00);
-				put("DECEMBER", (float) 0.00);
-			}};
+		Map<String, Float> mapmonthapp  = new LinkedHashMap<String, Float>();
+		for (String month : monthNames){
+			mapmonthapp.put(month, 0.0f);
+		}
+
 		var appointments = (List<Appointment>) appointmentService.findAll();
-		
-			for (int i = 0; i<mapmonthapp.size(); i++){
-				for (Appointment app: appointments){
-					var key = mapmonthapp.keySet().toArray()[i];
-					if (app.getAppointmentDate().getMonth().toString() == key && app.getPaid() == true){
-						mapmonthapp.put(app.getAppointmentDate().getMonth().toString(), (float) mapmonthapp.get(key) + app.getTreatment().getPrice());
-					}
-				}
-			}
-		return mapmonthapp;
-	}
-	private Map<String, Float> unpaidByMonth(){
-		Map<String, Float> mapmonthappunpaid  = new LinkedHashMap<String, Float>() {{
-				put("JANUARY", (float) 0.00);
-				put("FEBRUARY", (float) 0.00);
-				put("MARCH", (float) 0.00);
-				put("APRIL", (float) 0.00);
-				put("MAY", (float) 0.00);
-				put("JUNE", (float) 0.00);
-				put("JULY", (float) 0.00);
-				put("AUGUST", (float) 0.00);
-				put("SEPTEMBER", (float) 0.00);
-				put("OCTOBER", (float) 0.00);
-				put("NOVEMBER", (float) 0.00);
-				put("DECEMBER", (float) 0.00);
-			}};
-		var appointments = (List<Appointment>) appointmentService.findAll();
-		for (int i = 0; i<mapmonthappunpaid.size(); i++){
-			for (Appointment app: appointments){
-				var key = mapmonthappunpaid.keySet().toArray()[i];
-				if (app.getAppointmentDate().getMonth().toString() == key && app.getPaid() == false){
-					mapmonthappunpaid.put(app.getAppointmentDate().getMonth().toString(), (float) mapmonthappunpaid.get(key) + app.getTreatment().getPrice());
-				}
+		for (Appointment app: appointments){
+			String month = monthNames[app.getAppointmentDate().getMonthValue()-1];
+			if (app.getPaid() == true){
+				mapmonthapp.put(month, (float) mapmonthapp.get(month) + app.getTreatment().getPrice());
 			}
 		}
-		return mapmonthappunpaid;
+		return mapmonthapp;
+	}
+
+	private Map<String, Float> unpaidByMonth(){
+		Map<String, Float> mapmonthappunpaid  = new LinkedHashMap<String, Float>();
+		for (String month : monthNames){
+			mapmonthappunpaid.put(month, 0.0f);
+		}
+		var appointments = (List<Appointment>) appointmentService.findAll();
+		for (Appointment app: appointments){
+			String month = monthNames[app.getAppointmentDate().getMonthValue()-1];
+			if (app.getPaid() == false){
+				mapmonthappunpaid.put(month, (float) mapmonthappunpaid.get(month) + app.getTreatment().getPrice());
+			}
+		}
 	}
 
 
@@ -168,11 +130,11 @@ public class StatisticsController {
 	}
 	@RequestMapping(value = "/statistics", params= "clientId")
 	public String filterByClient(Model model, @RequestParam("clientId")  Long clientId){
-        System.out.println("Has entrado al request de clientid");
+		System.out.println("Has entrado al request de clientid");
 		var clients = (List<Client>) clientService.findAll();
 		model.addAttribute("clients", clients);
-        model.addAttribute("clientId", clientId);
-        return "statistics";
+		model.addAttribute("clientId", clientId);
+		return "statistics";
 	}
 
 	@RequestMapping(value = "/statistics", params= "treatmentId")
@@ -204,18 +166,18 @@ public class StatisticsController {
 		return "statistics";
 	}
 
-	
-    @PostMapping("/statistics")
-    public String filterData(Model model, @RequestParam(name = "client", required = false) Client client, @RequestParam(name= "treatment", required = false) Treatment treatment, @RequestParam(name="paidAppointment", required = false) Boolean paidAppointment, @RequestParam(name="doneAppointment", required = false) Boolean doneAppointment, @RequestParam(name="initialDate", required = false) String initialDate, @RequestParam(name="endDate", required = false) String endDate  ){
+
+	@PostMapping("/statistics")
+	public String filterData(Model model, @RequestParam(name = "client", required = false) Client client, @RequestParam(name= "treatment", required = false) Treatment treatment, @RequestParam(name="paidAppointment", required = false) Boolean paidAppointment, @RequestParam(name="doneAppointment", required = false) Boolean doneAppointment, @RequestParam(name="initialDate", required = false) String initialDate, @RequestParam(name="endDate", required = false) String endDate  ){
 		var treatments = treatmentService.findAll();
-        var clients = (List<Client>) clientService.findAll();
-        var allAppointments = (List<Appointment>) appointmentService.findAll();
+		var clients = (List<Client>) clientService.findAll();
+		var allAppointments = (List<Appointment>) appointmentService.findAll();
 		var appointments = allAppointments;
 		Float ingresosTotales = (float) 0.00;
 		if (client != null) appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == client.getId()).collect(java.util.stream.Collectors.toList());
 		if (treatment !=null) appointments = appointments.stream().filter(appointment -> appointment.getTreatment().getId() == treatment.getId()).collect(java.util.stream.Collectors.toList());
 		if (paidAppointment != null) appointments = appointments.stream().filter(appointment -> appointment.getPaid() == paidAppointment).collect(java.util.stream.Collectors.toList());
-        if (doneAppointment != null) appointments = appointments.stream().filter(appointment -> appointment.getDone() == doneAppointment).collect(java.util.stream.Collectors.toList());
+		if (doneAppointment != null) appointments = appointments.stream().filter(appointment -> appointment.getDone() == doneAppointment).collect(java.util.stream.Collectors.toList());
 		if (initialDate != "") inicioDate = LocalDateTime.parse(initialDate);
 		if (endDate != "") finalDate = LocalDateTime.parse(endDate);
 		if ((initialDate != "") && (endDate != "" )) appointments = appointments.stream().filter(appointment -> ((!appointment.getAppointmentDate().isBefore(inicioDate)) && (!appointment.getAppointmentDate().isAfter(finalDate)))).collect(java.util.stream.Collectors.toList());
@@ -223,10 +185,10 @@ public class StatisticsController {
 			ingresosTotales += app.getTreatment().getPrice();
 		}
 		if (client != null) model.addAttribute("clientId", client.getId());
-        if (treatment != null) model.addAttribute("treatmentId", treatment.getId());
+		if (treatment != null) model.addAttribute("treatmentId", treatment.getId());
 		model.addAttribute("treatments",treatments);
-        model.addAttribute("clients", clients);
-        model.addAttribute("appointments", appointments);
+		model.addAttribute("clients", clients);
+		model.addAttribute("appointments", appointments);
 		model.addAttribute("paidAppointment", paidAppointment);
 		model.addAttribute("doneAppointment", doneAppointment);
 		if (initialDate != null) model.addAttribute("initialDate", initialDate);
@@ -237,8 +199,8 @@ public class StatisticsController {
 		model.addAttribute("mapmonthappunpaid", unpaidByMonth());
 		model.addAttribute("maps", incomeByMonthandTreatment());
 		return "statistics";
-    }
+	}
 
-	
+
 
 }
