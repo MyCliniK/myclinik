@@ -13,9 +13,11 @@ INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) 
 INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-03 14:15', 2, 1, true, true);
 
 INSERT INTO users (username, password, enabled) values ('admin', '$2a$10$T7ftSUbI/bOXZXmjcRYI9uZlZdH0QdC5blKqvX0qpgM.On.fyN7K2', true);
+INSERT INTO users (username, password, enabled) values ('ops', '$2a$10$T7ftSUbI/bOXZXmjcRYI9uZlZdH0QdC5blKqvX0qpgM.On.fyN7K2', true);
 
 INSERT INTO roles (name) VALUES ('ADMIN');
 INSERT INTO roles (name) VALUES ('OPS');
 INSERT INTO roles (name) VALUES ('CONT');
 
 INSERT INTO users_roles (userid, roleid) VALUES (1, 1); 
+INSERT INTO users_roles (userid, roleid) VALUES (2, 2); 

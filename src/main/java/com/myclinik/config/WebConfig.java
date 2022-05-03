@@ -10,6 +10,7 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -36,6 +37,7 @@ public class WebConfig implements WebMvcConfigurer {
         var templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
 		templateEngine.addDialect(new Java8TimeDialect());
+        templateEngine.addDialect(new SpringSecurityDialect());
 
         return templateEngine;
     }

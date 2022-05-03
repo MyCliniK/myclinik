@@ -73,6 +73,4 @@ public class UserDetailsImp implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
-
 }

@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	th:replace="~{layouts/main-layout :: main-fragment(
+		~{:: title},
+		~{:: #user-header},
+		~{:: #user-nav},
+		~{:: #user-main-content},
+		~{:: #user-footer}
+		)}"
+	>
 	<head>
 		<title> Editar usuario </title>
 		<meta charset="UTF-8">
@@ -12,11 +20,14 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 		<link rel="stylesheet" href="/css/main.css">
     </head>
 	<body>
-		<div id="mail-header">
+		<div id="user-header">
 			<h1 class="title">Editar usuario</h1>
 		</div>
+		<div id="user-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+			User Nav
+		</div>
 	<br>
-	<div id= "admin-main-content">
+	<div id= "user-main-content">
 		<div class="container">
 			<div class="card">
 				<form method="POST" th:action="@{'/users/update?id=' + ${user.id}}" th:object="${user}" class="container">
