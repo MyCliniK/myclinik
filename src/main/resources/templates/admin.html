@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	th:replace="~{layouts/main-layout :: main-fragment(
+		~{:: title},
+		~{:: #admin-header},
+		~{:: #admin-nav},
+		~{:: #admin-main-content},
+		~{:: #admin-footer}
+		)}"
+>
 	<head>
 		<title> Admin </title>
 		<meta charset="UTF-8">
@@ -15,15 +23,18 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 		<div id="admin-header">
 			<h1 class="title">Admin</h1>
 		</div>
-	<br>
-	<div id= "admin-main-content">	
-		<div class="container">
-            <div style="font-size: large;">
-                <a href="users">Manage users</a>
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="btn btn-danger"> Sign Out </button>
-                </form>
-            </div>
+		<div id="admin-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+			Admin Nav
 		</div>
-	</div>
+		<br>
+		<div id= "admin-main-content">	
+			<div class="container">
+				<div style="font-size: large;">
+					<a href="users">Manage users</a>
+					<form th:action="@{/logout}" method="post">
+						<button type="submit" class="btn btn-danger"> Sign Out </button>
+					</form>
+				</div>
+			</div>
+		</div>
 </body>

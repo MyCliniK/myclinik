@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 	th:replace="~{layouts/main-layout :: main-fragment(
 	~{:: title},
 	~{:: #home-header},
@@ -24,9 +25,6 @@
 				<a href="treatments">Show all treatments</a>
 				<a href="mail">Send mail</a>
 				<a href="admin">Admin</a>
-				<form th:action="@{/logout}" method="post">
-					<input type="submit" value="Sign Out"/>
-				</form>
 			</div>
 		</div>
 	</body>

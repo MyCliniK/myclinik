@@ -30,7 +30,7 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-	private UserDetailsServiceImp userService; //duda
+	private UserDetailsServiceImp userService;
 
     @GetMapping("/users")
 	public String findUsers(Model model) {

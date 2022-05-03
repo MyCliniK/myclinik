@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<head>
 		<meta charset="UTF-8" />
 		<title>Navigation Bar</title>
@@ -14,25 +14,38 @@
 					</a>
 				</div>
 				<ul class="navbar-nav d-flex flex-column justify-content-around" style="height: 80%">
-					<li class="nav-item">
+					<li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN', 'OPS')">
 						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/clients') ? 'active':''}" th:href="@{/clients}">
 							<i class="fa fa-solid fa-users" aria-hidden="true"></i>
 						</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN', 'OPS')">
 						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/appointments') ? 'active':''}" th:href="@{/appointments}">
 							<i class="fa fa-regular fa-calendar-check"></i>
 						</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN', 'OPS')">
 						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/treatments') ? 'active':''}" th:href="@{/treatments}">
 							<i class="fa fa-solid fa-heart-circle-plus" aria-hidden="true"></i>
 						</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN', 'OPS')">
 						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/mail') ? 'active':''}" th:href="@{/mail}">
 							<i class="fa fa-solid fa-envelope" aria-hidden="true"></i>
 						</a>
+					</li>
+					<li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/admin') ? 'active':''}" th:href="@{/admin}">
+							<i class="fa fa-solid fa-user-cog" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li>
+						<div sec:authorize="isAuthenticated()">
+							<p class="nav-item"><i class="fa fa-solid fa-user-circle" aria-hidden="true"> </i> <b sec:authentication="name"></b></p>
+							<form class="nav-item" th:action="@{/logout}" method="post">
+								<button type="submit" class="btn btn-outline-dark" style="width: 70pt"><i class="fa fa-solid fa-sign-out" aria-hidden="true"></i> <b>Cerrar sesión</b></button>
+							</form>
+						</div>
 					</li>
 				</ul>
 			</div>
