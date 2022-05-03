@@ -1,10 +1,10 @@
 package com.myclinik.controller;
 
 import com.myclinik.model.User;
+import com.myclinik.model.Role;
 import com.myclinik.repository.UserRepository;
-import com.myclinik.security.UserDetailsServiceImp;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import com.myclinik.service.IUserService;
+import com.myclinik.service.IRoleService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +25,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.HashSet;
 
 @Controller
 public class UserController {
 
     @Autowired
-	private UserDetailsServiceImp userService; //duda
+	private IUserService userService;
+    @Autowired
+	private IRoleService roleService;
 
     @GetMapping("/users")
 	public String findUsers(Model model) {
@@ -40,36 +44,52 @@ public class UserController {
 	}
 
 	@GetMapping("/users/user")
-	public String getUser(Model model, @RequestParam("username") String username){
-		var user  = userService.findOne(username);
+	public String getUser(Model model, @RequestParam("id") Long id){
+		var user  = userService.get(id);
+		var role = user.getRoles().iterator().next();
+		var roles = roleService.findAll();
 		model.addAttribute("user", user);
+		model.addAttribute("roleId", role.getId());
+		model.addAttribute("roles", roles);
 		return "user";
 	}
 
 	@RequestMapping("/users/new")
 	public String createUser(Model model){
-		var newuser = userService.createUser();
+		var newuser = new User();
+		var roles = roleService.findAll();
 		model.addAttribute("user", newuser);
+		model.addAttribute("roles", roles);
 		return "new_user";
 	}
 
 	@PostMapping("/users/new/save")
-	public String saveUser(@ModelAttribute("user") User user) {
+	public String saveUser(@ModelAttribute("user") User user, @RequestParam("role") Role role){
+		Set<Role> roles = new HashSet<Role>();
+		roles.add(role);
+		user.setRoles(roles);
 		user.setEnabled(true);
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-		userService.saveUser(user);
+		userService.save(user);
 		return "redirect:/users";
 	}
 
 	@RequestMapping ("/users/delete")
 	public String deleteUser(@RequestParam("id") Long id) {
-		userService.deleteUser(id);
+		userService.delete(id);
 		return "redirect:/users";
 	}
 
 	@RequestMapping ("/users/update")
-	public String editUser(@RequestParam("username") String username, User u){
-		userService.updateUser(username, u);
+	public String editUser(@RequestParam("id") Long id, User user, Role role){
+		Set<Role> roles = new HashSet<Role>();
+		roles.add(role);
+		user.setRoles(roles);
+
+		user.setEnabled(true);
+		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+
+		userService.update(id, user);
 		return "redirect:/users";
 	}
 }

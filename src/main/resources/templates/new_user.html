@@ -41,10 +41,9 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
                         <label>Rol</label>
                         <div class="input-group">
                             <span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-cog" aria-hidden="true"></i></span>
-                            <select placeholder="Rol" class="form-select" name="authority">
-                                <option value="OPS">OPS</option>
-                                <option value="CONT">CONT</option>
-                                <option value="ADMIN">ADMIN</option>
+                            <select placeholder="Rol" class="form-select" name="role" required>
+								<option value="" selected >Seleccione un rol</option>
+								<option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">${role.name}</option>
                             </select>
                         </div>
                     </div>
