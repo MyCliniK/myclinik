@@ -30,7 +30,7 @@ public class User {
 	private String password;
 	private Boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="users_roles", joinColumns=@JoinColumn(name="userid"), inverseJoinColumns=@JoinColumn(name="roleid"))
     private Set<Role> roles=new HashSet<Role>();
 

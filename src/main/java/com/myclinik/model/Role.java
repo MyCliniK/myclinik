@@ -26,7 +26,7 @@ public class Role {
     private Long id;
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="users_roles", joinColumns=@JoinColumn(name="roleid"), inverseJoinColumns=@JoinColumn(name="userid"))
     private Set<User> users=new HashSet<User>();
 
