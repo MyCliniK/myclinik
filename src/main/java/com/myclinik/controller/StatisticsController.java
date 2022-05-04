@@ -111,6 +111,7 @@ public class StatisticsController {
 				mapmonthappunpaid.put(month, (float) mapmonthappunpaid.get(month) + app.getTreatment().getPrice());
 			}
 		}
+		return mapmonthappunpaid;
 	}
 
 
