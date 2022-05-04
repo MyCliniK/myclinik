@@ -34,6 +34,11 @@
 							<i class="fa fa-solid fa-envelope" aria-hidden="true"></i>
 						</a>
 					</li>
+					<li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN', 'CONT')">
+						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/statistics') ? 'active':''}" th:href="@{/statistics}">
+							<i class="fa fa-solid fa-file-invoice-dollar" aria-hidden="true"></i>
+						</a>
+					</li>
 					<li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
 						<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/admin') ? 'active':''}" th:href="@{/admin}">
 							<i class="fa fa-solid fa-user-cog" aria-hidden="true"></i>
@@ -41,9 +46,9 @@
 					</li>
 					<li>
 						<div sec:authorize="isAuthenticated()">
-							<p class="nav-item"><i class="fa fa-solid fa-user-circle" aria-hidden="true"> </i> <b sec:authentication="name"></b></p>
+							<p class="nav-item"><i class="fa fa-solid fa-user-circle" aria-hidden="true" style="color: #ffffff"> </i> <b style="color: #ffffff" sec:authentication="name"></b></p>
 							<form class="nav-item" th:action="@{/logout}" method="post">
-								<button type="submit" class="btn btn-outline-dark" style="width: 70pt"><i class="fa fa-solid fa-sign-out" aria-hidden="true"></i> <b>Cerrar sesión</b></button>
+								<button type="submit" class="btn btn-danger"><i class="fa fa-solid fa-sign-out" aria-hidden="true"></i> <b>Logout</b></button>
 							</form>
 						</div>
 					</li>

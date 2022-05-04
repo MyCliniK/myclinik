@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{layouts/main-layout :: main-fragment(
+		~{:: title},
+		~{:: #user-header},
+		~{:: #user-nav},
+		~{:: #user-main-content},
+		~{:: #user-footer}
+		)}"
+	>>
 	<head>
 		<title> Nuevo usuario </title>
 		<meta charset="UTF-8">
@@ -14,6 +22,9 @@
 	<body>
 		<div id="user-header">
 			<h1 class="title">Nuevo usuario</h1>
+		</div>
+		<div id="user-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+			User Nav
 		</div>
 	<br>
 	<div id= "user-main-content">

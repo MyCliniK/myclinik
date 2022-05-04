@@ -13,17 +13,27 @@
     </head>
 	<body class="app" style="background-color:#eff9ff; border: 10px solid; color: #117182;">
 		<div style="margin: 10%; padding: 10px; text-align: center; display:block;">
-			<p th:inline="text" style="color: rgb(53, 106, 128); font-size: xx-large; font-weight: bold;">Welcome to MyClinik</p>
+			<div sec:authorize="isAnonymous()">
+				<p th:inline="text" style="color: rgb(53, 106, 128); font-size: xx-large; font-weight: bold;">Bienvenido a MyClinik</p>
+			</div>
+			<div sec:authorize="isAuthenticated()">
+				<p th:inline="text" style="color: rgb(53, 106, 128); font-size: xx-large; font-weight: bold;">Bienvenido de vuelta, <b sec:authentication="name"></b></p>
+			</div>
 			<img src="assets/logo_rect.png" alt="MyClinik"  width="400" height="341">
 			<br>
 			<br>
 			<div sec:authorize="isAuthenticated()">
 				<a style="font-size: x-large;" href="home" class="btn btn-outline-primary"><i class="fa fa-fw fa-home" aria-hidden="true"></i> Inicio</a>
+				<br>
+				<br>
+				<form class="nav-item" th:action="@{/logout}" method="post"></form>
+					<button style="font-size: x-large;" type="submit" class="btn btn-outline-danger"><i class="fa fa-fw fa-sign-out" aria-hidden="true"></i> Cerrar sesión</button>
+				</form>
 			</div>
 			<br>
 			<br>
 			<div sec:authorize="isAnonymous()">
-				<a style="font-size: x-large;" href="login" class="btn btn-outline-dark"><i class="fa fa-fw fa-sign-in" aria-hidden="true"></i> Iniciar sesión</a>
+				<a style="font-size: x-large;" href="login" class="btn btn-outline-success"><i class="fa fa-fw fa-sign-in" aria-hidden="true"></i> Iniciar sesión</a>
 			</div>
 		</div>
 	</body>

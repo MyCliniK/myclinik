@@ -21,18 +21,20 @@
 	</head>
 	<body>
 		<div id="admin-header">
-			<h1 class="title">Admin</h1>
+			<h1 class="title">Panel de administrador</h1>
 		</div>
 		<div id="admin-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
 			Admin Nav
 		</div>
 		<br>
 		<div id= "admin-main-content">	
-			<div class="container">
+			<div class="container" style="text-align: center">
 				<div style="font-size: large;">
-					<a href="users">Manage users</a>
-					<form th:action="@{/logout}" method="post">
-						<button type="submit" class="btn btn-danger"> Sign Out </button>
+					<div class="card-block">
+						<br>
+						<br>
+					<form th:action="@{/users}" method="post">
+						<button style="font-size: x-large;" type="submit" class="btn btn-dark"><i class="fa fa-fw fa-users-cog" aria-hidden="true"></i> Administrar usuarios</button>
 					</form>
 				</div>
 			</div>

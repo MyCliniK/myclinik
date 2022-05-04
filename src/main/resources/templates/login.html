@@ -24,17 +24,24 @@
         </div>
         <div id="login-main-content" class="container">
             <br>
-            <form th:action="@{/login}" method="post">
+            <form th:action="@{/login}" method="post" class="card" style="text-align: center">
+                <br>
+                <img src="/assets/logo_circle.png" width="20%" height="20%" style="margin-left: auto; margin-right: auto" alt="">
+                <br>
+                <br>
                 <div><label><i class="fa fa-fw fa-user" aria-hidden="true"></i> Nombre de usuario: <input type="text" name="username"/> </label></div>
+                <br>
                 <div><label><i class="fa fa-fw fa-key" aria-hidden="true"></i> Contraseña: <input type="password" name="password"/> </label></div>
-                <div><input type="submit" value="Sign In"/></div>
+                <br>
+                <div><input type="submit" value="Iniciar sesión"/></div>
+                <br>
             </form>
             <br>
-            <div th:if="${param.error}">
-                Invalid username or password.
+            <div th:if="${param.error}" style="text-align: center">
+                Usuario o contraseña no válidos
             </div>
-            <div th:if="${param.logout}">
-                You have been logged out.
+            <div th:if="${param.logout}" style="text-align: center">
+                Has cerrado sesión correctamente.
             </div>
         </div>
     </body>
