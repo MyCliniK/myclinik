@@ -24,13 +24,13 @@
 			<h1 class="title">Editar usuario</h1>
 		</div>
 		<div id="user-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-			User Nav
+			Edit User Nav
 		</div>
 	<br>
 	<div id= "user-main-content">
 		<div class="container">
 			<div class="card">
-				<form method="POST" th:action="@{'/users/update?id=' + ${user.id}}" th:object="${user}" class="container">
+				<form method="POST" th:action="@{'/admin/users/update?id=' + ${user.id}}" th:object="${user}" class="container">
 					<br>
 					<div class="form-group">
 						<label>Nombre de usuario</label>

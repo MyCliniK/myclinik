@@ -36,14 +36,14 @@ public class UserController {
     @Autowired
 	private IRoleService roleService;
 
-    @GetMapping("/users")
+    @GetMapping("/admin/users")
 	public String findUsers(Model model) {
 		var users = (List<User>) userService.findAll();
 		model.addAttribute("users", users);
 		return "showUsers";
 	}
 
-	@GetMapping("/users/user")
+	@GetMapping("/admin/users/user")
 	public String getUser(Model model, @RequestParam("id") Long id){
 		var user  = userService.get(id);
 		var role = user.getRoles().iterator().next();
@@ -54,7 +54,7 @@ public class UserController {
 		return "user";
 	}
 
-	@RequestMapping("/users/new")
+	@RequestMapping("/admin/users/new")
 	public String createUser(Model model){
 		var newuser = new User();
 		var roles = roleService.findAll();
@@ -63,7 +63,7 @@ public class UserController {
 		return "new_user";
 	}
 
-	@PostMapping("/users/new/save")
+	@PostMapping("/admin/users/new/save")
 	public String saveUser(@ModelAttribute("user") User user, @RequestParam("role") Role role){
 		Set<Role> roles = new HashSet<Role>();
 		roles.add(role);
@@ -71,16 +71,16 @@ public class UserController {
 		user.setEnabled(true);
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 		userService.save(user);
-		return "redirect:/users";
+		return "redirect:/admin/users";
 	}
 
-	@RequestMapping ("/users/delete")
+	@RequestMapping ("/admin/users/delete")
 	public String deleteUser(@RequestParam("id") Long id) {
 		userService.delete(id);
-		return "redirect:/users";
+		return "redirect:/admin/users";
 	}
 
-	@RequestMapping ("/users/update")
+	@RequestMapping ("/admin/users/update")
 	public String editUser(@RequestParam("id") Long id, User user, Long roleId){
 		Role role = roleService.get(roleId);
 		Set<Role> roles = new HashSet<Role>();
@@ -95,6 +95,6 @@ public class UserController {
 		}
 
 		userService.update(id, user);
-		return "redirect:/users";
+		return "redirect:/admin/users";
 	}
 }

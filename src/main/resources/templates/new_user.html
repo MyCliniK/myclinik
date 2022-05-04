@@ -24,13 +24,13 @@
 			<h1 class="title">Nuevo usuario</h1>
 		</div>
 		<div id="user-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-			User Nav
+			New User Nav
 		</div>
 	<br>
 	<div id= "user-main-content">
 		<div class="container">
 			<div class="card">
-				<form method="POST" th:action="@{/users/new/save}" th:object="${user}"  class="container">
+				<form method="POST" th:action="@{/admin/users/new/save}" th:object="${user}"  class="container">
 					<br>
 					<div class="form-group">
 						<label>Nombre de usuario</label>
