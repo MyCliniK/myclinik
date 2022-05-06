@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.swing.text.Document;
 
@@ -38,12 +37,7 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;  
-import java.text.ParseException;  
-import java.util.Date;  
-import java.util.Locale; 
-import java.text.DateFormat;
+ 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -72,37 +66,32 @@ public class DocumentController {
 	public String generateClientConsent(@RequestParam("client") Client client, @RequestParam("treatment") Treatment treatment){
 
 		try{PDDocument document = new PDDocument();
-			PDPage page = new PDPage();
+			PDPage page = new PDPage(PDRectangle.A4);
 			document.addPage(page);
 
 			PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-			
+			// parte del codigo para el título
+
 			String title= "CONSENTIMIENTO DEL CLIENTE";
-			//String text1="Declaración del paciente de que ha quedado satisfecho con la información recibida, la ha comprendido, se le ha respondido a todas  sus dudas y comprende   que su decisión es voluntaria.";
-			//String text2="Declaración de que presta su consentimiento para el  procedimiento propuesto y de que conoce su derecho a retirarlo cuando lo desee, con la única obligación de informar de su de decisión al médico.";
-		
-			
-			// fecha
-			//Date date = Calendar.getInstance().getTime();  
-			//DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
-			//String strDate = dateFormat.format(date);   
 
-			DateTimeFormatter dtf5 = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm");
-			String strDate=dtf5.format(LocalDateTime.now());
-			
-			contentStream.setFont(PDType1Font.COURIER, 12);
-			contentStream.beginText();
-			contentStream.newLineAtOffset(20,690);
-			contentStream.showText(strDate);
-			contentStream.endText();
-
-			
 			contentStream.setFont(PDType1Font.COURIER_BOLD, 30);
 			contentStream.beginText();
-			contentStream.newLineAtOffset(20,640);
+			contentStream.newLineAtOffset(70,720);
 			contentStream.showText(title);
 			contentStream.endText();
+
+			//parte para dirigirse al cliente
+
+			contentStream.beginText();
+			contentStream.newLineAtOffset(60,660);
+			contentStream.setFont(PDType1Font.COURIER, 12);
+			contentStream.showText("Estimado");
+			contentStream.newLineAtOffset(65,0);
+			contentStream.setFont(PDType1Font.COURIER_BOLD, 12);
+			contentStream.showText(client.getFirstName()+" "+client.getLastName());
+			contentStream.endText();
+			
 
 
 			// codigo para crear varias lineas
@@ -114,9 +103,9 @@ public class DocumentController {
 			float margin = 60;
 			float width = mediabox.getWidth() - 2*margin;
 			float startX = mediabox.getLowerLeftX() + margin;
-			float startY = mediabox.getUpperRightY() - 3*margin;
-		
-			String text = client.getFirstName()+"Declaración del paciente de que ha quedado satisfecho con la información recibida, la ha comprendido, se le ha respondido a todas  sus dudas y comprende   que su decisión es voluntaria.Declaración de que presta su consentimiento para el  procedimiento propuesto y de que conoce su derecho a retirarlo cuando lo desee, con la única obligación de informar de su de decisión al médico.";
+			float startY = mediabox.getUpperRightY() - 4*margin;
+			String treat=treatment.getName();
+			String text = "Firmando este documento, declara que está al tanto del procedimiento que se va a llevar a cabo durante la "+treat.toUpperCase()+" a la que se ve a someter.";
 			List<String> lines = new ArrayList<String>();
 			int lastSpace = -1;
 			while (text.length() > 0)
@@ -155,9 +144,36 @@ public class DocumentController {
 				contentStream.showText(line);
 				contentStream.newLineAtOffset(0, -leading);
 			}
-			//contentStream.showText(title);
+
+			contentStream.endText();
+
+			//parte para firmar documento
+			String firma= "Firma cliente:";
+
+			contentStream.setFont(PDType1Font.COURIER, 12);
+			contentStream.beginText();
+			contentStream.newLineAtOffset(60,470);
+			contentStream.showText(firma);
+			contentStream.endText();
+
+			String linea= "________________";
+
+			contentStream.setFont(PDType1Font.COURIER, 12);
+			contentStream.beginText();
+			contentStream.newLineAtOffset(60,405);
+			contentStream.showText(linea);
 			contentStream.endText();
 			
+			// parte del codigo para la fecha
+			
+			DateTimeFormatter dtf5 = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm");
+			String strDate=dtf5.format(LocalDateTime.now());
+			
+			contentStream.setFont(PDType1Font.COURIER, 12);
+			contentStream.beginText();
+			contentStream.newLineAtOffset(60,370);
+			contentStream.showText(strDate);
+			contentStream.endText();
 			
 			// Image
 
@@ -165,9 +181,8 @@ public class DocumentController {
 			contentStream.drawImage(logo, 10, 10, 50,50);
 			contentStream.close();	
 			
-			
-			contentStream.close();
 
+			contentStream.close();
 
 			String filename="/Consentimiento " + treatment.getName() + ".pdf";			
 			String path="./src/main/resources/static/files/"+client.getId();
@@ -179,7 +194,6 @@ public class DocumentController {
 		catch(Exception e){
 			System.out.println(e);
 		}
-
 
 		return "redirect:/clients/client?id="+client.getId();
 

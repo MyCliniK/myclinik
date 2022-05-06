@@ -1,5 +1,5 @@
-# Data folder
-files/*
+# Data folder 
+files/* 
 
 # Compiled class file
 *.class
