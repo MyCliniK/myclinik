@@ -1,5 +1,5 @@
 # Data folder
-files/*
+src/main/resources/static/files/*
 
 # Compiled class file
 *.class

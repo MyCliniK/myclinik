@@ -50,40 +50,40 @@ public class ClientController {
 	}
 
 	@GetMapping("/clients/client")
-	public String getClient(Model model, @RequestParam("id") String itemid){
-		var client  = clientService.findOne(Long.parseLong(itemid));
+	public String getClient(Model model, @RequestParam("id") String itemid) {
+		var client = clientService.findOne(Long.parseLong(itemid));
 
 		model.addAttribute("files", storageService.loadFolder(itemid)
-			.map(path -> {
-				return MvcUriComponentsBuilder.fromMethodName(ClientController.class,
-						"serveFile", path.getFileName().toString(), itemid).build().toUri().toString();
-			})
-			.collect(Collectors.toList()));
-
+				.map(path -> {
+					return MvcUriComponentsBuilder.fromMethodName(ClientController.class,
+							"serveFile", path.getFileName().toString(), itemid).build().toUri().toString();
+				})
+				.collect(Collectors.toList()));
 		model.addAttribute("client", client);
 		return "client";
 	}
 
 	@RequestMapping("/clients/new")
-	public String createClient(Model model){
+	public String createClient(Model model) {
 		var newclient = clientService.createClient();
 		model.addAttribute("client", newclient);
 		return "newclient";
 	}
+
 	@PostMapping("/clients/new/save")
 	public String saveClient(@ModelAttribute("client") Client client) {
 		clientService.saveClient(client);
 		return "redirect:/clients";
 	}
 
-	@RequestMapping ("/clients/delete")
+	@RequestMapping("/clients/delete")
 	public String deleteClient(@RequestParam("id") Long itemid) {
 		clientService.deleteClient(itemid);
 		return "redirect:/clients";
 	}
 
-	@RequestMapping ("/clients/update")
-	public String editClient(@RequestParam("id") Long itemId, Client client, @RequestParam("file") MultipartFile file){
+	@RequestMapping("/clients/update")
+	public String editClient(@RequestParam("id") Long itemId, Client client, @RequestParam("file") MultipartFile file) {
 		storageService.store(file, Long.toString(itemId));
 		clientService.updateClient(itemId, client);
 		return "redirect:/clients/client?id=" + itemId;

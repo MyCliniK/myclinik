@@ -8,6 +8,13 @@ INSERT INTO treatments(name, price, duration) VALUES ('Depilación Espalda', '80
 INSERT INTO treatments(name, price, duration) VALUES ('Depilación Axilas', '50', '60');
 INSERT INTO treatments(name, price, duration) VALUES ('Depilación Piernas', '100', '90');
 
-INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-01 19:10', 1, 1, false, false);
-INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-02 13:30', 1, 2, true, false);
-INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2020-01-03 14:15', 2, 1, true, true);
+INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2022-01-01 19:10', 1, 1, false, false);
+INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2022-01-02 13:30', 1, 2, true, false);
+INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2022-01-03 14:15', 2, 1, true, true);
+INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2022-02-03 14:15', 3, 3, false, true);
+INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2022-02-03 14:15', 2, 3, false, true);
+INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2022-04-03 14:15', 1, 3, true, true);
+INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2022-08-03 14:15', 2, 2, true, true);
+INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2022-08-03 14:15', 2, 1, true, true);
+INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2022-05-02 14:15', 2, 3, true, true);
+INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2022-05-03 14:15', 2, 1, true, true);

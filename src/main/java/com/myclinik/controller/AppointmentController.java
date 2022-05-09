@@ -7,7 +7,6 @@ import com.myclinik.service.IAppointmentService;
 import com.myclinik.service.ITreatmentService;
 import com.myclinik.service.IClientService;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +41,8 @@ public class AppointmentController {
 	@RequestMapping(value = "/appointments", params = "clientId")
 	public String findAppointmentsByClient(Model model, @RequestParam("clientId") Long clientId) {
 		var allAppointments = (List<Appointment>) appointmentService.findAll();
-		var appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == clientId).collect(java.util.stream.Collectors.toList());
+		var appointments = allAppointments.stream().filter(appointment -> appointment.getClient().getId() == clientId)
+				.collect(java.util.stream.Collectors.toList());
 		model.addAttribute("appointments", appointments);
 		return "listAppointments";
 	}
@@ -94,8 +94,10 @@ public class AppointmentController {
 	}
 
 	@RequestMapping("/appointments/update")
-	public String updateAppointment(@RequestParam("id") Long id, @ModelAttribute("appointment") Appointment appointment) {
+	public String updateAppointment(@RequestParam("id") Long id,
+			@ModelAttribute("appointment") Appointment appointment) {
 		appointmentService.update(id, appointment);
 		return "redirect:/appointments";
 	}
+
 }
