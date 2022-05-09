@@ -308,7 +308,7 @@ and we'll try to make them look good cross-browser.
 
 .fc-event {
 	border: 1px solid #FFF; /* default BORDER color */
-	background-color: #03a9f3 !important; /* default BACKGROUND color */
+	background-color: #c6ebfe !important; /* default BACKGROUND color */
 	color: #000 !important;
 	font-size: 12px;
 	cursor: default;
@@ -317,7 +317,7 @@ and we'll try to make them look good cross-browser.
 	background-color: #f3dcf8 !important;
 }
 .fc-event.info{
-	background-color: #c6ebfe !important;
+	background-color: #03a9f3 !important;
 }
 .fc-event.important{
 	background-color: #FFBEBE !important;
