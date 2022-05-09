@@ -13,6 +13,7 @@ public interface IStorageService {
 	void store(MultipartFile file, String folder);
 
 	Stream<Path> loadAll();
+
 	Stream<Path> loadFolder(String folder);
 
 	Path load(String filename);
