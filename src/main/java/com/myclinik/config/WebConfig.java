@@ -15,42 +15,42 @@ import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Bean
-    @Description("Thymeleaf template resolver serving HTML 5")
-    public ClassLoaderTemplateResolver templateResolver() {
+	@Bean
+	@Description("Thymeleaf template resolver serving HTML 5")
+	public ClassLoaderTemplateResolver templateResolver() {
 
-        var templateResolver = new ClassLoaderTemplateResolver();
+		var templateResolver = new ClassLoaderTemplateResolver();
 
-        templateResolver.setPrefix("templates/");
-        templateResolver.setCacheable(false);
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode("HTML");
-        templateResolver.setCharacterEncoding("UTF-8");
+		templateResolver.setPrefix("templates/");
+		templateResolver.setCacheable(false);
+		templateResolver.setSuffix(".html");
+		templateResolver.setTemplateMode("HTML");
+		templateResolver.setCharacterEncoding("UTF-8");
 
-        return templateResolver;
-    }
+		return templateResolver;
+	}
 
-    @Bean
-    @Description("Thymeleaf template engine with Spring integration")
-    public SpringTemplateEngine templateEngine() {
+	@Bean
+	@Description("Thymeleaf template engine with Spring integration")
+	public SpringTemplateEngine templateEngine() {
 
-        var templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver());
+		var templateEngine = new SpringTemplateEngine();
+		templateEngine.setTemplateResolver(templateResolver());
 		templateEngine.addDialect(new Java8TimeDialect());
-        templateEngine.addDialect(new SpringSecurityDialect());
+		templateEngine.addDialect(new SpringSecurityDialect());
 
-        return templateEngine;
-    }
+		return templateEngine;
+	}
 
-    @Bean
-    @Description("Thymeleaf view resolver")
-    public ViewResolver viewResolver() {
+	@Bean
+	@Description("Thymeleaf view resolver")
+	public ViewResolver viewResolver() {
 
-        var viewResolver = new ThymeleafViewResolver();
+		var viewResolver = new ThymeleafViewResolver();
 
-        viewResolver.setTemplateEngine(templateEngine());
-        viewResolver.setCharacterEncoding("UTF-8");
+		viewResolver.setTemplateEngine(templateEngine());
+		viewResolver.setCharacterEncoding("UTF-8");
 
-        return viewResolver;
-    }
+		return viewResolver;
+	}
 }

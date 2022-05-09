@@ -1,50 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layouts/main-layout :: main-fragment(
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/main-layout :: main-fragment(
 	~{:: title},
 	~{:: #users-header},
 	~{:: #users-nav},
 	~{:: #users-main-content},
 	~{:: #users-footer}
-	)}"
->
-	<head>
-		<title>Usuarios</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	</head>
+	)}">
 
-	<body>
-		<div id="users-header">
-			Usuarios
-		</div>
-		<div id="users-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-			Users Nav
-		</div>
-		<div id="users-main-content">
-			<table class="table table-danger table-striped table-responsive">
-				<thead class="thead">
-					<tr>
-						<th style="text-align: center;">Nombre de usuario</th>
-						<th style="text-align: center;">Contraseña</th>
-						<th style="text-align: center;">Acciones</th>
-					</tr>
-				</thead>
-				<tr th:each="user : ${users}">
-					<td th:text="${user.username}" style="text-align: center;">Nombre de usuario</td>
-					<td th:text="${user.password}" style="text-align: center;">Contraseña</td>
-					<td style="text-align: center;">
-						<div class="d-flex justify-content-center align-content-center">
-							<div class="d-flex ms-2">
-								<a th:href="@{'/admin/users/user?id=' + ${user.id}}" id="user" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-user-edit" aria-hidden="true"></i></a>
-								<a th:href="@{'/admin/users/delete?id=' + ${user.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i></a>
-							</div>
-						</div>
-					</td>
+<head>
+	<title>Usuarios</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<div id="users-header">
+		Usuarios
+	</div>
+	<div id="users-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+		Users Nav
+	</div>
+	<div id="users-main-content">
+		<table class="table table-danger table-striped table-responsive">
+			<thead class="thead">
+				<tr>
+					<th style="text-align: center;">Nombre de usuario</th>
+					<th style="text-align: center;">Contraseña</th>
+					<th style="text-align: center;">Acciones</th>
 				</tr>
-			</table>
-			<div>
-				<a th:href="@{/admin/users/new}" id="new" class="btn btn-success" role="button" style="width: 100%"><i class="fa fa-fw fa-user-plus" aria-hidden="true"></i></a>
-			</div>
+			</thead>
+			<tr th:each="user : ${users}">
+				<td th:text="${user.username}" style="text-align: center;">Nombre de usuario</td>
+				<td th:text="${user.password}" style="text-align: center;">Contraseña</td>
+				<td style="text-align: center;">
+					<div class="d-flex justify-content-center align-content-center">
+						<div class="d-flex ms-2">
+							<a th:href="@{'/admin/users/user?id=' + ${user.id}}" id="user" class="btn btn-secondary"
+								role="button"><i class="fa fa-fw fa-user-edit" aria-hidden="true"></i></a>
+							<a th:href="@{'/admin/users/delete?id=' + ${user.id}}" id="delete" class="btn btn-danger"
+								role="button"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i></a>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<div>
+			<a th:href="@{/admin/users/new}" id="new" class="btn btn-success" role="button" style="width: 100%"><i
+					class="fa fa-fw fa-user-plus" aria-hidden="true"></i></a>
 		</div>
-	</body>
+	</div>
+</body>
+
 </html>

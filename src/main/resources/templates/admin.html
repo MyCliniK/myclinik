@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-	th:replace="~{layouts/main-layout :: main-fragment(
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" th:replace="~{layouts/main-layout :: main-fragment(
 		~{:: title},
 		~{:: #admin-header},
 		~{:: #admin-nav},
 		~{:: #admin-main-content},
 		~{:: #admin-footer}
-		)}"
->
-	<head>
-		<title> Admin </title>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-		<script src="https://use.fontawesome.com/5b5fa05dbf.js"></script>
-		<link rel="stylesheet" href="/css/main.css">
-	</head>
-	<body>
-		<div id="admin-header">
-			<h1 class="title">Panel de administrador</h1>
-		</div>
-		<div id="admin-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-			Admin Nav
-		</div>
-		<br>
-		<div id= "admin-main-content">	
-			<div class="container" style="text-align: center">
-				<div style="font-size: large;">
-					<div class="card-block">
-						<br>
-						<br>
+		)}">
+
+<head>
+	<title> Admin </title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+		integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+		integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+		integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+		integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+		crossorigin="anonymous"></script>
+	<script src="https://use.fontawesome.com/5b5fa05dbf.js"></script>
+	<link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+	<div id="admin-header">
+		<h1 class="title">Panel de administrador</h1>
+	</div>
+	<div id="admin-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+		Admin Nav
+	</div>
+	<br>
+	<div id="admin-main-content">
+		<div class="container" style="text-align: center">
+			<div style="font-size: large;">
+				<div class="card-block">
+					<br>
+					<br>
 					<form th:action="@{/admin/users}">
-						<button style="font-size: x-large;" type="submit" class="btn btn-dark"><i class="fa fa-fw fa-users-cog" aria-hidden="true"></i> Administrar usuarios</button>
+						<button style="font-size: x-large;" type="submit" class="btn btn-dark"><i
+								class="fa fa-fw fa-users-cog" aria-hidden="true"></i> Administrar usuarios</button>
 					</form>
 				</div>
 			</div>

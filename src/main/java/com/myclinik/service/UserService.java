@@ -19,17 +19,21 @@ public class UserService implements IUserService {
 		var users = (List<User>) repository.findAll();
 		return users;
 	}
+
 	public User get(Long id) {
 		var user = (User) repository.findById(id).get();
 		return user;
 	}
-	public void save(User user){
+
+	public void save(User user) {
 		repository.save(user);
 	}
-	public void delete(Long id){
+
+	public void delete(Long id) {
 		repository.deleteById(id);
 	}
-	public void update(Long id, User newUser){
+
+	public void update(Long id, User newUser) {
 		newUser.setId(id);
 		repository.save(newUser);
 	}

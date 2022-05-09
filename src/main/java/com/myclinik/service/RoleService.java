@@ -19,21 +19,26 @@ public class RoleService implements IRoleService {
 		var roles = (List<Role>) repository.findAll();
 		return roles;
 	}
+
 	public Role get(Long id) {
 		var role = (Role) repository.findById(id).get();
 		return role;
 	}
-	public Role create(){
+
+	public Role create() {
 		Role role = new Role();
 		return role;
 	}
-	public void save(Role role){
+
+	public void save(Role role) {
 		repository.save(role);
 	}
-	public void delete(Long id){
+
+	public void delete(Long id) {
 		repository.deleteById(id);
 	}
-	public void update(Long id, Role newRole){
+
+	public void update(Long id, Role newRole) {
 		newRole.setId(id);
 		repository.save(newRole);
 	}

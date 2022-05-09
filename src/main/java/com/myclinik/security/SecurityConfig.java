@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public UserDetailsServiceImp userDetailsService() {
@@ -44,26 +44,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-		.authorizeRequests()
-		.antMatchers("/admin/**").hasAuthority("ADMIN")
-		.antMatchers("/clients/**", "/appointments/**", "/treatments/**").hasAnyAuthority("ADMIN", "OPS")
-		.antMatchers("/mail/**").hasAnyAuthority("ADMIN", "CONT", "OPS")
-		.antMatchers("/statistics/**").hasAnyAuthority("ADMIN", "CONT")
-		.antMatchers("/css/**", "/assets/**", "/layouts/**", "/login*", "/").permitAll()
-		.anyRequest().authenticated()
-		.and()
-		.formLogin()
-		.loginPage("/login")
-		.failureUrl("/login?error")
-		.permitAll()
-		.and()
-		.logout()
-		.permitAll()
-		.and()
-		.exceptionHandling().accessDeniedPage("/access-denied")
-		;
+				.authorizeRequests()
+				.antMatchers("/admin/**").hasAuthority("ADMIN")
+				.antMatchers("/clients/**", "/appointments/**", "/treatments/**").hasAnyAuthority("ADMIN", "OPS")
+				.antMatchers("/mail/**").hasAnyAuthority("ADMIN", "CONT", "OPS")
+				.antMatchers("/statistics/**").hasAnyAuthority("ADMIN", "CONT")
+				.antMatchers("/css/**", "/assets/**", "/layouts/**", "/login*", "/").permitAll()
+				.anyRequest().authenticated()
+				.and()
+				.formLogin()
+				.loginPage("/login")
+				.failureUrl("/login?error")
+				.permitAll()
+				.and()
+				.logout()
+				.permitAll()
+				.and()
+				.exceptionHandling().accessDeniedPage("/access-denied");
 
-		http.httpBasic()
-		;
+		http.httpBasic();
 	}
 }

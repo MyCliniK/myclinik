@@ -19,5 +19,5 @@ INSERT INTO roles (name) VALUES ('ADMIN');
 INSERT INTO roles (name) VALUES ('OPS');
 INSERT INTO roles (name) VALUES ('CONT');
 
-INSERT INTO users_roles (userid, roleid) VALUES (1, 1); 
-INSERT INTO users_roles (userid, roleid) VALUES (2, 2); 
+INSERT INTO users_roles (userid, roleid) VALUES (1, 1);
+INSERT INTO users_roles (userid, roleid) VALUES (2, 2);

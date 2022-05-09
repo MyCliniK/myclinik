@@ -31,12 +31,12 @@ import java.util.HashSet;
 @Controller
 public class UserController {
 
-    @Autowired
+	@Autowired
 	private IUserService userService;
-    @Autowired
+	@Autowired
 	private IRoleService roleService;
 
-    @GetMapping("/admin/users")
+	@GetMapping("/admin/users")
 	public String findUsers(Model model) {
 		var users = (List<User>) userService.findAll();
 		model.addAttribute("users", users);
@@ -44,8 +44,8 @@ public class UserController {
 	}
 
 	@GetMapping("/admin/users/user")
-	public String getUser(Model model, @RequestParam("id") Long id){
-		var user  = userService.get(id);
+	public String getUser(Model model, @RequestParam("id") Long id) {
+		var user = userService.get(id);
 		var role = user.getRoles().iterator().next();
 		var roles = roleService.findAll();
 		model.addAttribute("user", user);
@@ -55,7 +55,7 @@ public class UserController {
 	}
 
 	@RequestMapping("/admin/users/new")
-	public String createUser(Model model){
+	public String createUser(Model model) {
 		var newuser = new User();
 		var roles = roleService.findAll();
 		model.addAttribute("user", newuser);
@@ -64,7 +64,7 @@ public class UserController {
 	}
 
 	@PostMapping("/admin/users/new/save")
-	public String saveUser(@ModelAttribute("user") User user, @RequestParam("role") Role role){
+	public String saveUser(@ModelAttribute("user") User user, @RequestParam("role") Role role) {
 		Set<Role> roles = new HashSet<Role>();
 		roles.add(role);
 		user.setRoles(roles);
@@ -74,21 +74,21 @@ public class UserController {
 		return "redirect:/admin/users";
 	}
 
-	@RequestMapping ("/admin/users/delete")
+	@RequestMapping("/admin/users/delete")
 	public String deleteUser(@RequestParam("id") Long id) {
 		userService.delete(id);
 		return "redirect:/admin/users";
 	}
 
-	@RequestMapping ("/admin/users/update")
-	public String editUser(@RequestParam("id") Long id, User user, Long roleId){
+	@RequestMapping("/admin/users/update")
+	public String editUser(@RequestParam("id") Long id, User user, Long roleId) {
 		Role role = roleService.get(roleId);
 		Set<Role> roles = new HashSet<Role>();
 		roles.add(role);
 		user.setRoles(roles);
 
 		user.setEnabled(true);
-		if(user.getPassword() != null && !user.getPassword().isEmpty()){
+		if (user.getPassword() != null && !user.getPassword().isEmpty()) {
 			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 		} else {
 			user.setPassword(userService.get(id).getPassword());

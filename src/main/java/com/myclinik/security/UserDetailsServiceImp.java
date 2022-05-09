@@ -10,34 +10,34 @@ import java.util.List;
 
 public class UserDetailsServiceImp implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("Usuario no encontrado");
-        }
-        return new UserDetailsImp(user);
-    }
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = userRepository.findByUsername(username);
+		if (user == null) {
+			throw new UsernameNotFoundException("Usuario no encontrado");
+		}
+		return new UserDetailsImp(user);
+	}
 
-    public List<User> findAll() {
+	public List<User> findAll() {
 		var users = (List<User>) userRepository.findAll();
 		return users;
 	}
 
-    public User findOne(String username) {
+	public User findOne(String username) {
 		var user = (User) userRepository.findByUsername(username);
 		return user;
 	}
 
-	public User createUser(){
+	public User createUser() {
 		User user = new User();
 		return user;
 	}
 
-    public void saveUser(User user){
+	public void saveUser(User user) {
 		userRepository.save(user);
 	}
 
@@ -45,7 +45,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 		userRepository.deleteById(id);
 	}
 
-	public void updateUser(String username, User newUser){
+	public void updateUser(String username, User newUser) {
 		newUser.setUsername(username);
 		userRepository.save(newUser);
 	}

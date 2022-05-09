@@ -1,31 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 	th:replace="~{layouts/main-layout :: main-fragment(
 	~{:: title},
 	~{:: #home-header},
 	~{:: #home-nav},
 	~{:: #home-main-content},
 	~{:: #home-footer}
-	)}"
->
-	<head>
-		<title>Home page</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	</head>
-	<body style="text-align: center; margin: auto; padding: 10%;">
-		<div id="home-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-			Home Nav
+	)}">
+
+<head>
+	<title>Home page</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="text-align: center; margin: auto; padding: 10%;">
+	<div id="home-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+		Home Nav
+	</div>
+	<div id="home-main-content">
+		<div style="font-size: large;">
+			<a href="clients">Show clients</a>
+			<a href="appointments">Show all appointments</a>
+			<a href="treatments">Show all treatments</a>
+			<a href="mail">Send mail</a>
+			<a href="admin">Admin</a>
 		</div>
-		<div id="home-main-content">
-			<div style="font-size: large;">
-				<a href="clients">Show clients</a>
-				<a href="appointments">Show all appointments</a>
-				<a href="treatments">Show all treatments</a>
-				<a href="mail">Send mail</a>
-				<a href="admin">Admin</a>
-			</div>
-		</div>
-	</body>
+	</div>
+</body>
+
 </html>

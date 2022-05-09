@@ -18,59 +18,58 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
 public class UserDetailsImp implements UserDetails {
 
 	private User user;
-    private UserRepository userRepository;
+	private UserRepository userRepository;
 
-    public UserDetailsImp(User user) {
-        this.user = user;
-    }
-    
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Role> roles = user.getRoles();
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+	public UserDetailsImp(User user) {
+		this.user = user;
+	}
 
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Set<Role> roles = user.getRoles();
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        return authorities;
-    }
+		for (Role role : roles) {
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
+		}
 
-    public String getUsername() {
-        return user.getUsername();
-    }
+		return authorities;
+	}
 
-    public void setUsername(String username) {
-        user.setUsername(username);
-    }
+	public String getUsername() {
+		return user.getUsername();
+	}
 
-    public String getPassword() {
-        return user.getPassword();
-    }
+	public void setUsername(String username) {
+		user.setUsername(username);
+	}
 
-    public void setPassword(String password) {
-        setPassword(password);
-    }
+	public String getPassword() {
+		return user.getPassword();
+	}
 
-    public boolean isEnabled() {
-        return true;
-    }
+	public void setPassword(String password) {
+		setPassword(password);
+	}
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+	public boolean isEnabled() {
+		return true;
+	}
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
 }

@@ -15,22 +15,22 @@ import javax.persistence.JoinColumn;
 import java.util.Set;
 import java.util.HashSet;
 
-
 @Entity
 @Table(name = "roles")
 public class Role {
 
-    @Id
-    @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String name;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="users_roles", joinColumns=@JoinColumn(name="roleid"), inverseJoinColumns=@JoinColumn(name="userid"))
-    private Set<User> users=new HashSet<User>();
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "roleid"), inverseJoinColumns = @JoinColumn(name = "userid"))
+	private Set<User> users = new HashSet<User>();
 
-	public Role() {}
+	public Role() {
+	}
 
 	public Role(Long id, String name) {
 		this.id = id;
@@ -41,21 +41,21 @@ public class Role {
 		this.name = name;
 	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public Set<User> getUsers() {
 		return users;
