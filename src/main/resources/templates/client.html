@@ -137,9 +137,14 @@
 
 				<div>
 					<ul>
-						<li th:each="file : ${files}">
+						<ul th:each="file : ${files}">
+							<a th:href="@{'/files/{clientId}/delete?filename={filename}'(clientId=${client.id}, filename=${file.name})}"
+								onclick="return confirm('¿Está seguro que desea borrar el archivo?')"
+								class="btn btn-sm rounded-pill btn-danger">
+								<i class="fa fa-fw fa-trash" aria-hidden="true"></i>
+							</a>
 							<a th:href="${file.url}" th:text="${file.name}" />
-						</li>
+						</ul>
 					</ul>
 				</div>
 				<br>

@@ -101,6 +101,12 @@ public class ClientController {
 				"attachment; filename=\"" + file.getFilename() + "\"").body(file);
 	}
 
+	@GetMapping("/files/{clientid:.+}/delete")
+	public String deleteFile(@PathVariable String clientid, @RequestParam("filename") String filename) {
+		storageService.delete(clientid + "/" + filename);
+		return "redirect:/clients/client?id=" + clientid;
+	}
+
 	@ExceptionHandler(StorageFileNotFoundException.class)
 	public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
 		return ResponseEntity.notFound().build();

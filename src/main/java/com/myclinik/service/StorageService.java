@@ -82,6 +82,15 @@ public class StorageService implements IStorageService {
 		}
 	}
 
+	public void delete(String filename) {
+		try {
+			Path file = load(filename);
+			Files.deleteIfExists(file);
+		} catch (IOException e) {
+			throw new StorageException("Could not delete file: " + filename, e);
+		}
+	}
+
 	@Override
 	public void deleteAll() {
 		FileSystemUtils.deleteRecursively(rootLocation.toFile());
