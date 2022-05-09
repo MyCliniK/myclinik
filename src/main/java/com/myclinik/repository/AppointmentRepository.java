@@ -12,4 +12,3 @@ import org.springframework.stereotype.Repository;
 public interface AppointmentRepository extends CrudRepository<Appointment, Long> {
 
 }
-

@@ -1,60 +1,68 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layouts/main-layout :: main-fragment(
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/main-layout :: main-fragment(
 	~{:: title},
 	~{:: #appointments-header},
 	~{:: #appointments-nav},
 	~{:: #appointments-main-content},
 	~{:: #appointments-footer}
-	)}"
-	>
-	<head>
-		<title>Citas</title>
-	</head>
-	<body>
+	)}">
 
-		<div id="appointments-header">
-			Citas
-		</div>
-		<br>
-		<div id="appointments-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-			Citas Nav
-		</div>
+<head>
+	<title>Citas</title>
+</head>
 
-		<div id="appointments-main-content">
-			<table class="table table-success table-striped">
-				<thead class="thead">
-					<tr>
-						<th style="text-align: center;">Cliente</th>
-						<th style="text-align: center;">Fecha</th>
-						<th style="text-align: center;">Tratamiento</th>
-						<th style="text-align: center;">Realizada</th>
-						<th style="text-align: center;">Pagada</th>
-						<th style="text-align: center;">Acciones</th>
-					</tr>
-				</thead>
-				<tr th:each="appointment : ${appointments}">
-					<td th:text="${appointment.client.firstName} + ' ' + ${appointment.client.lastName}" style="text-align: center;">Cliente</td>
-					<td th:text="${#temporals.format(appointment.appointmentDate)}" style="text-align: center;">Fecha</td>
-					<td th:text="${appointment.treatment.name}" style="text-align: center;">Tratamiento</td>
-					<td class="text-center" style="font-size: 20px">
-						<span th:if="${appointment.done == true}"> <i class="fa-solid fa-circle-check text-success"></i></span>
-						<span th:if="${appointment.done == false}"> <i class="fa-solid fa-circle-xmark text-danger"></i></span>
-					</td>
-					<td class="text-center" style="font-size: 20px">
-						<span th:if="${appointment.paid == true}"> <i class="fa-solid fa-circle-check text-success"></i></span>
-						<span th:if="${appointment.paid == false}"> <i class="fa-solid fa-circle-xmark text-danger"></i></span>
-					</td>
-					<td style="text-align: center;">
-						<a th:href="@{'/appointments/edit/' + ${appointment.id}}" id="edit" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-edit" aria-hidden="true"></i></a>
-						<a th:href="@{'/appointments/delete/' + ${appointment.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-calendar-times" aria-hidden="true"></i></a>
-					</td>
+<body>
+
+	<div id="appointments-header">
+		Citas
+	</div>
+	<br>
+	<div id="appointments-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+		Citas Nav
+	</div>
+
+	<div id="appointments-main-content">
+		<table class="table table-success table-striped">
+			<thead class="thead">
+				<tr>
+					<th style="text-align: center;">Cliente</th>
+					<th style="text-align: center;">Fecha</th>
+					<th style="text-align: center;">Tratamiento</th>
+					<th style="text-align: center;">Realizada</th>
+					<th style="text-align: center;">Pagada</th>
+					<th style="text-align: center;">Acciones</th>
 				</tr>
-			</table>
-			<div>
-				<a href="appointments/new" id="new" class="btn btn-success" role="button" style="width: 100%"><i class="fa fa-fw fa-calendar-plus" aria-hidden="true"></i></a>
-			</div>
+			</thead>
+			<tr th:each="appointment : ${appointments}">
+				<td th:text="${appointment.client.firstName} + ' ' + ${appointment.client.lastName}"
+					style="text-align: center;">Cliente</td>
+				<td th:text="${#temporals.format(appointment.appointmentDate)}" style="text-align: center;">Fecha</td>
+				<td th:text="${appointment.treatment.name}" style="text-align: center;">Tratamiento</td>
+				<td class="text-center" style="font-size: 20px">
+					<span th:if="${appointment.done == true}"> <i
+							class="fa-solid fa-circle-check text-success"></i></span>
+					<span th:if="${appointment.done == false}"> <i
+							class="fa-solid fa-circle-xmark text-danger"></i></span>
+				</td>
+				<td class="text-center" style="font-size: 20px">
+					<span th:if="${appointment.paid == true}"> <i
+							class="fa-solid fa-circle-check text-success"></i></span>
+					<span th:if="${appointment.paid == false}"> <i
+							class="fa-solid fa-circle-xmark text-danger"></i></span>
+				</td>
+				<td style="text-align: center;">
+					<a th:href="@{'/appointments/edit/' + ${appointment.id}}" id="edit" class="btn btn-secondary"
+						role="button"><i class="fa fa-fw fa-edit" aria-hidden="true"></i></a>
+					<a th:href="@{'/appointments/delete/' + ${appointment.id}}" id="delete" class="btn btn-danger"
+						role="button"><i class="fa fa-fw fa-calendar-times" aria-hidden="true"></i></a>
+				</td>
+			</tr>
+		</table>
+		<div>
+			<a href="appointments/new" id="new" class="btn btn-success" role="button" style="width: 100%"><i
+					class="fa fa-fw fa-calendar-plus" aria-hidden="true"></i></a>
 		</div>
-	</body>
+	</div>
+</body>
+
 </html>

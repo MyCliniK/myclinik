@@ -1,118 +1,119 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layouts/main-layout :: main-fragment(
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/main-layout :: main-fragment(
 	~{:: title},
 	~{:: #statistics-header},
 	~{:: #statistics-nav},
 	~{:: #statistics-main-content},
 	~{:: #statistics-footer}
-	)}"
-	>
-	<head>
-		<title>Statistics</title>
-	</head>
-	<body>
+	)}">
 
-		<div id="statistics-header">
-			Statistics
-		</div>
-		<br>
-		<div id="statistics-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-			Statistics Nav
-		</div>
+<head>
+	<title>Statistics</title>
+</head>
 
-		<div id="statistics-main-content" style="display:flex; margin: auto; justify-content: center">
-            
-            <div style="width:50%; margin-right: 10px">
+<body>
+
+	<div id="statistics-header">
+		Statistics
+	</div>
+	<br>
+	<div id="statistics-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+		Statistics Nav
+	</div>
+
+	<div id="statistics-main-content" style="display:flex; margin: auto; justify-content: center">
+
+		<div style="width:50%; margin-right: 10px">
 			<form method="POST" th:action="@{/statistics}" id="statisticsForm" class="container">
-                 <div class="form-floating">
-                    <select  id="clientSelector" class="form-select" aria-labeled="clients" name="client">
-                        <option value="" selected>Seleccione un Cliente</option>
-                        <option th:each="itClient: ${clients}" th:value="${itClient.id}"
-                            th:selected="(${itClient.id} ==  ${clientId})"                               
-                            th:text="${itClient.firstName} + ' ' + ${itClient.lastName}"
-                            class="dropdown-item" href="#"
-                                >
-                        </option>
-                    </select>
-                     <label class="form-check-label" for="clientSelector">Client</label>
-                </div>
 				<div class="form-floating">
-                    <select  id="treatmentSelector" class="form-select" aria-labeled="treatments" name="treatment">
-                        <option value="" selected>Seleccione un Tratamiento</option>
-                        <option th:each="itTreatment: ${treatments}" th:value="${itTreatment.id}"
-                            th:selected="(${itTreatment.id} ==  ${treatmentId})"                               
-                            th:text="${itTreatment.name}"
-                            class="dropdown-item" href="#"
-                                >
-                        </option>
-                    </select>
-                     <label class="form-check-label" for="treatmentSelector">Tratamiento</label>
-                </div>	
+					<select id="clientSelector" class="form-select" aria-labeled="clients" name="client">
+						<option value="" selected>Seleccione un Cliente</option>
+						<option th:each="itClient: ${clients}" th:value="${itClient.id}"
+							th:selected="(${itClient.id} ==  ${clientId})"
+							th:text="${itClient.firstName} + ' ' + ${itClient.lastName}" class="dropdown-item" href="#">
+						</option>
+					</select>
+					<label class="form-check-label" for="clientSelector">Client</label>
+				</div>
 				<div class="form-floating">
-                    <select  id="paidSelector" class="form-select" aria-labeled="appointments" name="paidAppointment">
-                   	<option value="" selected> Seleccione pagadas, no pagadas o todas</option>
-					<option th:value="true" th:selected="${paidAppointment} == true">Pagado</option> 
-					<option th:value="false"th:selected="${paidAppointment} == false">No pagado</option>
-                    </select>
-                     <label class="form-check-label" for="paidSelector">Pagos</label>
-                </div>		
+					<select id="treatmentSelector" class="form-select" aria-labeled="treatments" name="treatment">
+						<option value="" selected>Seleccione un Tratamiento</option>
+						<option th:each="itTreatment: ${treatments}" th:value="${itTreatment.id}"
+							th:selected="(${itTreatment.id} ==  ${treatmentId})" th:text="${itTreatment.name}"
+							class="dropdown-item" href="#">
+						</option>
+					</select>
+					<label class="form-check-label" for="treatmentSelector">Tratamiento</label>
+				</div>
 				<div class="form-floating">
-                    <select  id="doneSelector" class="form-select" aria-labeled="appointments" name="doneAppointment">
-                   	<option value="" selected> Seleccione realizadas, no realizadas o todas</option>
-					<option th:value="true" th:selected="${doneAppointment} == true">Realizada</option> 
-					<option th:value="false"th:selected="${doneAppointment} == false">No realizada</option>
-                    </select>
-                     <label class="form-check-label" for="doneSelector">Pagos</label>
-                </div>	
-			</br>
+					<select id="paidSelector" class="form-select" aria-labeled="appointments" name="paidAppointment">
+						<option value="" selected> Seleccione pagadas, no pagadas o todas</option>
+						<option th:value="true" th:selected="${paidAppointment} == true">Pagado</option>
+						<option th:value="false" th:selected="${paidAppointment} == false">No pagado</option>
+					</select>
+					<label class="form-check-label" for="paidSelector">Pagos</label>
+				</div>
+				<div class="form-floating">
+					<select id="doneSelector" class="form-select" aria-labeled="appointments" name="doneAppointment">
+						<option value="" selected> Seleccione realizadas, no realizadas o todas</option>
+						<option th:value="true" th:selected="${doneAppointment} == true">Realizada</option>
+						<option th:value="false" th:selected="${doneAppointment} == false">No realizada</option>
+					</select>
+					<label class="form-check-label" for="doneSelector">Pagos</label>
+				</div>
+				</br>
 				<div style="display:flex">
 					<div class="form-group" style="width: 50%; justify-content: center;">
 						<div class="input-group justify-content-center">
 							<span class="input-group-text" id="addon-wrapping">Fecha inicial</span>
-							<input type="datetime-local" name = "initialDate" th:value = "${initialDate}"/>
+							<input type="datetime-local" name="initialDate" th:value="${initialDate}" />
 						</div>
 					</div>
-					
+
 					<div class="form-group" style="width: 50%; justify-content: center;">
 						<div class="input-group justify-content-center">
 							<span class="input-group-text" id="addon-wrapping">Fecha final</span>
-							<input type="datetime-local" name="endDate" th:value = "${endDate}" />
+							<input type="datetime-local" name="endDate" th:value="${endDate}" />
 						</div>
 					</div>
 				</div>
 				<br>
 
-                <div style="margin-bottom: 10px; text-align: center;">
-                    <button type="submit" class="btn btn-primary">Buscar</button>
-                </div>
+				<div style="margin-bottom: 10px; text-align: center;">
+					<button type="submit" class="btn btn-primary">Buscar</button>
+				</div>
 
-            </form>
-            <table class="table table-success table-striped">
+			</form>
+			<table class="table table-success table-striped">
 				<thead class="thead">
 					<tr>
 						<th style="text-align: center;">Cliente</th>
 						<th style="text-align: center;">Fecha</th>
 						<th style="text-align: center;">Tratamiento</th>
-                        <th style="text-align: center;">Precio</th>
+						<th style="text-align: center;">Precio</th>
 						<th style="text-align: center;">Realizada</th>
 						<th style="text-align: center;">Pagada</th>
-                        
+
 					</tr>
 				</thead>
 				<tr th:each="appointment : ${appointments}">
-					<td th:text="${appointment.client.firstName} + ' ' + ${appointment.client.lastName}" style="text-align: center;">Cliente</td>
-					<td th:text="${#temporals.format(appointment.appointmentDate)}" style="text-align: center;">Fecha</td>
+					<td th:text="${appointment.client.firstName} + ' ' + ${appointment.client.lastName}"
+						style="text-align: center;">Cliente</td>
+					<td th:text="${#temporals.format(appointment.appointmentDate)}" style="text-align: center;">Fecha
+					</td>
 					<td th:text="${appointment.treatment.name}" style="text-align: center;">Tratamiento</td>
 					<td th:text="${appointment.treatment.price}" style="text-align: center;">Precio</td>
-                    <td class="text-center" style="font-size: 20px">
-						<span th:if="${appointment.done == true}"> <i class="fa-solid fa-circle-check text-success"></i></span>
-						<span th:if="${appointment.done == false}"> <i class="fa-solid fa-circle-xmark text-danger"></i></span>
+					<td class="text-center" style="font-size: 20px">
+						<span th:if="${appointment.done == true}"> <i
+								class="fa-solid fa-circle-check text-success"></i></span>
+						<span th:if="${appointment.done == false}"> <i
+								class="fa-solid fa-circle-xmark text-danger"></i></span>
 					</td>
 					<td class="text-center" style="font-size: 20px">
-						<span th:if="${appointment.paid == true}"> <i class="fa-solid fa-circle-check text-success"></i></span>
-						<span th:if="${appointment.paid == false}"> <i class="fa-solid fa-circle-xmark text-danger"></i></span>
+						<span th:if="${appointment.paid == true}"> <i
+								class="fa-solid fa-circle-check text-success"></i></span>
+						<span th:if="${appointment.paid == false}"> <i
+								class="fa-solid fa-circle-xmark text-danger"></i></span>
 					</td>
 				</tr>
 			</table>
@@ -123,117 +124,119 @@
 			<script src="https://code.highcharts.com/highcharts-3d.js"></script>
 			<script src="https://code.highcharts.com/modules/exporting.js"></script>
 			<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-				
-			<div style= "display: flex">
-			<div id="container" style="width: 30%; border-width: 1px; border-bottom: 2px; border-bottom-style:ridge;"></div>
-			<script th:inline="javascript">
-				/*<![CDATA[*/
-				var jmap = /*[[${maptreatapp}]]*/ 'defaultmap';
-    			/*]]>*/
-				
-				/*[+
-				var chartdata = []
-				var i = 0;
-				Object.keys(jmap).forEach(function(key) {
-					var data = jmap[key]; 
-					chartdata[i++] = [key, data];
-				});
-				+]*/
-				Highcharts.chart('container', {
-					chart : {
-						type : 'pie',
-						options3d : {
-							enabled : true,
-							alpha : 50,
-							beta : 0
-						}
-					},
-					title : {
-						text : 'Número de citas por tipo de tratamiento'
-					},
-					tooltip : {
-						pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
-					},
-					plotOptions : {
-						pie : {
-							allowPointSelect : true,
-							cursor : 'pointer',
-							depth : 35,
-							dataLabels : {
-								enabled : true,
-								format : '{point.name}'
-							}
-						}
-					},
-					colors: ['#117182', '#FF5733','#FFC300', '#DAF7A6', '#FFA9D9', '#CAA9FF'],
-					series : [ {
-						type : 'pie',
-						name : 'Ratio',
-						data : chartdata
-					} ]
-				});
-			</script>
-			<div id="container3" style="width: 70%; border-width: 1px; border-bottom: 2px; border-bottom-style:ridge;"></div>
+
+			<div style="display: flex">
+				<div id="container"
+					style="width: 30%; border-width: 1px; border-bottom: 2px; border-bottom-style:ridge;"></div>
 				<script th:inline="javascript">
-				/*<![CDATA[*/
-				var jmap3 = /*[[${maps}]]*/ 'defaultmap';
-				var jkeyset = /*[[${maps.keySet()}]]*/ 'defaultkeyset';
-				var jvalues = /*[[${maps.values()}]]*/ 'defaultvalues';
-				var jcategories = /*[[${maps.values()[0].keySet()}]]*/ 'defaultcategories';
-				var jvaluesunpaid = /*[[${mapmonthappunpaid.values()}]]*/ 'defaultvaluesunpaid';
-				/*]]>*/
-				/*[+
-				chartdata = []
-				var i = 0;
-				Object.keys(jmap3).forEach(function(key) {
-					var data = [];
-					var mapita = jmap3[key]; // esto es el map de dentro de nuevo
-					var j = 0;
-					Object.keys(mapita).forEach(function(key2) {
-						data[j++] = mapita[key2];
-					})
-					chartdata[i++] = {name: key, data: data};
-				});
-				console.log(chartdata);
-				+]*/
-				Highcharts.chart('container3', {
-					chart: {
-						type: 'column'
-					},
-					title: {
-						text: 'Ingresos por mes según tipo de tratamiento'
-					},
-					xAxis: {
-						categories: jcategories,
-						crosshair: true
-					},
-					yAxis: {
+					/*<![CDATA[*/
+					var jmap = /*[[${maptreatapp}]]*/ 'defaultmap';
+					/*]]>*/
+
+					/*[+
+					var chartdata = []
+					var i = 0;
+					Object.keys(jmap).forEach(function(key) {
+						var data = jmap[key];
+						chartdata[i++] = [key, data];
+					});
+					+]*/
+					Highcharts.chart('container', {
+						chart: {
+							type: 'pie',
+							options3d: {
+								enabled: true,
+								alpha: 50,
+								beta: 0
+							}
+						},
 						title: {
-							text: 'Ingresos'
-						}
-					},
-					tooltip: {
-						headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-						pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-						'<td style="padding:0"><b>{point.y:.1f} €</b></td></tr>',
-						footerFormat: '</table>',
-						shared: true,
-						useHTML: true
-					},
-					plotOptions: {
-						column: {
-							stacking: 'normal',
-							pointPadding: 0.2,
-							borderWidth: 0
-						}
-					},
-					colors: ['#117182', '#FF5733','#FFC300', '#DAF7A6', '#FFA9D9', '#CAA9FF'],
-					series: chartdata
-				});
+							text: 'Número de citas por tipo de tratamiento'
+						},
+						tooltip: {
+							pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+						},
+						plotOptions: {
+							pie: {
+								allowPointSelect: true,
+								cursor: 'pointer',
+								depth: 35,
+								dataLabels: {
+									enabled: true,
+									format: '{point.name}'
+								}
+							}
+						},
+						colors: ['#117182', '#FF5733', '#FFC300', '#DAF7A6', '#FFA9D9', '#CAA9FF'],
+						series: [{
+							type: 'pie',
+							name: 'Ratio',
+							data: chartdata
+						}]
+					});
+				</script>
+				<div id="container3"
+					style="width: 70%; border-width: 1px; border-bottom: 2px; border-bottom-style:ridge;"></div>
+				<script th:inline="javascript">
+					/*<![CDATA[*/
+					var jmap3 = /*[[${maps}]]*/ 'defaultmap';
+					var jkeyset = /*[[${maps.keySet()}]]*/ 'defaultkeyset';
+					var jvalues = /*[[${maps.values()}]]*/ 'defaultvalues';
+					var jcategories = /*[[${maps.values()[0].keySet()}]]*/ 'defaultcategories';
+					var jvaluesunpaid = /*[[${mapmonthappunpaid.values()}]]*/ 'defaultvaluesunpaid';
+					/*]]>*/
+					/*[+
+					chartdata = []
+					var i = 0;
+					Object.keys(jmap3).forEach(function(key) {
+						var data = [];
+						var mapita = jmap3[key]; // esto es el map de dentro de nuevo
+						var j = 0;
+						Object.keys(mapita).forEach(function(key2) {
+							data[j++] = mapita[key2];
+						})
+						chartdata[i++] = {name: key, data: data};
+					});
+					console.log(chartdata);
+					+]*/
+					Highcharts.chart('container3', {
+						chart: {
+							type: 'column'
+						},
+						title: {
+							text: 'Ingresos por mes según tipo de tratamiento'
+						},
+						xAxis: {
+							categories: jcategories,
+							crosshair: true
+						},
+						yAxis: {
+							title: {
+								text: 'Ingresos'
+							}
+						},
+						tooltip: {
+							headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+							pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+								'<td style="padding:0"><b>{point.y:.1f} €</b></td></tr>',
+							footerFormat: '</table>',
+							shared: true,
+							useHTML: true
+						},
+						plotOptions: {
+							column: {
+								stacking: 'normal',
+								pointPadding: 0.2,
+								borderWidth: 0
+							}
+						},
+						colors: ['#117182', '#FF5733', '#FFC300', '#DAF7A6', '#FFA9D9', '#CAA9FF'],
+						series: chartdata
+					});
 				</script>
 			</div>
 			<div id="container2" style="height: 500px"></div>
-				<script th:inline="javascript">
+			<script th:inline="javascript">
 				/*<![CDATA[*/
 				var jmap2 = /*[[${mapmonthapp}]]*/ 'defaultmap';
 				var jkeyset = /*[[${mapmonthapp.keySet()}]]*/ 'defaultkeyset';
@@ -265,7 +268,7 @@
 					tooltip: {
 						headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
 						pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-						'<td style="padding:0"><b>{point.y:.1f} €</b></td></tr>',
+							'<td style="padding:0"><b>{point.y:.1f} €</b></td></tr>',
 						footerFormat: '</table>',
 						shared: true,
 						useHTML: true
@@ -279,16 +282,17 @@
 					colors: ['#04BC00', '#E63030'],
 					series: [{
 						name: 'Pagados',
-						data:  jvalues
+						data: jvalues
 					},
 					{
 						name: 'NoPagados',
-						data:  jvaluesunpaid
+						data: jvaluesunpaid
 					}
 					]
 				});
-				</script>
-			</div>
+			</script>
 		</div>
-	</body>
+	</div>
+</body>
+
 </html>

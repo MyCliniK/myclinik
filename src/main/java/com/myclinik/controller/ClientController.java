@@ -34,31 +34,33 @@ public class ClientController {
 	}
 
 	@GetMapping("/clients/client")
-	public String getClient(Model model, @RequestParam("id") String itemid){
-		var client  = clientService.findOne(Long.parseLong(itemid));
+	public String getClient(Model model, @RequestParam("id") String itemid) {
+		var client = clientService.findOne(Long.parseLong(itemid));
 		model.addAttribute("client", client);
 		return "client";
 	}
 
 	@RequestMapping("/clients/new")
-	public String createClient(Model model){
+	public String createClient(Model model) {
 		var newclient = clientService.createClient();
 		model.addAttribute("client", newclient);
 		return "newclient";
 	}
+
 	@PostMapping("/clients/new/save")
 	public String saveClient(@ModelAttribute("client") Client client) {
 		clientService.saveClient(client);
 		return "redirect:/clients";
 	}
-	@RequestMapping ("/clients/delete")
+
+	@RequestMapping("/clients/delete")
 	public String deleteClient(@RequestParam("id") Long itemid) {
 		clientService.deleteClient(itemid);
 		return "redirect:/clients";
 	}
 
-	@RequestMapping ("/clients/update")
-	public String editClient(@RequestParam("id") Long itemid, Client client){
+	@RequestMapping("/clients/update")
+	public String editClient(@RequestParam("id") Long itemid, Client client) {
 		clientService.updateClient(itemid, client);
 		return "redirect:/clients";
 	}
