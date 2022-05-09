@@ -32,6 +32,7 @@ import com.myclinik.service.IStorageService;
 import com.myclinik.exception.StorageFileNotFoundException;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Controller
@@ -53,12 +54,15 @@ public class ClientController {
 	public String getClient(Model model, @RequestParam("id") String itemid) {
 		var client = clientService.findOne(Long.parseLong(itemid));
 
-		model.addAttribute("files", storageService.loadFolder(itemid)
-				.map(path -> {
-					return MvcUriComponentsBuilder.fromMethodName(ClientController.class,
-							"serveFile", path.getFileName().toString(), itemid).build().toUri().toString();
-				})
-				.collect(Collectors.toList()));
+		List<File> files = storageService.loadFolder(itemid).map(path -> {
+			return new File(path.getFileName().toString(),
+					MvcUriComponentsBuilder.fromMethodName(ClientController.class,
+							"serveFile", path.getFileName().toString(),
+							itemid).build().toUri().toString());
+		})
+				.collect(Collectors.toList());
+
+		model.addAttribute("files", files);
 		model.addAttribute("client", client);
 		return "client";
 	}
@@ -101,4 +105,31 @@ public class ClientController {
 	public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
 		return ResponseEntity.notFound().build();
 	}
+
+	private class File {
+		private String name;
+		private String url;
+
+		public File(String name, String url) {
+			this.name = name;
+			this.url = url;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+	}
+
 }
