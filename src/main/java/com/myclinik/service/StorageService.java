@@ -56,7 +56,7 @@ public class StorageService implements IStorageService {
 					.filter(path -> !path.equals(location))
 					.map(path -> location.relativize(path));
 		} catch (IOException e) {
-			throw new StorageException("Failed to read stored files", e);
+			return Stream.empty();
 		}
 
 	}
@@ -71,10 +71,9 @@ public class StorageService implements IStorageService {
 		try {
 			Path file = load(filename);
 			Resource resource = new UrlResource(file.toUri());
-			if(resource.exists() || resource.isReadable()) {
+			if (resource.exists() || resource.isReadable()) {
 				return resource;
-			}
-			else {
+			} else {
 				throw new StorageFileNotFoundException("Could not read file: " + filename);
 
 			}
