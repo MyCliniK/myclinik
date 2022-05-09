@@ -131,7 +131,6 @@ public class StatisticsController {
 
 	@RequestMapping(value = "/statistics", params = "clientId")
 	public String filterByClient(Model model, @RequestParam("clientId") Long clientId) {
-		System.out.println("Has entrado al request de clientid");
 		var clients = (List<Client>) clientService.findAll();
 		model.addAttribute("clients", clients);
 		model.addAttribute("clientId", clientId);
