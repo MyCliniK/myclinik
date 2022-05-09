@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.time.LocalDateTime;
 
 @Controller
 public class AppointmentController {
@@ -70,10 +71,27 @@ public class AppointmentController {
 		return "new_appointment";
 	}
 
+	@RequestMapping(value = "/appointments/new", params = "date")
+	public String showNewAppointmentForm(Model model, @RequestParam("date") String strDate) {
+		Appointment appointment = new Appointment();
+		LocalDateTime date = LocalDateTime.parse(strDate);
+		appointment.setAppointmentDate(date);
+		var treatments = (List<Treatment>) treatmentService.findAll();
+		var clients = (List<Client>) clientService.findAll();
+		model.addAttribute("appointment", appointment);
+		model.addAttribute("treatments", treatments);
+		model.addAttribute("clients", clients);
+		return "new_appointment";
+	}
+
 	@PostMapping("/appointments/new/save")
 	public String saveAppointment(@ModelAttribute("appointment") Appointment appointment) {
+		if (appointment.getAppointmentDate() == null) {
+			appointment.setAppointmentDate(LocalDateTime.now());
+		}
 		appointmentService.save(appointment);
-		return "redirect:/appointments";
+		return "redirect:/calendar?initialDate=" + appointment.getAppointmentDate() + "&newAppointmentId="
+				+ appointment.getId();
 	}
 
 	@RequestMapping("/appointments/edit/{appointmentId}")
@@ -97,7 +115,16 @@ public class AppointmentController {
 	public String updateAppointment(@RequestParam("id") Long id,
 			@ModelAttribute("appointment") Appointment appointment) {
 		appointmentService.update(id, appointment);
-		return "redirect:/appointments";
+		return "redirect:/calendar?editedAppointmentId=" + appointment.getId() + "&initialDate="
+				+ appointment.getAppointmentDate();
 	}
 
+	@PostMapping("/appointments/date/update")
+	public String updateAppointmentDate(@RequestParam("id") Long id, @RequestParam("date") String strDate) {
+		LocalDateTime newDate = LocalDateTime.parse(strDate);
+		Appointment appointment = appointmentService.get(id);
+		appointment.setAppointmentDate(newDate);
+		appointmentService.update(id, appointment);
+		return "calendar";
+	}
 }
