@@ -1,54 +1,60 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layouts/main-layout :: main-fragment(
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/main-layout :: main-fragment(
 	~{:: title},
 	~{:: #newapp-header},
 	~{:: #newdoc-nav},
 	~{:: #newdoc-main-content},
 	~{:: #newdoc-footer}
-	)}"
-	>
-	<head>
-		<title>Nuevo Documento</title>
-	</head>
-	<body>
-		<div id="newdoc-header">
-			Nuevo documento
-		</div>
-		<br>
-		<div id="newdoc-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-			Nuevo documento Nav
-		</div>
-		<div id="newdoc-main-content" class="container">
-			<div class="card">
-				<div class="row">
-					<div class="col-sm-10 offset-sm-1 text-center">
-						<form method="POST" th:action="@{/documents/generate}">
-							<br>
-							<div class="form-floating">
-								<select id="clientSelector" class="form-select" aria-labeled="clients" name="client" required>
-									<option value="" selected>Seleccione un Cliente</option>
-									<option th:each="client: ${clients}" th:value="${client.id}" th:text="${client.firstName} + ' ' + ${client.lastName}" th:selected="(${client.id}==${clientId})" class="dropdown-item" href="#"></option>
-								</select>
-								<label class="form-check-label" for="clientSelector">Client</label>
-							</div>
-							<br>
-							<div class="form-floating">
-								<select id="treatmentSelector" class="form-select" aria-labeled="treatments" name="treatment" required>
-									<option value="" selected>Seleccione un Tratamiento</option>
-									<option th:each="treatment: ${treatments}" th:value="${treatment.id}" th:text="${treatment.name}" th:selected="(${treatment.id}==${treatmentId})" class="dropdown-item" href="#"></option>
-								</select>
-								<label class="form-check-label" for="clientSelector">Tratamiento</label>
-							</div>
-							<br>
-							<div style="margin-bottom: 10px; text-align: center;">
-								<button type="submit" class="btn btn-primary">Generar</button>
-							</div>
-						</form>
-					</div>
+	)}">
+
+<head>
+	<title>Nuevo Documento</title>
+</head>
+
+<body>
+	<div id="newdoc-header">
+		Nuevo documento
+	</div>
+	<br>
+	<div id="newdoc-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+		Nuevo documento Nav
+	</div>
+	<div id="newdoc-main-content" class="container">
+		<div class="card">
+			<div class="row">
+				<div class="col-sm-10 offset-sm-1 text-center">
+					<form method="POST" th:action="@{/documents/generate}">
+						<br>
+						<div class="form-floating">
+							<select id="clientSelector" class="form-select" aria-labeled="clients" name="client"
+								required>
+								<option value="" selected>Seleccione un Cliente</option>
+								<option th:each="client: ${clients}" th:value="${client.id}"
+									th:text="${client.firstName} + ' ' + ${client.lastName}"
+									th:selected="(${client.id}==${clientId})" class="dropdown-item" href="#"></option>
+							</select>
+							<label class="form-check-label" for="clientSelector">Client</label>
+						</div>
+						<br>
+						<div class="form-floating">
+							<select id="treatmentSelector" class="form-select" aria-labeled="treatments"
+								name="treatment" required>
+								<option value="" selected>Seleccione un Tratamiento</option>
+								<option th:each="treatment: ${treatments}" th:value="${treatment.id}"
+									th:text="${treatment.name}" th:selected="(${treatment.id}==${treatmentId})"
+									class="dropdown-item" href="#"></option>
+							</select>
+							<label class="form-check-label" for="clientSelector">Tratamiento</label>
+						</div>
+						<br>
+						<div style="margin-bottom: 10px; text-align: center;">
+							<button type="submit" class="btn btn-primary">Generar</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
+
 </html>
