@@ -57,7 +57,7 @@ public class DocumentController {
 		model.addAttribute("treatmentId", treatmentId);
 		model.addAttribute("treatments", treatments);
 		model.addAttribute("clients", clients);
-		return "ew_document";
+		return "new_document";
 	}
 
 	@PostMapping("/documents/generate")
