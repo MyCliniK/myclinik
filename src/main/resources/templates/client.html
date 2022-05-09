@@ -123,12 +123,15 @@
 				<br>
 
 				<div class="form-group">
-					<label>Consentimientos</label>
+					<label>
+						Consentimientos
+						<a th:href="@{'/documents/new?clientId=' + ${client.id}}"
+							class="btn btn-sm rounded-pill btn-success">Generar</a>
+					</label>
 					<div class="input-group mb-3">
 						<label class="input-group-text" for="inputGroupFile01"><i class="fa fa-fw fa-file-contract"
 								aria-hidden="true"></i></label>
 						<input type="file" class="form-control" id="inputGroupFile01" name="file">
-						<a th:href="@{'/documents/new?clientId=' + ${client.id}}" class="btn btn-success">Generar</a>
 					</div>
 				</div>
 
