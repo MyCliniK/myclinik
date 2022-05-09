@@ -57,7 +57,7 @@ public class DocumentController {
 		model.addAttribute("treatmentId", treatmentId);
 		model.addAttribute("treatments", treatments);
 		model.addAttribute("clients", clients);
-		return "new_document";
+		return "ew_document";
 	}
 
 	@PostMapping("/documents/generate")
@@ -180,7 +180,6 @@ public class DocumentController {
 			String path = "./src/main/resources/static/files/" + client.getId();
 			Files.createDirectories(Paths.get(path));
 			document.save(path + filename);
-			System.out.println("PDF created");
 			document.close();
 		} catch (Exception e) {
 			System.out.println(e);
