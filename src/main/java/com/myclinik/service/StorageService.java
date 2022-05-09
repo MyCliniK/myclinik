@@ -20,7 +20,7 @@ import com.myclinik.exception.StorageFileNotFoundException;
 @Service
 public class StorageService implements IStorageService {
 
-	private final Path rootLocation = Paths.get("files");
+	private final Path rootLocation = Paths.get("src/main/resources/static/files");
 
 	@Override
 	public void store(MultipartFile file, String folder) {
