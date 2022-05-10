@@ -82,6 +82,7 @@ public class ClientController {
 
 	@RequestMapping("/clients/delete")
 	public String deleteClient(@RequestParam("id") Long itemid) {
+		storageService.deleteFolder(itemid.toString());
 		clientService.deleteClient(itemid);
 		return "redirect:/clients";
 	}

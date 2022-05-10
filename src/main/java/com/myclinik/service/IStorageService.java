@@ -22,6 +22,8 @@ public interface IStorageService {
 
 	void delete(String path);
 
+	void deleteFolder(String folder);
+
 	void deleteAll();
 
 }
