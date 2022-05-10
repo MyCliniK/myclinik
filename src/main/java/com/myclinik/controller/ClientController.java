@@ -89,7 +89,8 @@ public class ClientController {
 
 	@RequestMapping("/clients/update")
 	public String editClient(@RequestParam("id") Long itemId, Client client, @RequestParam("file") MultipartFile file) {
-		storageService.store(file, Long.toString(itemId));
+		if (!file.isEmpty())
+			storageService.store(file, Long.toString(itemId));
 		clientService.updateClient(itemId, client);
 		return "redirect:/clients/client?id=" + itemId;
 	}
