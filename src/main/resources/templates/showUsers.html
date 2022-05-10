@@ -25,12 +25,16 @@
 				<tr>
 					<th style="text-align: center;">Nombre de usuario</th>
 					<th style="text-align: center;">Contraseña</th>
+					<th style="text-align: center;">Roles</th>
 					<th style="text-align: center;">Acciones</th>
 				</tr>
 			</thead>
 			<tr th:each="user : ${users}">
 				<td th:text="${user.username}" style="text-align: center;">Nombre de usuario</td>
 				<td th:text="${user.password}" style="text-align: center;">Contraseña</td>
+				<td style="text-align: center;">
+					<span th:each="role : ${user.roles}" th:text="${role.name}" th:remove="tag">Role</span>
+				</td>
 				<td style="text-align: center;">
 					<div class="d-flex justify-content-center align-content-center">
 						<div class="d-flex ms-2">
