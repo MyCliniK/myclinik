@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.security.core.Authentication;
+
 @Controller
 public class AppController {
 
@@ -15,8 +17,19 @@ public class AppController {
 	}
 
 	@GetMapping("/home")
-	public String goToHomePage(Model model) {
-		return "redirect:/calendar";
+	public String goToHomePage(Authentication authResult, Model model) {
+		String role = authResult.getAuthorities().toString();
+
+		if (role.contains("ADMIN")) {
+			return ("redirect:/admin");
+		} else if (role.contains("OPS")) {
+			return "redirect:/calendar";
+		} else if (role.contains("CONT")) {
+			return "redirect:/statistics";
+		} else {
+			return "redirect:/";
+		}
+
 	}
 
 	@GetMapping("/login")
