@@ -20,7 +20,8 @@ INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) 
 INSERT INTO appointments(appointment_date, client_id, treatment_id, done, paid) VALUES ('2022-05-03 14:15', 2, 1, true, true);
 
 INSERT INTO users (username, password, enabled) values ('admin', '$2a$10$T7ftSUbI/bOXZXmjcRYI9uZlZdH0QdC5blKqvX0qpgM.On.fyN7K2', true);
-INSERT INTO users (username, password, enabled) values ('ops', '$2a$10$T7ftSUbI/bOXZXmjcRYI9uZlZdH0QdC5blKqvX0qpgM.On.fyN7K2', true);
+INSERT INTO users (username, password, enabled) values ('ops', '$2a$10$3ZFVnMjGhqX9hPN.6sRahe7rk01PHuGziMvly2aYYDe6irp8CZAym', true);
+INSERT INTO users (username, password, enabled) values ('cont', '$2a$10$EQ4iwYaq72wYzMJroxVfEefN3UQMWX0.GrTtOlRFeqIV8behJDb5K', true);
 
 INSERT INTO roles (name) VALUES ('ADMIN');
 INSERT INTO roles (name) VALUES ('OPS');
@@ -28,3 +29,4 @@ INSERT INTO roles (name) VALUES ('CONT');
 
 INSERT INTO users_roles (userid, roleid) VALUES (1, 1);
 INSERT INTO users_roles (userid, roleid) VALUES (2, 2);
+INSERT INTO users_roles (userid, roleid) VALUES (3, 3);
