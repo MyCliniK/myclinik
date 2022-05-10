@@ -4811,8 +4811,16 @@
 			// Get the date to the local date time
 			var z = event.start.getTimezoneOffset() * 60 * 1000;
 			var date = new Date(event.start.getTime() - z);
+
+			var csrfHeader = $('#_csrf_header').attr('content');
+			var csrfToken = $('#_csrf').attr('content');
+
 			$.ajax({
 				type: "POST",
+				cache: false,
+				beforeSend: function(xhr) {
+					xhr.setRequestHeader(csrfHeader, csrfToken);
+				},
 				url: "/appointments/date/update",
 				data: {
 					id: event.id,

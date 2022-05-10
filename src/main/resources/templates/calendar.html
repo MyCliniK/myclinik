@@ -11,6 +11,8 @@
 <head>
 	<title>Calendar</title>
 	<th:block id="calendar-resources">
+		<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+		<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
 		<script src="/js/calendar.js"></script>
 		<link rel="stylesheet" type="text/css" th:href="@{/css/calendar.css}" href="/css/calendar.css" />
 		<script th:inline="javascript">
