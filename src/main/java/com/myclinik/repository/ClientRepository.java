@@ -1,4 +1,4 @@
-package com.myclinik.repository; 
+package com.myclinik.repository;
 
 import com.myclinik.model.Client;
 import org.springframework.data.repository.CrudRepository;

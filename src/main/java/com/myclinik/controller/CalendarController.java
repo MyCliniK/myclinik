@@ -18,12 +18,11 @@ public class CalendarController {
 
 	@GetMapping("/calendar")
 	public String goToCalendar(
-		Model model,
-		@RequestParam(value = "initialDate", required = false) String initialDate,
-		@RequestParam(value = "newAppointmentId", required = false) Long newAppointmentId,
-		@RequestParam(value = "selectedAppointmentId", required = false) Long selectedAppointmentId,
-		@RequestParam(value = "editedAppointmentId", required = false) Long editedAppointmentId
-	){
+			Model model,
+			@RequestParam(value = "initialDate", required = false) String initialDate,
+			@RequestParam(value = "newAppointmentId", required = false) Long newAppointmentId,
+			@RequestParam(value = "selectedAppointmentId", required = false) Long selectedAppointmentId,
+			@RequestParam(value = "editedAppointmentId", required = false) Long editedAppointmentId) {
 		model.addAttribute("initialDate", initialDate);
 		model.addAttribute("newAppointmentId", newAppointmentId);
 		model.addAttribute("selectedAppointmentId", selectedAppointmentId);
@@ -31,6 +30,6 @@ public class CalendarController {
 
 		var appointments = (List<Appointment>) appointmentService.findAll();
 		model.addAttribute("appointments", appointments);
-        return ("calendar");
-    }
+		return ("calendar");
+	}
 }

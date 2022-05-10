@@ -29,23 +29,23 @@ public class TreatmentController {
 		return "listTreatments";
 	}
 
-    @RequestMapping("/treatments/new")
-    public String showNewTreatmentForm(Model model) {
-        Treatment treatment = new Treatment();
-        model.addAttribute("treatment", treatment);
-        return "new_treatment";
-    }
+	@RequestMapping("/treatments/new")
+	public String showNewTreatmentForm(Model model) {
+		Treatment treatment = new Treatment();
+		model.addAttribute("treatment", treatment);
+		return "new_treatment";
+	}
 
-    @PostMapping("/treatments/new/save")
-    public String saveTreatment(@ModelAttribute("treatment") Treatment treatment) {
-        treatmentService.save(treatment);
-        return "redirect:/treatments";
-    }
+	@PostMapping("/treatments/new/save")
+	public String saveTreatment(@ModelAttribute("treatment") Treatment treatment) {
+		treatmentService.save(treatment);
+		return "redirect:/treatments";
+	}
 
-    @RequestMapping("/treatments/edit/{id}")
+	@RequestMapping("/treatments/edit/{id}")
 	public String showEditTreatment(Model model, @PathVariable(name = "id") long id) {
 
-        Treatment treatment = treatmentService.get(id);
+		Treatment treatment = treatmentService.get(id);
 		model.addAttribute("treatment", treatment);
 
 		return "edit_treatment";

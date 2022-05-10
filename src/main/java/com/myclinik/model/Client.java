@@ -21,7 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "clients")
 public class Client {
 
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="clients_id_seq")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "clients_id_seq")
 	private @Id Long id;
 	private String firstName;
 	private String lastName;
@@ -35,12 +35,14 @@ public class Client {
 	private String medicalObservations;
 	private String observations;
 
-	@OneToMany(mappedBy = "client", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	private List<Appointment> appointments;
 
-	public Client() {}
+	public Client() {
+	}
 
-	public Client(String firstName, String lastName, String dni, Date birthdate, String sex, String phone, String email, Boolean promos, String medicalObservations, String observations,  List<Appointment> appointments ) {
+	public Client(String firstName, String lastName, String dni, Date birthdate, String sex, String phone, String email,
+			Boolean promos, String medicalObservations, String observations, List<Appointment> appointments) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dni = dni;
@@ -56,21 +58,23 @@ public class Client {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		Client client = (Client) o;
 		return Objects.equals(id, client.id) &&
-		Objects.equals(firstName, client.firstName) &&
-		Objects.equals(lastName, client.lastName) &&
-		Objects.equals(dni, client.dni) &&
-		Objects.equals(birthdate, client.birthdate) &&
-		Objects.equals(sex, client.sex) &&
-		Objects.equals(email, client.phone) &&
-		Objects.equals(phone, client.email) &&
-		Objects.equals(promos, client.promos) &&
-		Objects.equals(medicalObservations, client.medicalObservations) &&
-		Objects.equals(observations, client.observations) &&
-		Objects.equals(appointments, client.appointments);
+				Objects.equals(firstName, client.firstName) &&
+				Objects.equals(lastName, client.lastName) &&
+				Objects.equals(dni, client.dni) &&
+				Objects.equals(birthdate, client.birthdate) &&
+				Objects.equals(sex, client.sex) &&
+				Objects.equals(email, client.phone) &&
+				Objects.equals(phone, client.email) &&
+				Objects.equals(promos, client.promos) &&
+				Objects.equals(medicalObservations, client.medicalObservations) &&
+				Objects.equals(observations, client.observations) &&
+				Objects.equals(appointments, client.appointments);
 	}
 
 	@Override
@@ -167,28 +171,28 @@ public class Client {
 		this.observations = observations;
 	}
 
-	public List<Appointment> getAppointments (List<Appointment> appointments){
+	public List<Appointment> getAppointments(List<Appointment> appointments) {
 		return appointments;
 	}
 
-	public void setAppointments(List<Appointment> appointments){
+	public void setAppointments(List<Appointment> appointments) {
 		this.appointments = appointments;
 	}
 
 	@Override
 	public String toString() {
 		return "Client{" +
-		"id=" + id +
-		", firstName='" + firstName + '\'' +
-		", lastName='" + lastName + '\'' +
-		", dni='" + dni + '\'' +
-		", birthdate=" + birthdate +
-		", sex=" + sex +
-		", phone='" + phone + '\'' +
-		", email='" + email + '\'' +
-		", sex='" + sex + '\'' +
-		", medicalObservations='" + medicalObservations + '\'' +
-		", observations='" + observations + '\'' +
-		'}';
+				"id=" + id +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", dni='" + dni + '\'' +
+				", birthdate=" + birthdate +
+				", sex=" + sex +
+				", phone='" + phone + '\'' +
+				", email='" + email + '\'' +
+				", sex='" + sex + '\'' +
+				", medicalObservations='" + medicalObservations + '\'' +
+				", observations='" + observations + '\'' +
+				'}';
 	}
 }

@@ -15,22 +15,24 @@ import java.util.List;
 @Table(name = "treatments")
 public class Treatment {
 
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="treatments_id_seq")
-	private @Id  Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "treatments_id_seq")
+	private @Id Long id;
 	private String name;
 	private String subservice;
 	private Float price;
 	private Integer duration;
 	private String consents;
 
-	@OneToMany(mappedBy = "treatment", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL)
 	private List<Appointment> appointments;
 
-	public Treatment() {}
+	public Treatment() {
+	}
 
-	public Treatment(String name, String subservice, Float price, Integer duration, String consents, List<Appointment> appointments) {
-		this.name =name;
-		this.subservice =subservice;
+	public Treatment(String name, String subservice, Float price, Integer duration, String consents,
+			List<Appointment> appointments) {
+		this.name = name;
+		this.subservice = subservice;
 		this.price = price;
 		this.duration = duration;
 		this.consents = consents;
@@ -39,16 +41,18 @@ public class Treatment {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		Treatment treatment = (Treatment) o;
-		return Objects.equals(id,treatment.id) &&
-		Objects.equals(name, treatment.name) &&
-		Objects.equals(subservice, treatment.subservice) &&
-		Objects.equals(price, treatment.price) &&
-		Objects.equals(duration, treatment.duration) &&
-		Objects.equals(consents, treatment.consents) &&
-		Objects.equals(appointments, treatment.appointments);
+		return Objects.equals(id, treatment.id) &&
+				Objects.equals(name, treatment.name) &&
+				Objects.equals(subservice, treatment.subservice) &&
+				Objects.equals(price, treatment.price) &&
+				Objects.equals(duration, treatment.duration) &&
+				Objects.equals(consents, treatment.consents) &&
+				Objects.equals(appointments, treatment.appointments);
 	}
 
 	@Override
@@ -107,22 +111,22 @@ public class Treatment {
 		this.consents = consents;
 	}
 
-	public List<Appointment> getAppointments (List<Appointment> appointments){
+	public List<Appointment> getAppointments(List<Appointment> appointments) {
 		return appointments;
 	}
 
-	public void setAppointments(List<Appointment> appointments){
+	public void setAppointments(List<Appointment> appointments) {
 		this.appointments = appointments;
 	}
 
 	@Override
 	public String toString() {
-		return "Treatment{" +"id=" + id +
-		", name='" +name + '\'' +
-		", subservice='" +subservice + '\'' +
-		", price='" + price + '\'' +
-		", duration='" + duration + '\'' +
-		", consents='" + consents + '\'' +
-		'}';
+		return "Treatment{" + "id=" + id +
+				", name='" + name + '\'' +
+				", subservice='" + subservice + '\'' +
+				", price='" + price + '\'' +
+				", duration='" + duration + '\'' +
+				", consents='" + consents + '\'' +
+				'}';
 	}
 }
