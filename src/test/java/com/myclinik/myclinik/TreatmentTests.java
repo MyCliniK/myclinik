@@ -7,13 +7,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myclinik.model.Client;
 import com.myclinik.model.Treatment;
 import com.myclinik.model.Appointment;
-import com.myclinik.service.IClientService;
 import com.myclinik.service.ITreatmentService;
-import com.myclinik.service.TreatmentService;
-import com.myclinik.service.IAppointmentService;
 
 import java.util.Date;
 import java.util.List;
@@ -28,11 +24,7 @@ import java.util.NoSuchElementException;
 public class TreatmentTests {
 
 	@Autowired
-	private ITreatmentService TreatmentService;
-	@Autowired
-	private IClientService appointmentService;
-
-	private Client client;
+	private ITreatmentService treatmentService;
 
 	@Test
 	@Transactional
@@ -46,20 +38,18 @@ public class TreatmentTests {
 		List<Appointment> appointments = new ArrayList<Appointment>();
 		t1.setAppointments(appointments);
 
-		TreatmentService.save(t1);
-		Treatment t2 = TreatmentService.get(t1.getId());
+		treatmentService.save(t1);
+		Treatment t2 = treatmentService.get(t1.getId());
 		assertThat(t2.equals(t1)).isTrue();
 
-		t1.setName("Depilación Muslo");
-		TreatmentService.save(t1);
-		t2.setName("Depilación Cara");
-		TreatmentService.save(t2);
-		// client2 = TreatmentService.findOne(client.getId());
-		assertThat(t2.getName().equals("Depilación Muslo")).isFalse();
+		t1.setName("Depilación Cara");
+		treatmentService.save(t1);
+		t2 = treatmentService.get(t1.getId());
+		assertThat(t2.getName().equals("Depilación Piernas")).isFalse();
 
-		TreatmentService.delete(t2.getId());
+		treatmentService.delete(t1.getId());
 		try {
-			t2 = TreatmentService.get(t1.getId());
+			t2 = treatmentService.get(t1.getId());
 		} catch (NoSuchElementException e) {
 			t2 = null;
 		}

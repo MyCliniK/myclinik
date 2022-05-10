@@ -10,9 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.myclinik.model.Client;
 import com.myclinik.model.Treatment;
 import com.myclinik.model.Appointment;
-import com.myclinik.service.IClientService;
-import com.myclinik.service.ITreatmentService;
-import com.myclinik.service.TreatmentService;
 import com.myclinik.service.IAppointmentService;
 
 import java.util.Date;
@@ -29,31 +26,32 @@ import java.util.NoSuchElementException;
 public class AppointmentTests {
 
 	@Autowired
-	private ITreatmentService TreatmentService;
-	@Autowired
-	private IAppointmentService AppointmentService;
+	private IAppointmentService appointmentService;
 
 	@Test
 	@Transactional
 	final void testAppointment() {
-		String strDate = "2022-12-12";
-		// LocalDateTime date = LocalDateTime.parse(strDate);
 		Appointment a1 = new Appointment();
 		Client c1 = new Client();
 		Treatment t1 = new Treatment();
 		a1.setDone(false);
 		a1.setPaid(false);
+		a1.setAppointmentDate(LocalDateTime.parse("2022-01-01T00:00"));
 		a1.setClient(c1);
 		a1.setTreatment(t1);
 
-		AppointmentService.save(a1);
-		Appointment a2 = AppointmentService.get(a1.getId());
+		appointmentService.save(a1);
+		Appointment a2 = appointmentService.get(a1.getId());
 		assertThat(a2.equals(a1)).isTrue();
 
-		// AppointmentService.delete(a1.getId());
-		AppointmentService.delete(a2.getId());
+		a1.setDone(true);
+		appointmentService.save(a1);
+		a2 = appointmentService.get(a1.getId());
+		assertThat(a2.getDone()).isTrue();
+
+		appointmentService.delete(a1.getId());
 		try {
-			a2 = AppointmentService.get(a1.getId());
+			a2 = appointmentService.get(a1.getId());
 		} catch (NoSuchElementException e) {
 			a2 = null;
 		}
