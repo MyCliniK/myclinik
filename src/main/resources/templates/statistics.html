@@ -15,11 +15,11 @@
 <body>
 
 	<div id="statistics-header">
-		Statistics
+		Estadísticas
 	</div>
 	<br>
 	<div id="statistics-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-		Statistics Nav
+		Estadísticas Nav
 	</div>
 
 	<div id="statistics-main-content" style="display:flex; margin: auto; justify-content: center">
@@ -34,7 +34,7 @@
 							th:text="${itClient.firstName} + ' ' + ${itClient.lastName}" class="dropdown-item" href="#">
 						</option>
 					</select>
-					<label class="form-check-label" for="clientSelector">Client</label>
+					<label class="form-check-label" for="clientSelector">Cliente</label>
 				</div>
 				<div class="form-floating">
 					<select id="treatmentSelector" class="form-select" aria-labeled="treatments" name="treatment">
@@ -60,7 +60,7 @@
 						<option th:value="true" th:selected="${doneAppointment} == true">Realizada</option>
 						<option th:value="false" th:selected="${doneAppointment} == false">No realizada</option>
 					</select>
-					<label class="form-check-label" for="doneSelector">Pagos</label>
+					<label class="form-check-label" for="doneSelector">Realizados</label>
 				</div>
 				</br>
 				<div style="display:flex">
