@@ -171,7 +171,7 @@ public class Client {
 		this.observations = observations;
 	}
 
-	public List<Appointment> getAppointments(List<Appointment> appointments) {
+	public List<Appointment> getAppointments() {
 		return appointments;
 	}
 
