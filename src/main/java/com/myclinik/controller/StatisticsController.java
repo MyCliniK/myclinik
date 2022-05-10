@@ -114,62 +114,7 @@ public class StatisticsController {
 		return mapmonthappunpaid;
 	}
 
-	@GetMapping("/statistics")
-	public String findAppointments(Model model) {
-		var clients = (List<Client>) clientService.findAll();
-		var appointments = (List<Appointment>) appointmentService.findAll();
-		var treatments = (List<Treatment>) treatmentService.findAll();
-		model.addAttribute("appointments", appointments);
-		model.addAttribute("treatments", treatments);
-		model.addAttribute("clients", clients);
-		model.addAttribute("maptreatapp", appointmentByTreatment());
-		model.addAttribute("mapmonthapp", incomeByMonth());
-		model.addAttribute("mapmonthappunpaid", unpaidByMonth());
-		model.addAttribute("maps", incomeByMonthandTreatment());
-		return "statistics";
-	}
-
-	@RequestMapping(value = "/statistics", params = "clientId")
-	public String filterByClient(Model model, @RequestParam("clientId") Long clientId) {
-		var clients = (List<Client>) clientService.findAll();
-		model.addAttribute("clients", clients);
-		model.addAttribute("clientId", clientId);
-		return "statistics";
-	}
-
-	@RequestMapping(value = "/statistics", params = "treatmentId")
-	public String filterByTreatment(Model model, @RequestParam("treatmentId") Long treatmentId) {
-		var treatments = (List<Treatment>) treatmentService.findAll();
-		model.addAttribute("treatments", treatments);
-		model.addAttribute("treatmentId", treatmentId);
-		return "statistics";
-	}
-
-	@RequestMapping(value = "/statistics", params = "appointmentPaid")
-	public String filterByPaid(Model model, @RequestParam("appointmentPaid") Boolean appointmentPaid) {
-		var appointments = (List<Appointment>) appointmentService.findAll();
-		model.addAttribute("appointments", appointments);
-		model.addAttribute("appointmentPaid", appointmentPaid);
-		return "statistics";
-	}
-
-	@RequestMapping(value = "/statistics", params = "appointmentDone")
-	public String filterByDone(Model model, @RequestParam("appointmentDone") Boolean appointmentDone) {
-		var appointments = (List<Appointment>) appointmentService.findAll();
-		model.addAttribute("appointments", appointments);
-		model.addAttribute("appointmentDone", appointmentDone);
-		return "statistics";
-	}
-
-	@RequestMapping(value = "/statistics", params = "appointmentDate")
-	public String filterByDate(Model model, @RequestParam("appointmentDate") LocalDateTime appointmentDate) {
-		var appointments = (List<Appointment>) appointmentService.findAll();
-		model.addAttribute("appointments", appointments);
-		model.addAttribute("appointmentDate", appointmentDate);
-		return "statistics";
-	}
-
-	@PostMapping("/statistics")
+	@RequestMapping("/statistics")
 	public String filterData(Model model, @RequestParam(name = "client", required = false) Client client,
 			@RequestParam(name = "treatment", required = false) Treatment treatment,
 			@RequestParam(name = "paidAppointment", required = false) Boolean paidAppointment,
@@ -195,11 +140,11 @@ public class StatisticsController {
 		if (doneAppointment != null)
 			appointments = appointments.stream().filter(appointment -> appointment.getDone() == doneAppointment)
 					.collect(java.util.stream.Collectors.toList());
-		if (initialDate != "")
+		if (initialDate != null && initialDate != "")
 			inicioDate = LocalDateTime.parse(initialDate);
-		if (endDate != "")
+		if (endDate != null && endDate != "")
 			finalDate = LocalDateTime.parse(endDate);
-		if ((initialDate != "") && (endDate != ""))
+		if (initialDate != null && endDate != null && initialDate != "" && endDate != "")
 			appointments = appointments.stream()
 					.filter(appointment -> ((!appointment.getAppointmentDate().isBefore(inicioDate))
 							&& (!appointment.getAppointmentDate().isAfter(finalDate))))
