@@ -12,11 +12,6 @@ import com.myclinik.model.Appointment;
 import com.myclinik.service.IClientService;
 import com.myclinik.service.IAppointmentService;
 
-// import org.apache.pdfbox.text.PDFTextStripper;
-// import org.apache.pdfbox.text.PDFParserTextStripper;
-// import org.apache.pdfbox.pdmodel.PDDocument;
-// import org.apache.pdfbox.Loader;
-
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -25,7 +20,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.util.NoSuchElementException;
-
 
 @SpringBootTest
 public class ClientTests {
@@ -36,8 +30,6 @@ public class ClientTests {
 	private IClientService appointmentService;
 
 	private Client client;
-
-
 
 	@Test
 	@Transactional
@@ -68,11 +60,10 @@ public class ClientTests {
 		clientService.deleteClient(client.getId());
 		try {
 			client2 = clientService.findOne(client.getId());
-        } catch (NoSuchElementException e) {
-            client2=null;
-        }
+		} catch (NoSuchElementException e) {
+			client2 = null;
+		}
 		assertThat(client2 == null).isTrue();
 	}
-
 
 }
