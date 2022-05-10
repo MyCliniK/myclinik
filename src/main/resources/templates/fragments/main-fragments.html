@@ -9,14 +9,14 @@
 <body>
 	<!-- Default Navigator -->
 	<nav th:fragment="nav-default" class="navbar navbar-dark" style="height: 100%; background-color: #117182; ">
-		<div class="d-flex flex-column justify-content-center text-center" style="height: 100%; width:100%">
+		<div class="d-flex flex-column justify-content-between text-center" style="height: 100%; width:100%">
 			<div>
 				<a class="nav-link" th:href="@{/home}">
 					<img src="/assets/logo_circle.png" width="70%" height="auto" class="d-inline-block align-center"
 						alt="">
 				</a>
 			</div>
-			<ul class="navbar-nav d-flex flex-column justify-content-around" style="height: 80%">
+			<ul class="navbar-nav d-flex flex-column justify-content-around" style="height: 70%">
 				<li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN', 'OPS')">
 					<a class="nav-link" th:classappend="${#request.requestURI.startsWith('/calendar') ? 'active':''}"
 						th:href="@{/calendar}">
@@ -60,18 +60,18 @@
 						<i class="fa fa-solid fa-user-cog" aria-hidden="true"></i>
 					</a>
 				</li>
-				<li>
-					<div sec:authorize="isAuthenticated()">
-						<p class="nav-item"><i class="fa fa-solid fa-user-circle" aria-hidden="true"
-								style="color: #ffffff"> </i> <b style="color: #ffffff" sec:authentication="name"></b>
-						</p>
-						<form class="nav-item" th:action="@{/logout}" method="post">
-							<button type="submit" class="btn btn-danger"><i class="fa fa-solid fa-sign-out"
-									aria-hidden="true"></i> <b>Logout</b></button>
-						</form>
-					</div>
-				</li>
 			</ul>
+			<div>
+				<div sec:authorize="isAuthenticated()">
+					<p class="nav-item"><i class="fa fa-solid fa-user-circle" aria-hidden="true" style="color: #ffffff">
+						</i> <b style="color: #ffffff" sec:authentication="name"></b>
+					</p>
+					<form class="nav-item" th:action="@{/logout}" method="post">
+						<button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-solid fa-sign-out"
+								aria-hidden="true"></i> <b>Logout</b></button>
+					</form>
+				</div>
+			</div>
 		</div>
 	</nav>
 </body>
