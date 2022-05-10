@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -36,6 +38,7 @@ public class Client {
 	private String observations;
 
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	@JsonBackReference
 	private List<Appointment> appointments;
 
 	public Client() {

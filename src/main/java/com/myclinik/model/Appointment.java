@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.OnDelete;
@@ -29,11 +31,13 @@ public class Appointment {
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonManagedReference
 	private Client client;
 
 	@ManyToOne
 	@JoinColumn(name = "treatment_id")
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonManagedReference
 	private Treatment treatment;
 
 	public Appointment() {

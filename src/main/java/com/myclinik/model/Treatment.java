@@ -8,6 +8,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Objects;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class Treatment {
 	private String consents;
 
 	@OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL)
+	@JsonBackReference
 	private List<Appointment> appointments;
 
 	public Treatment() {
@@ -111,7 +114,7 @@ public class Treatment {
 		this.consents = consents;
 	}
 
-	public List<Appointment> getAppointments(List<Appointment> appointments) {
+	public List<Appointment> getAppointments() {
 		return appointments;
 	}
 
