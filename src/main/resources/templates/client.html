@@ -1,123 +1,158 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layouts/main-layout :: main-fragment(
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/main-layout :: main-fragment(
 		~{:: title},
 		~{:: #client-header},
 		~{:: #client-nav},
 		~{:: #client-main-content},
-		~{:: #client-footer}
-		)}"
->
-	<head>
-		<title>Modificar ficha de cliente</title>
-	</head>
-	<body>
-		<div id="client-header">
-			Modificar ficha de cliente
-		</div>
-		<div id="client-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-			Cliente Nav
-		</div>
-		<div>
-			<h1 class="title">CLIENTE</h1>
-			<p th:field="*{appointments}"></p>
-		</div>
-		<br>
-		<div id="client-main-content" class="container">
-			<div class="card">
-				<form method="POST" th:action="@{'/clients/update?id=' + ${client.id}}" th:object="${client}" id="clientForm" class="container">
-					<br>
-					<div class="form-group">
-						<div class="input-group">
-							<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-user" aria-hidden="true"></i></span>
-							<input type="text" th:field="*{firstName}" placeholder="Nombre" aria-label="Nombre" class="form-control" required>
-							<input type="text" th:field="*{lastName}"placeholder="Apellidos" aria-label="Apellidos" class="form-control" required>
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<div class="input-group">
-									<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-id-card" aria-hidden="true"></i></span>
-									<input type="text" th:field="*{dni}"placeholder="DNI" aria-label="DNI" class="form-control" required>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<div class="input-group">
-									<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-birthday-cake" aria-hidden="true"></i></span>
-									<input type="date" th:field="*{birthdate}" class="form-control">
-								</div>
-							</div>
-						</div>
-					</div>
+		~{:: #client-footer},
+		~{:: #client-resources}
+		)}">
+
+<head>
+	<title>Modificar ficha de cliente</title>
+</head>
+
+<body>
+	<div id="client-header">
+		Modificar ficha de cliente
+	</div>
+	<div id="client-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+		Cliente Nav
+	</div>
+	<div>
+		<h1 class="title">CLIENTE</h1>
+		<p th:field="*{appointments}"></p>
+	</div>
+	<br>
+	<div id="client-main-content" class="container">
+		<div class="card">
+			<form method="POST" enctype="multipart/form-data" th:action="@{'/clients/update?id=' + ${client.id}}"
+				th:object="${client}" id="clientForm" class="container">
 				<br>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<div class="input-group">
-									<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-venus-mars" aria-hidden="true"></i></span>
-									<select th:field="*{sex}" placeholder="Sexo" class="form-select">
-										<option value="M">Masculino</option>
-										<option value="F">Femenino</option>
-										<option value="-">Prefiere no decirlo</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<div class="input-group">
-									<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-phone" aria-hidden="true"></i></span>
-									<input type="text" th:field="*{phone}" placeholder="Teléfono" aria-label="Teléfono" class="form-control">
-								</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-user"
+								aria-hidden="true"></i></span>
+						<input type="text" th:field="*{firstName}" placeholder="Nombre" aria-label="Nombre"
+							class="form-control" required>
+						<input type="text" th:field="*{lastName}" placeholder="Apellidos" aria-label="Apellidos"
+							class="form-control" required>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-id-card"
+										aria-hidden="true"></i></span>
+								<input type="text" th:field="*{dni}" placeholder="DNI" aria-label="DNI"
+									class="form-control" required>
 							</div>
 						</div>
 					</div>
-				<br>
-					<div class="form-group">
-						<div class="input-group">
-							<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i></span>
-							<input type="text" th:field="*{email}" placeholder="Correo" aria-label="Correo" class="form-control" required>
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-birthday-cake"
+										aria-hidden="true"></i></span>
+								<input type="date" th:field="*{birthdate}" class="form-control">
+							</div>
 						</div>
 					</div>
+				</div>
 				<br>
-					<div class="form-check form-switch">
-						<input class="form-check-input" th:field="*{promos}" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-						<label class="form-check-label" for="flexSwitchCheckDefault">Desea recibir ofertas y promociones</label>
-					</div>
-				<br>
-					<div class="form-group">
-						<label>Observaciones médicas</label>
-						<div class="input-group">
-							<div class="input-group-text"><i class="fa fa-fw fa-stethoscope" aria-hidden="true"></i></div>
-							<textarea class="form-control" th:field="*{medicalObservations}" rows="5" name="body"></textarea>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-venus-mars"
+										aria-hidden="true"></i></span>
+								<select th:field="*{sex}" placeholder="Sexo" class="form-select">
+									<option value="M">Masculino</option>
+									<option value="F">Femenino</option>
+									<option value="-">Prefiere no decirlo</option>
+								</select>
+							</div>
 						</div>
 					</div>
-				<br>
-					<div class="form-group">
-						<label>Comentarios adicionales</label>
-						<div class="input-group">
-							<div class="input-group-text"><i class="fa fa-fw fa-comment-medical" aria-hidden="true"></i></div>
-							<textarea class="form-control" th:field="*{observations}" rows="5" name="body"></textarea>
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-phone"
+										aria-hidden="true"></i></span>
+								<input type="text" th:field="*{phone}" placeholder="Teléfono" aria-label="Teléfono"
+									class="form-control">
+							</div>
 						</div>
 					</div>
+				</div>
 				<br>
-					<div class="form-group">
-						<label>Consentimientos</label>
-						<div class="input-group mb-3">
-							<label class="input-group-text" for="inputGroupFile01"><i class="fa fa-fw fa-file-contract" aria-hidden="true"></i></label>
-							<input type="file" class="form-control" id="inputGroupFile01">
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-envelope"
+								aria-hidden="true"></i></span>
+						<input type="text" th:field="*{email}" placeholder="Correo" aria-label="Correo"
+							class="form-control" required>
+					</div>
+				</div>
+				<br>
+				<div class="form-check form-switch">
+					<input class="form-check-input" th:field="*{promos}" type="checkbox" role="switch"
+						id="flexSwitchCheckDefault">
+					<label class="form-check-label" for="flexSwitchCheckDefault">Desea recibir ofertas y
+						promociones</label>
+				</div>
+				<br>
+				<div class="form-group">
+					<label>Observaciones médicas</label>
+					<div class="input-group">
+						<div class="input-group-text"><i class="fa fa-fw fa-stethoscope" aria-hidden="true"></i></div>
+						<textarea class="form-control" th:field="*{medicalObservations}" rows="5"
+							name="body"></textarea>
+					</div>
+				</div>
+				<br>
+				<div class="form-group">
+					<label>Comentarios adicionales</label>
+					<div class="input-group">
+						<div class="input-group-text"><i class="fa fa-fw fa-comment-medical" aria-hidden="true"></i>
 						</div>
+						<textarea class="form-control" th:field="*{observations}" rows="5" name="body"></textarea>
 					</div>
+				</div>
 				<br>
-					<div style="margin-bottom: 10px; text-align: center;">
-						<button type="submit" class="btn btn-warning">Guardar</button>
-						<button type="button" class="btn btn-danger">Eliminar ficha</button>
+
+				<div class="form-group">
+					<label>
+						Consentimientos
+						<a th:href="@{'/documents/new?clientId=' + ${client.id}}"
+							class="btn btn-sm rounded-pill btn-success">Generar</a>
+					</label>
+					<div class="input-group mb-3">
+						<label class="input-group-text" for="inputGroupFile01"><i class="fa fa-fw fa-file-contract"
+								aria-hidden="true"></i></label>
+						<input type="file" class="form-control" id="inputGroupFile01" name="file">
 					</div>
-				</form>
-			</div>
+				</div>
+
+				<div>
+					<ul>
+						<ul th:each="file : ${files}">
+							<a th:href="@{'/files/{clientId}/delete?filename={filename}'(clientId=${client.id}, filename=${file.name})}"
+								onclick="return confirm('¿Está seguro que desea borrar el archivo?')"
+								class="btn btn-sm rounded-pill btn-danger">
+								<i class="fa fa-fw fa-trash" aria-hidden="true"></i>
+							</a>
+							<a th:href="${file.url}" th:text="${file.name}" />
+						</ul>
+					</ul>
+				</div>
+				<br>
+				<div style="margin-bottom: 10px; text-align: center;">
+					<button type="submit" class="btn btn-warning">Guardar</button>
+				</div>
+			</form>
 		</div>
-	</body>
+	</div>
+</body>

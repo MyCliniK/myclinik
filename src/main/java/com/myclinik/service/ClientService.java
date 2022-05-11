@@ -19,21 +19,26 @@ public class ClientService implements IClientService {
 		var clients = (List<Client>) repository.findAll();
 		return clients;
 	}
+
 	public Client findOne(Long id) {
 		var client = (Client) repository.findById(id).get();
 		return client;
 	}
-	public Client createClient(){
+
+	public Client createClient() {
 		Client client = new Client();
 		return client;
 	}
-	public void saveClient(Client c){
+
+	public void saveClient(Client c) {
 		repository.save(c);
 	}
-	public void deleteClient(Long id){
+
+	public void deleteClient(Long id) {
 		repository.deleteById(id);
 	}
-	public void updateClient(Long id, Client newClient){
+
+	public void updateClient(Long id, Client newClient) {
 		newClient.setId(id);
 		repository.save(newClient);
 	}

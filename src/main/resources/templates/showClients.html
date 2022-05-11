@@ -1,67 +1,74 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layouts/main-layout :: main-fragment(
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/main-layout :: main-fragment(
 	~{:: title},
 	~{:: #clients-header},
 	~{:: #clients-nav},
 	~{:: #clients-main-content},
-	~{:: #clients-footer}
-	)}"
->
-	<head>
-		<title>Clientes</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	</head>
+	~{:: #clients-footer},
+	~{:: #clients-resources}
+	)}">
 
-	<body>
-		<div id="clients-header">
-			Clientes
-		</div>
-		<div id="clients-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-			Clients Nav
-		</div>
-		<div id="clients-main-content">
-			<table class="table table-info table-striped table-responsive">
-				<thead class="thead">
-					<tr>
-						<th style="text-align: center;">Nombre</th>
-						<th style="text-align: center;">DNI</th>
-						<th style="text-align: center;">Teléfono</th>
-						<th style="text-align: center;">Correo</th>
-						<th style="text-align: center;">Acciones</th>
-					</tr>
-				</thead>
-				<tr th:each="client : ${clients}">
-					<td th:text="${client.firstName} + ' ' + ${client.lastName}" style="text-align: center;">Nombre</td>
-					<td th:text="${client.dni}" style="text-align: center;">DNI</td>
-					<td th:text="${client.phone}" style="text-align: center;">Teléfono</td>
-					<td th:text="${client.email}" style="text-align: center;">Correo</td>
-					<td style="text-align: center;">
-						<div class="d-flex justify-content-center align-content-center">
-							<div class="d-flex me-2">
-								<a th:href="@{'/mail?clientId=' + ${client.id}}" id="mail" class="btn btn-primary" role="button">
-									<i class="fa fa-fw fa-envelope" aria-hidden="true"></i>
-								</a>
-							</div>
-							<div class="d-flex ms-2 me-2">
-								<a th:href="@{'/appointments/new?clientId=' + ${client.id}}" id="newAppointment" class="btn btn-success" role="button">
-									<i class="fa fa-fw fa-calendar-plus" aria-hidden="true"></i>
-								</a>
-								<a th:href="@{'/appointments?clientId=' + ${client.id}}" id="showAppointments" class="btn btn-info text-light" role="button">
-									<i class="fa fa-fw fa-calendar" aria-hidden="true"></i>
-								</a>
-							</div>
-							<div class="d-flex ms-2">
-								<a th:href="@{'/clients/client?id=' + ${client.id}}" id="client" class="btn btn-secondary" role="button"><i class="fa fa-fw fa-user-edit" aria-hidden="true"></i></a>
-								<a th:href="@{'/clients/delete?id=' + ${client.id}}" id="delete" class="btn btn-danger" role="button"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i></a>
-							</div>
-						</div>
-					</td>
+<head>
+	<title>Clientes</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<div id="clients-header">
+		Clientes
+	</div>
+	<div id="clients-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+		Clients Nav
+	</div>
+	<div id="clients-main-content">
+		<table class="table table-info table-striped table-responsive">
+			<thead class="thead">
+				<tr>
+					<th style="text-align: center;">Nombre</th>
+					<th style="text-align: center;">DNI</th>
+					<th style="text-align: center;">Teléfono</th>
+					<th style="text-align: center;">Correo</th>
+					<th style="text-align: center;">Acciones</th>
 				</tr>
-			</table>
-			<div>
-				<a th:href="@{/clients/new}" id="new" class="btn btn-success" role="button" style="width: 100%"><i class="fa fa-fw fa-user-plus" aria-hidden="true"></i></a>
-			</div>
+			</thead>
+			<tr th:each="client : ${clients}">
+				<td th:text="${client.firstName} + ' ' + ${client.lastName}" style="text-align: center;">Nombre</td>
+				<td th:text="${client.dni}" style="text-align: center;">DNI</td>
+				<td th:text="${client.phone}" style="text-align: center;">Teléfono</td>
+				<td th:text="${client.email}" style="text-align: center;">Correo</td>
+				<td style="text-align: center;">
+					<div class="d-flex justify-content-center align-content-center">
+						<div class="d-flex me-2">
+							<a th:href="@{'/mail?clientId=' + ${client.id}}" id="mail" class="btn btn-primary"
+								role="button">
+								<i class="fa fa-fw fa-envelope" aria-hidden="true"></i>
+							</a>
+						</div>
+						<div class="d-flex ms-2 me-2">
+							<a th:href="@{'/appointments/new?clientId=' + ${client.id}}" id="newAppointment"
+								class="btn btn-success" role="button">
+								<i class="fa fa-fw fa-calendar-plus" aria-hidden="true"></i>
+							</a>
+							<a th:href="@{'/appointments?clientId=' + ${client.id}}" id="showAppointments"
+								class="btn btn-info text-light" role="button">
+								<i class="fa fa-fw fa-calendar" aria-hidden="true"></i>
+							</a>
+						</div>
+						<div class="d-flex ms-2">
+							<a th:href="@{'/clients/client?id=' + ${client.id}}" id="client" class="btn btn-secondary"
+								role="button"><i class="fa fa-fw fa-user-edit" aria-hidden="true"></i></a>
+							<a th:href="@{'/clients/delete?id=' + ${client.id}}" id="delete" class="btn btn-danger"
+								role="button"><i class="fa fa-fw fa-user-times" aria-hidden="true"></i></a>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<div>
+			<a th:href="@{/clients/new}" id="new" class="btn btn-success" role="button" style="width: 100%"><i
+					class="fa fa-fw fa-user-plus" aria-hidden="true"></i></a>
 		</div>
-	</body>
+	</div>
+</body>
+
 </html>

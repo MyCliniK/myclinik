@@ -1,6 +1,9 @@
 DROP TABLE IF EXISTS clients CASCADE;
 DROP TABLE IF EXISTS appointments CASCADE;
 DROP TABLE IF EXISTS treatments CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS users_roles CASCADE;
+DROP TABLE IF EXISTS roles CASCADE;
 
 CREATE TABLE clients (
 	id SERIAL PRIMARY KEY,
@@ -21,9 +24,7 @@ CREATE TABLE treatments (
 	name VARCHAR(255) NOT NULL,
 	subservice VARCHAR(255),
 	price FLOAT NOT NULL,
-	duration INT NOT NULL,
-	consents VARCHAR(255)
-
+	duration INT NOT NULL
 );
 
 CREATE TABLE appointments (
@@ -35,4 +36,22 @@ CREATE TABLE appointments (
 	treatment_id INT NOT NULL,
 	FOREIGN KEY (client_id) REFERENCES clients(id),
 	FOREIGN KEY (treatment_id) REFERENCES treatments(id)
+);
+
+CREATE TABLE users (
+	id SERIAL PRIMARY KEY,
+	username VARCHAR(50) NOT NULL,
+	password VARCHAR(255) NOT NULL,
+	enabled BOOLEAN NOT NULL
+);
+
+CREATE TABLE users_roles (
+	userid SERIAL NOT NULL,
+	roleid SERIAL NOT NULL,
+	FOREIGN KEY (userid) REFERENCES users(id)
+);
+
+CREATE TABLE roles (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(50) NOT NULL
 );

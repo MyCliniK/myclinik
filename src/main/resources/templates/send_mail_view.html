@@ -1,57 +1,58 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layouts/main-layout :: main-fragment(
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layouts/main-layout :: main-fragment(
 	~{:: title},
 	~{:: #mail-header},
 	~{:: #mail-nav},
 	~{:: #mail-main-content},
-	~{:: #mail-footer}
-	)}"
->
-	<head>
-		<title>E-mail</title>
-	</head>
-	<body>
-		<div id="mail-header">
-			E-mail
-		</div>
+	~{:: #mail-footer},
+	~{:: #mail-resources}
+	)}">
+
+<head>
+	<title>E-mail</title>
+</head>
+
+<body>
+	<div id="mail-header">
+		E-mail
+	</div>
 	<br>
-		<div id="mail-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
-			Mail Nav
-		</div>
-		<div id= "mail-main-content" class="container">
-			<div class="card">
-				<form method="POST" th:action="@{/sendMail}" id="emailForm" class="container">
-					<br>
-					<div class="form-floating">
-						<select id="clientSelector" class="form-select" aria-labeled="clients" name="client" required>
-							<option value="" selected>Seleccione un Cliente</option>
-							<option th:each="client: ${clients}" th:value="${client.id}"
-								th:selected="(${client.id} == ${clientId})"
-								th:text="${client.firstName} + ' ' + ${client.lastName} + ' <' + ${client.email} + '>'"
-								class="dropdown-item" href="#"
-								>
-							</option>
-						</select>
-						<label class="form-check-label" for="clientSelector">Client</label>
+	<div id="mail-nav" th:replace="~{/fragments/main-fragments :: nav-default}">
+		Mail Nav
+	</div>
+	<div id="mail-main-content" class="container">
+		<div class="card">
+			<form method="POST" th:action="@{/sendMail}" id="emailForm" class="container">
+				<br>
+				<div class="form-floating">
+					<select id="clientSelector" class="form-select" aria-labeled="clients" name="client" required>
+						<option value="" selected>Seleccione un Cliente</option>
+						<option th:each="client: ${clients}" th:value="${client.id}"
+							th:selected="(${client.id} == ${clientId})"
+							th:text="${client.firstName} + ' ' + ${client.lastName} + ' <' + ${client.email} + '>'"
+							class="dropdown-item" href="#">
+						</option>
+					</select>
+					<label class="form-check-label" for="clientSelector">Client</label>
+				</div>
+				<br>
+				<div class="form-group">
+					<div class="input-group justify-content-center">
+						<div class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-envelope-open"
+								aria-hidden="true"></i></div>
+						<input type="text" class="form-control" name="subject" placeholder="Asunto" />
 					</div>
-					<br>
-					<div class="form-group">
-						<div class="input-group justify-content-center">
-							<div class="input-group-text" id="addon-wrapping"><i class="fa fa-fw fa-envelope-open" aria-hidden="true"></i></div>
-							<input type="text" class="form-control" name="subject" placeholder="Asunto"/>
-						</div>
-					</div>
-					<br>
-					<div class="form-group">
+				</div>
+				<br>
+				<div class="form-group">
 					<label>Mensaje</label>
-						<textarea class="form-control" rows="5" name="body"></textarea>
-					</div>
-					<br>
-					<div style="margin-bottom: 10px; text-align: center;">
-						<button type="submit" class="btn btn-primary">Enviar</button>
-					</div>
-					<br>
-				</form>
-			</div>
-	</body>
+					<textarea class="form-control" rows="5" name="body"></textarea>
+				</div>
+				<br>
+				<div style="margin-bottom: 10px; text-align: center;">
+					<button type="submit" class="btn btn-primary">Enviar</button>
+				</div>
+				<br>
+			</form>
+		</div>
+</body>

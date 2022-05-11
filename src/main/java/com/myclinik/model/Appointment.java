@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.OnDelete;
@@ -19,7 +21,7 @@ import java.util.Objects;
 @Table(name = "appointments")
 public class Appointment {
 
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="appointments_id_seq")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "appointments_id_seq")
 	private @Id Long id;
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime appointmentDate;
@@ -29,17 +31,20 @@ public class Appointment {
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonManagedReference
 	private Client client;
 
 	@ManyToOne
 	@JoinColumn(name = "treatment_id")
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonManagedReference
 	private Treatment treatment;
 
-	public Appointment() {}
+	public Appointment() {
+	}
 
 	public Appointment(LocalDateTime appointmentDate, Boolean done, Boolean paid, Client client, Treatment treatment) {
-		this.appointmentDate= appointmentDate;
+		this.appointmentDate = appointmentDate;
 		this.done = done;
 		this.paid = paid;
 		this.client = client;
@@ -48,15 +53,17 @@ public class Appointment {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		Appointment appointment = (Appointment) o;
 		return Objects.equals(id, appointment.id) &&
-		Objects.equals(appointmentDate, appointment.appointmentDate) &&
-		Objects.equals(done, appointment.done) &&
-		Objects.equals(paid, appointment.paid) &&
-		Objects.equals(client, appointment.client) &&
-		Objects.equals(treatment, appointment.treatment);
+				Objects.equals(appointmentDate, appointment.appointmentDate) &&
+				Objects.equals(done, appointment.done) &&
+				Objects.equals(paid, appointment.paid) &&
+				Objects.equals(client, appointment.client) &&
+				Objects.equals(treatment, appointment.treatment);
 	}
 
 	@Override
@@ -96,31 +103,31 @@ public class Appointment {
 		this.paid = paid;
 	}
 
-	public Client getClient(){
+	public Client getClient() {
 		return client;
 	}
 
-	public void setClient(Client client){
+	public void setClient(Client client) {
 		this.client = client;
 	}
 
-	public Treatment getTreatment(){
+	public Treatment getTreatment() {
 		return treatment;
 	}
 
-	public void setTreatment(Treatment treatment){
+	public void setTreatment(Treatment treatment) {
 		this.treatment = treatment;
 	}
 
 	@Override
 	public String toString() {
 		return "Appointment{" +
-		"id=" + id +
-		", appointmentDate='" + appointmentDate + '\'' +
-		", done='" + done + '\'' +
-		", paid='" + paid + '\'' +
-		", client='" + client + '\'' +
-		", treatment='" + treatment + '\'' +
-		'}';
+				"id=" + id +
+				", appointmentDate='" + appointmentDate + '\'' +
+				", done='" + done + '\'' +
+				", paid='" + paid + '\'' +
+				", client='" + client + '\'' +
+				", treatment='" + treatment + '\'' +
+				'}';
 	}
 }
