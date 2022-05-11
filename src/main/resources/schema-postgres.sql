@@ -24,9 +24,7 @@ CREATE TABLE treatments (
 	name VARCHAR(255) NOT NULL,
 	subservice VARCHAR(255),
 	price FLOAT NOT NULL,
-	duration INT NOT NULL,
-	consents VARCHAR(255)
-
+	duration INT NOT NULL
 );
 
 CREATE TABLE appointments (

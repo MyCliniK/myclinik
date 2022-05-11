@@ -34,7 +34,6 @@ public class TreatmentTests {
 		t1.setSubservice("Ambas");
 		t1.setPrice(20.22f);
 		t1.setDuration(50);
-		t1.setConsents("Firmados ya");
 		List<Appointment> appointments = new ArrayList<Appointment>();
 		t1.setAppointments(appointments);
 

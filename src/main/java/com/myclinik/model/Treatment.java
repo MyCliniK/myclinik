@@ -23,7 +23,6 @@ public class Treatment {
 	private String subservice;
 	private Float price;
 	private Integer duration;
-	private String consents;
 
 	@OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL)
 	@JsonBackReference
@@ -32,13 +31,12 @@ public class Treatment {
 	public Treatment() {
 	}
 
-	public Treatment(String name, String subservice, Float price, Integer duration, String consents,
+	public Treatment(String name, String subservice, Float price, Integer duration,
 			List<Appointment> appointments) {
 		this.name = name;
 		this.subservice = subservice;
 		this.price = price;
 		this.duration = duration;
-		this.consents = consents;
 		this.appointments = appointments;
 	}
 
@@ -54,14 +52,13 @@ public class Treatment {
 				Objects.equals(subservice, treatment.subservice) &&
 				Objects.equals(price, treatment.price) &&
 				Objects.equals(duration, treatment.duration) &&
-				Objects.equals(consents, treatment.consents) &&
 				Objects.equals(appointments, treatment.appointments);
 	}
 
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, name, subservice, price, duration, consents, appointments);
+		return Objects.hash(id, name, subservice, price, duration, appointments);
 	}
 
 	public Long getId() {
@@ -106,14 +103,6 @@ public class Treatment {
 		this.duration = duration;
 	}
 
-	public String getConsents() {
-		return consents;
-	}
-
-	public void setConsents(String consents) {
-		this.consents = consents;
-	}
-
 	public List<Appointment> getAppointments() {
 		return appointments;
 	}
@@ -129,7 +118,6 @@ public class Treatment {
 				", subservice='" + subservice + '\'' +
 				", price='" + price + '\'' +
 				", duration='" + duration + '\'' +
-				", consents='" + consents + '\'' +
 				'}';
 	}
 }
