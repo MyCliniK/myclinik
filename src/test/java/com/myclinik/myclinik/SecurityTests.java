@@ -21,6 +21,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.springframework.security.test.context.support.WithMockUser;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -58,6 +59,48 @@ public class SecurityTests {
 	@Test
 	public void contCanLog() throws Exception {
 		canLog("cont", "cont");
+	}
+
+	@WithMockUser(username = "admin", authorities = { "ADMIN" })
+	@Test
+	public void adminAccess() throws Exception {
+		mockMvc
+				.perform(get("/admin"))
+				.andExpect(status().isOk());
+		mockMvc
+				.perform(get("/clients"))
+				.andExpect(status().isOk());
+		mockMvc
+				.perform(get("/statistics"))
+				.andExpect(status().isOk());
+	}
+
+	@WithMockUser(username = "ops", authorities = { "OPS" })
+	@Test
+	public void opsAccess() throws Exception {
+		mockMvc
+				.perform(get("/admin"))
+				.andExpect(status().isForbidden());
+		mockMvc
+				.perform(get("/clients"))
+				.andExpect(status().isOk());
+		mockMvc
+				.perform(get("/statistics"))
+				.andExpect(status().isForbidden());
+	}
+
+	@WithMockUser(username = "cont", authorities = { "CONT" })
+	@Test
+	public void contAccess() throws Exception {
+		mockMvc
+				.perform(get("/admin"))
+				.andExpect(status().isForbidden());
+		mockMvc
+				.perform(get("/clients"))
+				.andExpect(status().isForbidden());
+		mockMvc
+				.perform(get("/statistics"))
+				.andExpect(status().isOk());
 	}
 
 	@Test
